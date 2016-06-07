@@ -1,0 +1,103 @@
+<html>
+    <head>
+        <title>Interface Préleveur</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="preleveur.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <?php
+        try{
+            $bdd = new PDO('mysql:host=localhost;dbname=projet_annelide;charset=utf8', 'root', '');
+           }
+        catch (Exception $e){
+            die('Erreur : ' . $e->getMessage());
+           }
+
+        if(isset($_GET['ajout'])){
+            $req = $bdd->prepare('INSERT INTO bestioles (bestioles, nb) VALUES(?, ?)');
+            $req->execute(defined(array($_GET['mob'], $_GET['nb'])));
+            $reponse->closeCursor();}
+        ?>
+        
+        <div class="button">
+        <input type="button" name="lien1" value="Connexion" onclick="self.location.href='lien1.html'">
+        </div>
+        <p>
+        <form action="preleveur" method="post">        
+   <label for="nom">Projet :</label><br>
+   <input list="projet">
+   <datalist id="projet"> 
+   <option>Projet1</option> 
+   <option>Projet2</option> 
+   <option>Projet3</option> 
+   <option>Projet4</option> 
+   <option>Projet5</option> 
+   <option>Projet6</option> 
+   <option>Projet7</option> 
+   <option>Projet8</option> 
+   </datalist>  
+   
+        <table border="1">
+        <tr>
+            <td>Nom du groupe</td>
+            <td></td>
+        </tr>
+        <?php
+        $reponse = $bdd->query("SELECT * FROM groupe");
+        while ($donnees = $reponse->fetch())
+        {
+           echo"<tr>";
+           echo"<td>".$donnees['Nom']."</td>";
+           echo"<td><button class='envoyer'>Modifier</button></td>";
+           echo"</tr>";
+        }$reponse->closeCursor();?>
+        </table>
+   
+        <div>
+        <label for="nom">Nom du Groupe :</label><br>
+        <input type="text" id="nom" />
+        </div>
+        <p>
+        <div>
+        <label id="coor">Coordonnées1 XY</label>
+        <input type="text" id="latitude_degres">
+                            <label for="latitude_degres">deg</label>
+                            <input type="text" id="latitude_minutes">
+                            <label for="latitude_minutes">min</label>
+                            <input type="text" id="latitude_secondes">
+                            <label for="latitude_secondes">sec</label>
+                            <br>
+        <label id="coor2">Coordonnées2 XY</label>
+        <input type="text" id="longitude_degres">
+                            <label for="longitude_degres">deg</label>
+                            <input type="text" id="longitude_minutes">
+                            <label for="longitude_minutes">min</label>
+                            <input type="text" id="longitude_secondes">
+                            <label for="longitude_secondes">sec</label>
+                            <br>
+        </div> 
+        <div>
+        <label id="coor3">Coordonnées3 XY</label>
+        <input type="text" id="latitude_degres2">
+                            <label for="latitude2_degres">deg</label>
+                            <input type="text" id="latitude2_minutes">
+                            <label for="latitude2_minutes">min</label>
+                            <input type="text" id="latitude2_secondes">
+                            <label for="latitude2_secondes">sec</label>
+                            <br>
+        <label id="coor4">Coordonnées4 XY</label>
+        <input type="text" id="longitude_degres2">
+                            <label for="longitude2_degres">deg</label>
+                            <input type="text" id="longitude2_minutes">
+                            <label for="longitude2_minutes">min</label>
+                            <input type="text" id="longitude2_secondes">
+                            <label for="longitude2_secondes">sec</label>
+                            <br>
+        </div>
+        <div class="button">
+        <input type="button" name="lien4" value="Créer" onclick="self.location.href='lien4.html'"> 
+        </div>
+        </form>      
+    </body>
+</html>

@@ -1,0 +1,76 @@
+/**
+STYLE PAR DEFAUT POUR MOBILE
+*/
+body { font-size:0.9em; background:rgba(0,181,146,0.1); }
+.clear { clear:both; }
+
+/*FORMULAIRE*/
+fieldset, legend, table { width:100%; box-sizing:border-box; margin:1em 0; border:2px solid rgba(0,181,146,1); 
+border-radius:0.8em; }
+fieldset, legend { background:rgba(0,181,146,0.1); }
+legend { width:auto; padding:0 2em; background:rgba(167,229,216,1); }
+legend>h2, caption>h2 { margin:0.5em 0; font-size:1.1em; }
+table { border-collapse:collapse; }
+
+/*POSITIONNEMENT INFOS PLAGE*/
+div#plage { box-sizing:border-box; padding:1.5em; background:rgba(0,181,146,0.1); border-radius:0.8em; }
+div#infos-projet, div#coordonnees { box-sizing:border-box; margin:1em 0; vertical-align:middle; }
+div#coordonnees { display:table; border-top:1px solid rgba(0,181,146,1); padding-top:1em; }
+div#coordonnees div { float:left; box-sizing:border-box; width:50%; text-align:left; }
+div#coordonnees div:nth-child(2), div#coordonnees div:nth-child(5) { float:right; text-align:right; }
+div#coordonnees div:nth-child(1) { padding:0 1em 1em 0; }
+div#coordonnees div:nth-child(2) { padding:0 0 1em 1em; }
+div#coordonnees div:nth-child(4) { padding:1em 1em 0 0; }
+div#coordonnees div:nth-child(5) { padding:1em 0 0 1em; }
+div#coordonnees div:nth-child(3) { float:left; width:100%; padding:1em; text-align:center;  background:rgba(0,181,146,0.2); }
+
+/*CODE COULEUR COORDONNEES*/
+.couleur0-0 { color:rgba(0,181,146,1); }/*coin en haut à gauche*/
+.couleur0-1 { color:rgba(0,101,66,1); }/*coin en haut à droite*/
+.couleur1-0 { color:rgba(0,61,26,1); }/*coin en bas à gauche*/
+.couleur1-1 { color:rgba(0,141,106,1); }/*coin en bas à droite*/
+
+/*TABLEAU*/
+th { border:1px solid rgba(0,181,146,1); }
+tr:nth-child(even) { background:rgba(0,181,146,0.4); }
+tr:nth-child(odd) { background:rgba(0,181,146,0.2); }
+th, td { width:20%; text-align:center; padding:0.5em 0.2em; }
+th:first-child, td:first-child { width:60%; padding-left:0.5em; text-align:left; }
+            
+/*ELEMENT FORMULAIRE*/
+input, select { display:inline-block; width:100%; box-sizing:border-box; border:1px solid rgba(0,181,146,1); 
+border-radius:0.8em; background:rgba(230,247,244,1); padding:0.4em; }
+input { background-color:transparent; }
+            
+/*impossible de mixer les selecteurs pour Firefox et les s�lecteurs pour Webkit : separer les selecteurs*/
+/*selecteur moz*/
+input:-moz-placeholder, textarea:-moz-placeholder { color:rgba(0,181,146,0.9); }
+/*selecteur webkit*/
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { color:rgba(0,181,146,0.9); }
+
+/*SAISIE COORDONNEES*/
+div.saisie-coordonnees input { width:auto; }
+
+/*BOUTON*/
+.button, input.bouton, span#bouton_plage, a.bouton { cursor:pointer; margin:0 auto; padding:0.6em; color:rgba(255,255,255,1); 
+font-weight:bold; background:rgba(0,181,146,1); border-radius:0.8em; }
+input.bouton, span#bouton_plage, a.bouton { display:inline-block; border:1px solid rgba(0,181,146,1); margin:0.5em 0; }
+a.bouton { text-decoration:none; }
+.bouton:hover, span#bouton_plage:hover, a.bouton:hover { color:rgba(0,181,146,1); background:rgba(0,181,146,0.2); }
+input.bouton { width:auto; }
+
+
+/**
+STYLE POUR ECRAN
+*/
+@media screen and (min-width:400px) {
+    body { padding:0 10%; }
+
+    th, td { width:10%; }
+    th:first-child, td:first-child { width:80%; }
+    
+    /*POSITIONNEMENT INFOS PLAGE*/
+    div#infos-projet, div#coordonnees { display:inline-block; }
+    div#infos-projet { width:69%; }
+    div#coordonnees { width:29%; border-top:none; padding-top:0; }
+}
