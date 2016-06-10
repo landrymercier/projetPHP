@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,7 +24,13 @@
     
     <h1>Interface de saisie de prélèvement</h1>
         
-    <a href="login.php" class="bouton">Connexion</a>
+    <?php if(isset($_SESSION['logged']) == true){
+            echo'<a href="interchercheur.php" class="bouton">Accès préleveur</a>';
+         }
+            else{echo'<a href="login.php" class="bouton">Connexion</a>';
+         } 
+        ?>
+    
 
     <form action="preleveur" method="post">        
         <label for="nom-projet">Projet :</label>
@@ -60,12 +67,17 @@
             {
                echo"<tr>";
                echo"<td>".$donnees['Nom']."</td>";
-               echo'<td><input type="submit" id="complete" class="bouton" name="complete" value="Compléter"/></td>';
+               if(isset($_COOKIE['logged']) == true){
+                   echo'<td><input type="submit" id="complete" class="bouton" name="complete" value="Clore"/></td>';
+               }
+               else{
+                   echo'<td><input type="submit" id="complete" class="bouton" name="complete" value="Compléter"/></td>';
+               }
                echo"</tr>";
             }$reponse->closeCursor();?>
         </table>
-   
-        <h2>Inscription d'un nouveau groupe</h2>
+   <?php if(isset($_SESSION['logged']) == false){
+        echo'<h2>Inscription d\'un nouveau groupe</h2>
         <p>
             <label for="nom-groupe">Nom du Groupe :</label>
             <input type="text" name="nom-groupe" id="nom-groupe" placeholder="Choisissez un nom" required/>
@@ -158,8 +170,8 @@
                 <input type="number" min="0" name="longitude_secondes_8" id="longitude_secondes_8" placeholder="Saisissez une valeur en secondes" required/>
                 <label for="longitude_secondes_8">sec</label>
         </div>
-        <input type="submit" id="cree"  class="bouton" name="cree" value="Créer" onclick="self.location.href='lien4.html'"/>
-        
+        <input type="submit" id="cree"  class="bouton" name="cree" value="Créer" onclick="self.location.href=\'lien4.html\'"/>';
+        } ?>
     </form>
     
     </body>

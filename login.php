@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Interface PrÃ©leveur</title>
+        <title>Interface Préleveur</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
@@ -11,8 +11,8 @@
         <input type="password" id="pass" />
             </div>
             <div class="button">
-        <input type="button" name="lien" value="Valider" onclick="self.location.href='lien.html'">
-        <input type="button" name="lien2" value="Retour" onclick="self.location.href='lien2.html'">
+        <input type="button" name="lien" value="Valider" onclick="self.location.href='logged.php'">
+        <input type="button" name="lien2" value="Retour" onclick="self.location.href='index.php'">
         </div>
         </form>    
     </body>       

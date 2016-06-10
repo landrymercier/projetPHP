@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -5,6 +6,7 @@
         <meta charset="UTF-8">
         <link href="style.css" rel="stylesheet" type="text/css"/>
         <script type="text/javascript" src="afficher-cacher.js"></script>
+        <?php if(isset($_SESSION['logged']) == false){echo'<META HTTP-EQUIV="Refresh" CONTENT="1; URL=index.php">';} ?>
     </head>
     <body>
         
