@@ -2,12 +2,20 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Interface Préleveur</title>
+        <title>Interface d'étude de prélèvement</title>
         <meta charset="UTF-8">
         <link href="style.css" rel="stylesheet" type="text/css"/>
+        <!--import javascript-->
+            <!--import de la bibliotheque jQuery pour les animations-->
+            <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+        <!--script javascript-->
+            <!--script js de la fonction easing de jQuery non incluse dans la bibliotheque par defaut-->
+            <script type="text/javascript" src="scripts/jquery.easing.1.3.js"></script>
+            <!--script js de la fonction softScroll pour les ancres-->
+            <script type="text/javascript" src="scripts/scroll.js"></script>
     </head>
-    <body>
-        
+    
+    <body id="top"> 
     <?php
     try{
         $bdd = new PDO('mysql:host=localhost;dbname=projet_annelide;charset=utf8', 'root', '');
@@ -22,7 +30,7 @@
         $reponse->closeCursor();}
     ?>
     
-    <h1>Interface de saisie de prélèvement</h1>
+    <h1>Interface d'étude de prélèvement</h1>
         
     <?php if(isset($_SESSION['logged']) == true){
             echo'<a href="interchercheur.php" class="bouton">Accès préleveur</a>';
@@ -31,8 +39,7 @@
          } 
         ?>
     
-
-    <form action="preleveur" method="post">        
+    <form action="interprel.php" method="post">        
         <label for="nom-projet">Projet :</label>
         <input list="projet" id="nom-projet">
         <datalist id="projet"> 
@@ -76,103 +83,110 @@
                echo"</tr>";
             }$reponse->closeCursor();?>
         </table>
-   <?php if(isset($_SESSION['logged']) == false){
-        echo'<h2>Inscription d\'un nouveau groupe</h2>
-        <p>
-            <label for="nom-groupe">Nom du Groupe :</label>
-            <input type="text" name="nom-groupe" id="nom-groupe" placeholder="Choisissez un nom" required/>
-        </p>
-        <div class="saisie-coordonnees">
-            <h3>Coordonnees 1 XY</h3>
-                <input type="number" min="0" name="latitude_degres_1" id="latitude_degres_1" placeholder="Saisissez une valeur en degrés" required/>
-                <label for="latitude_degres_1">deg</label>
-                
-                <input type="number" min="0" name="latitude_minutes_1" id="latitude_minutes_1" placeholder="Saisissez une valeur en minutes" required/>
-                <label for="latitude_minutes_1">min</label>
-                
-                <input type="number" min="0" name="latitude_secondes_1" id="latitude_secondes_1" placeholder="Saisissez une valeur en secondes" required/>
-                <label for="latitude_secondes_1">sec</label>
-        </div>
-        <div class="saisie-coordonnees">
-            <h3>Coordonnees 2 XY</h3>
-                <input type="number" min="0" name="longitude_degres_2" id="longitude_degres_2" placeholder="Saisissez une valeur en degrés" required/>
-                <label for="longitude_degres_2">deg</label>
-                
-                <input type="number" min="0" name="longitude_minutes_2" id="longitude_minutes_2" placeholder="Saisissez une valeur en minutes" required/>
-                <label for="longitude_minutes_2">min</label>
-                
-                <input type="number" min="0" name="longitude_secondes_2" id="longitude_secondes_2" placeholder="Saisissez une valeur en secondes" required/>
-                <label for="longitude_secondes_2">sec</label>
-        </div> 
-        <div class="saisie-coordonnees">
-            <h3>Coordonnees 3 XY</h3>
-                <input type="number" min="0" name="latitude_degres_3" id="latitude_degres_3" placeholder="Saisissez une valeur en degrés" required/>
-                <label for="latitude_degres_3">deg</label>
-                
-                <input type="number" min="0" name="latitude_minutes_3" id="latitude_minutes_3" placeholder="Saisissez une valeur en minutes" required/>
-                <label for="latitude_minutes_3">min</label>
-                
-                <input type="number" min="0" name="latitude_secondes_3" id="latitude_secondes_3" placeholder="Saisissez une valeur en secondes" required/>
-                <label for="latitude_secondes_3">sec</label>
-        </div>
-        <div class="saisie-coordonnees">
-            <h3>Coordonnees 4 XY</h3>
-                <input type="number" min="0" name="longitude_degres_4" id="longitude_degres_4" placeholder="Saisissez une valeur en degrés" required/>
-                <label for="longitude_degres_4">deg</label>
-                
-                <input type="number" min="0" name="longitude_minutes_4" id="longitude_minutes_4" placeholder="Saisissez une valeur en minutes" required/>
-                <label for="longitude_minutes_4">min</label>
-                
-                <input type="number" min="0" name="longitude_secondes_4" id="longitude_secondes_4" placeholder="Saisissez une valeur en secondes" required/>
-                <label for="longitude_secondes_4">sec</label>
-        </div>
-        <div class="saisie-coordonnees">
-            <h3>Coordonnees 5 XY</h3>
-                <input type="number" min="0" name="latitude_degres_5" id="latitude_degres_5" placeholder="Saisissez une valeur en degrés" required/>
-                <label for="latitude_degres_5">deg</label>
-                
-                <input type="number" min="0" name="latitude_minutes_5" id="latitude_minutes_5" placeholder="Saisissez une valeur en minutes" required/>
-                <label for="latitude_minutes_5">min</label>
-                
-                <input type="number" min="0" name="latitude_secondes_5" id="latitude_secondes_5" placeholder="Saisissez une valeur en secondes" required/>
-                <label for="latitude_secondes_5">sec</label>
-        </div>
-        <div class="saisie-coordonnees">
-            <h3>Coordonnees 6 XY</h3>
-                <input type="number" min="0" name="longitude_degres_6" id="longitude_degres_6" placeholder="Saisissez une valeur en degrés" required/>
-                <label for="longitude_degres_6">deg</label>
-                
-                <input type="number" min="0" name="longitude_minutes_6" id="longitude_minutes_6" placeholder="Saisissez une valeur en minutes" required/>
-                <label for="longitude_minutes_6">min</label>
-                
-                <input type="number" min="0" name="longitude_secondes_6" id="longitude_secondes_6" placeholder="Saisissez une valeur en secondes" required/>
-                <label for="longitude_secondes_6">sec</label>
-        </div> 
-        <div class="saisie-coordonnees">
-            <h3>Coordonnees 7 XY</h3>
-                <input type="number" min="0" name="latitude_degres_7" id="latitude_degres_7" placeholder="Saisissez une valeur en degrés" required/>
-                <label for="latitude2_degres_7">deg</label>
-                
-                <input type="number" min="0" name="latitude_minutes_7" id="latitude_minutes_7" placeholder="Saisissez une valeur en minutes" required/>
-                <label for="latitude_minutes_7">min</label>
-                
-                <input type="number" min="0" name="latitude_secondes_7" id="latitude_secondes_7" placeholder="Saisissez une valeur en secondes" required/>
-                <label for="latitude_secondes_7">sec</label>
-        </div>
-        <div class="saisie-coordonnees">
-            <h3>Coordonnees 8 XY</h3>
-                <input type="number" min="0" name="longitude_degres_8" id="longitude_degres_8" placeholder="Saisissez une valeur en degrés" required/>
-                <label for="longitude_degres_8">deg</label>
-                
-                <input type="number" min="0" name="longitude_minutes_8" id="longitude_minutes_8" placeholder="Saisissez une valeur en minutes" required/>
-                <label for="longitude_minutes_8">min</label>
-                
-                <input type="number" min="0" name="longitude_secondes_8" id="longitude_secondes_8" placeholder="Saisissez une valeur en secondes" required/>
-                <label for="longitude_secondes_8">sec</label>
-        </div>
-        <input type="submit" id="cree"  class="bouton" name="cree" value="Créer" onclick="self.location.href=\'lien4.html\'"/>';
-        } ?>
     </form>
     
+   <?php if(isset($_SESSION['logged']) == false){
+        echo'
+        <form action="" method="post">
+            <h2>Inscription d\'un nouveau groupe</h2>
+            <p>
+                <label for="nom-groupe">Nom du Groupe :</label>
+                <input type="text" name="nom-groupe" id="nom-groupe" placeholder="Choisissez un nom" required/>
+            </p>
+            <div class="saisie-coordonnees">
+                <h3>Coordonnees 1 XY</h3>
+                    <input type="number" min="0" step="1" name="latitude_degres_1" id="latitude_degres_1" placeholder="Saisissez une valeur en degrés" required/>
+                    <label for="latitude_degres_1">deg</label>
+
+                    <input type="number" min="0" step="1" name="latitude_minutes_1" id="latitude_minutes_1" placeholder="Saisissez une valeur en minutes" required/>
+                    <label for="latitude_minutes_1">min</label>
+
+                    <input type="number" min="0" step="1" name="latitude_secondes_1" id="latitude_secondes_1" placeholder="Saisissez une valeur en secondes" required/>
+                    <label for="latitude_secondes_1">sec</label>
+            </div>
+            <div class="saisie-coordonnees">
+                <h3>Coordonnees 2 XY</h3>
+                    <input type="number" min="0" step="1" name="longitude_degres_2" id="longitude_degres_2" placeholder="Saisissez une valeur en degrés" required/>
+                    <label for="longitude_degres_2">deg</label>
+
+                    <input type="number" min="0" step="1" name="longitude_minutes_2" id="longitude_minutes_2" placeholder="Saisissez une valeur en minutes" required/>
+                    <label for="longitude_minutes_2">min</label>
+
+                    <input type="number" min="0" step="1" name="longitude_secondes_2" id="longitude_secondes_2" placeholder="Saisissez une valeur en secondes" required/>
+                    <label for="longitude_secondes_2">sec</label>
+            </div> 
+            <div class="saisie-coordonnees">
+                <h3>Coordonnees 3 XY</h3>
+                    <input type="number" min="0" step="1" name="latitude_degres_3" id="latitude_degres_3" placeholder="Saisissez une valeur en degrés" required/>
+                    <label for="latitude_degres_3">deg</label>
+
+                    <input type="number" min="0" step="1" name="latitude_minutes_3" id="latitude_minutes_3" placeholder="Saisissez une valeur en minutes" required/>
+                    <label for="latitude_minutes_3">min</label>
+
+                    <input type="number" min="0" step="1" name="latitude_secondes_3" id="latitude_secondes_3" placeholder="Saisissez une valeur en secondes" required/>
+                    <label for="latitude_secondes_3">sec</label>
+            </div>
+            <div class="saisie-coordonnees">
+                <h3>Coordonnees 4 XY</h3>
+                    <input type="number" min="0" step="1" name="longitude_degres_4" id="longitude_degres_4" placeholder="Saisissez une valeur en degrés" required/>
+                    <label for="longitude_degres_4">deg</label>
+
+                    <input type="number" min="0" step="1" name="longitude_minutes_4" id="longitude_minutes_4" placeholder="Saisissez une valeur en minutes" required/>
+                    <label for="longitude_minutes_4">min</label>
+
+                    <input type="number" min="0" step="1" name="longitude_secondes_4" id="longitude_secondes_4" placeholder="Saisissez une valeur en secondes" required/>
+                    <label for="longitude_secondes_4">sec</label>
+            </div>
+            <div class="saisie-coordonnees">
+                <h3>Coordonnees 5 XY</h3>
+                    <input type="number" min="0" step="1" name="latitude_degres_5" id="latitude_degres_5" placeholder="Saisissez une valeur en degrés" required/>
+                    <label for="latitude_degres_5">deg</label>
+
+                    <input type="number" min="0" step="1" name="latitude_minutes_5" id="latitude_minutes_5" placeholder="Saisissez une valeur en minutes" required/>
+                    <label for="latitude_minutes_5">min</label>
+
+                    <input type="number" min="0" step="1" name="latitude_secondes_5" id="latitude_secondes_5" placeholder="Saisissez une valeur en secondes" required/>
+                    <label for="latitude_secondes_5">sec</label>
+            </div>
+            <div class="saisie-coordonnees">
+                <h3>Coordonnees 6 XY</h3>
+                    <input type="number" min="0" step="1" name="longitude_degres_6" id="longitude_degres_6" placeholder="Saisissez une valeur en degrés" required/>
+                    <label for="longitude_degres_6">deg</label>
+
+                    <input type="number" min="0" step="1" name="longitude_minutes_6" id="longitude_minutes_6" placeholder="Saisissez une valeur en minutes" required/>
+                    <label for="longitude_minutes_6">min</label>
+
+                    <input type="number" min="0" step="1" name="longitude_secondes_6" id="longitude_secondes_6" placeholder="Saisissez une valeur en secondes" required/>
+                    <label for="longitude_secondes_6">sec</label>
+            </div> 
+            <div class="saisie-coordonnees">
+                <h3>Coordonnees 7 XY</h3>
+                    <input type="number" min="0" step="1" name="latitude_degres_7" id="latitude_degres_7" placeholder="Saisissez une valeur en degrés" required/>
+                    <label for="latitude2_degres_7">deg</label>
+
+                    <input type="number" min="0" step="1" name="latitude_minutes_7" id="latitude_minutes_7" placeholder="Saisissez une valeur en minutes" required/>
+                    <label for="latitude_minutes_7">min</label>
+
+                    <input type="number" min="0" step="1" name="latitude_secondes_7" id="latitude_secondes_7" placeholder="Saisissez une valeur en secondes" required/>
+                    <label for="latitude_secondes_7">sec</label>
+            </div>
+            <div class="saisie-coordonnees">
+                <h3>Coordonnees 8 XY</h3>
+                    <input type="number" min="0" step="1" name="longitude_degres_8" id="longitude_degres_8" placeholder="Saisissez une valeur en degrés" required/>
+                    <label for="longitude_degres_8">deg</label>
+
+                    <input type="number" min="0" step="1" name="longitude_minutes_8" id="longitude_minutes_8" placeholder="Saisissez une valeur en minutes" required/>
+                    <label for="longitude_minutes_8">min</label>
+
+                    <input type="number" min="0" step="1" name="longitude_secondes_8" id="longitude_secondes_8" placeholder="Saisissez une valeur en secondes" required/>
+                    <label for="longitude_secondes_8">sec</label>
+            </div>
+            <input type="submit" id="cree" class="bouton" name="cree" value="Créer"/>
+            <input type="reset" class="bouton" value="Vider"/>
+        </form>';
+        } ?>
+    <footer>
+        <a href="#top" class="bouton" title="Haut de page"><img src="images/icone_fleche-retour.png" alt="Haut de page"/></a>
+    </footer>
     </body>
 </html>
