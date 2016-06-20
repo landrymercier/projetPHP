@@ -1,4 +1,5 @@
-<?php session_start(); ?>
+<?php session_start(); 
+include_once 'Config.php';?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,7 +23,7 @@
     <body id="top">
     <?php
     try{
-        $bdd = new PDO('mysql:host=localhost;dbname=prelevebdd;charset=utf8', 'root', '');
+        $bdd = new PDO('mysql:host='.Config::SERVERNAME.';dbname='.Config::DBNAME.';charset=utf8', Config::LOGIN, '');
     }
     catch (Exception $e){
             die('Erreur : ' . $e->getMessage());
