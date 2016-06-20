@@ -22,14 +22,14 @@
     <body id="top">
     <?php
     try{
-        $bdd = new PDO('mysql:host=localhost;dbname=projet_annelide;charset=utf8', 'root', '');
+        $bdd = new PDO('mysql:host=localhost;dbname=prelevebdd;charset=utf8', 'root', '');
     }
     catch (Exception $e){
             die('Erreur : ' . $e->getMessage());
     }
     if(isset($_GET['ajout'])){
-    $req = $bdd->prepare('INSERT INTO bestioles (bestioles, nb) VALUES(?, ?)');
-    $req->execute(array($_GET['mob'], $_GET['nb']));
+    $req = $bdd->prepare('INSERT INTO Especes (Nom,IDzone) VALUES(?, ?)');
+    $req->execute(array($_GET['mob'], 3));
     $req->closeCursor();}
     ?>
 
@@ -39,11 +39,10 @@
         <fieldset>
             <legend><h2>Choix du projet</h2></legend>
             <select name="listprojet">
-                <option>Projet 1</option>
-                <option>Projet 2</option>
-                <option>Projet X</option>
-                <option>Projet blair witch</option>
-                <option>Projet parquet cuisine</option>
+                <?php $reponse = $bdd->query("SELECT Nom FROM plage");
+                    while ($donnees = $reponse->fetch()) {
+                    echo"<option>".$donnees['Nom']."</option>";}
+                $reponse->closeCursor();?>
             </select>
         </fieldset>
     </form>
@@ -53,10 +52,11 @@
             <legend><h2>Choix du groupe</h2></legend>
             <select name="listtri">
                 <option>Vu globale</option>
-                <option>--------</option>
-                <option>Groupe 1</option>
-                <option>Groupe 2</option>
-                <option>Groupe 3</option>
+                <option>----------</option>
+                <?php $reponse = $bdd->query("SELECT Nom FROM Zones");
+                    while ($donnees = $reponse->fetch()) {
+                    echo"<option>".$donnees['Nom']."</option>";}
+                ?>
             </select>
         </fieldset>
     </form>
@@ -77,11 +77,14 @@
             <p>"nom plage"</p>
         </div>
         <div id="coordonnees" class="clear">
-            <div class="couleur0-0">N20°14'5123" N20°14'5123"</div>
-            <div class="couleur0-1">N20°14'5123" N20°14'5123"</div>
-            <div>surface : "surface"</div>
-            <div class="couleur1-0">N20°14'5123" N20°14'5123"</div>
-            <div class="couleur1-1">N20°14'5123" N20°14'5123"</div>
+            <?php $reponse = $bdd->query("SELECT latA,longA,latB,longB,latC,longC,latD,longD,Superficie FROM Zones");
+            $donnees = $reponse->fetch();
+            echo "<div class=\"couleur0-0\"> ".$donnees['latA']." ".$donnees['longA']."</div>";
+            echo "<div class=\"couleur0-1\"> ".$donnees['latB']." ".$donnees['longB']."</div>";
+            echo"<div>Surface : ".$donnees['Superficie']." m²</div>";
+            echo "<div class=\"couleur1-0\"> ".$donnees['latC']." ".$donnees['longC']."</div>";
+            echo "<div class=\"couleur1-1\"> ".$donnees['latD']." ".$donnees['longD']."</div>"; 
+            $reponse->closeCursor();?>
         </div>
     </div>
     
@@ -103,18 +106,13 @@
                 </tr>
             </tfoot>
             <tbody><!--corp du tableau-->
-                <tr>
-                    <td><input type="text" name="mob" id="mob" placeholder="Choisissez un nom" required/></td>
-                    <td><input type="number" min="0" step="1" name="nb" id="nb" placeholder="Choisissez un chiffre" required/></td>
-                    <td><input type="submit" id="ajout" class="bouton" name="ajout" value="Ajouter"/></td>
-                </tr>
                 <?php
-                $reponse = $bdd->query("SELECT * FROM bestioles");
+                $reponse = $bdd->query("SELECT * FROM Especes");
                 while ($donnees = $reponse->fetch())
                 {
                     echo"<tr>";
-                    echo"<td>".$donnees['bestioles']."</td>";
-                    echo"<td>".$donnees['nb']."</td>";
+                    echo"<td>".$donnees['Nom']."</td>";
+                    echo"<td>0</td>";
                     echo'<td><input type="submit" id="modif" class="bouton" name="modif" value="Modifier"/></td>';
                     echo"</tr>";
                 }$reponse->closeCursor();?>
