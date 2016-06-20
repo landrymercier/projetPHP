@@ -1,4 +1,6 @@
-<?php session_start(); ?>
+<?php session_start();
+//session_destroy(); 
+include_once 'Config.php';?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,41 +20,33 @@
     <body id="top"> 
     <?php
     try{
-        $bdd = new PDO('mysql:host=localhost;dbname=projet_annelide;charset=utf8', 'root', '');
+        $bdd = new PDO('mysql:host='.Config::SERVERNAME.';dbname='.Config::DBNAME.';charset=utf8', Config::LOGIN, '');
         }
     catch (Exception $e){
         die('Erreur : ' . $e->getMessage());
         }
-
-    if(isset($_GET['ajout'])){
-        $req = $bdd->prepare('INSERT INTO bestioles (bestioles, nb) VALUES(?, ?)');
-        $req->execute(defined(array($_GET['mob'], $_GET['nb'])));
-        $reponse->closeCursor();}
     ?>
     
     <h1>Interface d'étude de prélèvement</h1>
         
-    <?php if(isset($_SESSION['logged']) == true){
+    <?php if(isset($_SESSION['logged']) == true){//GESTION DE LA SESSION, LE CHERCHEUR EST LOGGUE, PAS LE PRELEVEUR
             echo'<a href="interchercheur.php" class="bouton">Accès préleveur</a>';
          }
             else{echo'<a href="login.php" class="bouton">Connexion</a>';
          } 
         ?>
     
-    <form action="interprel.php" method="post">        
+    <form action="interprel.php" method="post">
         <label for="nom-projet">Projet :</label>
         <input list="projet" id="nom-projet">
-        <datalist id="projet"> 
-            <option>Projet1</option> 
-            <option>Projet2</option> 
-            <option>Projet3</option> 
-            <option>Projet4</option> 
-            <option>Projet5</option> 
-            <option>Projet6</option> 
-            <option>Projet7</option> 
-            <option>Projet8</option> 
-        </datalist>  
-   
+        <?php //REQUETE POUR LA LISTE DES PROJETS EN COURS
+        $reponse = $bdd->query("SELECT Nom FROM plage");
+        echo "<datalist id=\"projet\">"; 
+            while ($donnees = $reponse->fetch()) {
+                echo "<option>".$donnees['Nom']."</option>";}
+        echo "</datalist>";  
+        $reponse->closeCursor();?>
+
         <table>
             <caption><h2>Groupe(s) assigné(s) au projet</h2></caption>
             <thead><!--en tete de tableau-->
@@ -68,16 +62,16 @@
                 </tr>
             </tfoot>
             
-            <?php
-            $reponse = $bdd->query("SELECT * FROM groupe");
+            <?php //AFFICHE LES GROUPES DEJA CREES SUIVANT LE PROJET SELECTIONNE
+            $reponse = $bdd->query("SELECT Nom FROM zones WHERE IDplage = (SELECT ID FROM plage WHERE Nom ='Crevette-sur-salade')");
             while ($donnees = $reponse->fetch())
             {
                echo"<tr>";
                echo"<td>".$donnees['Nom']."</td>";
-               if(isset($_COOKIE['logged']) == true){
+               if(isset($_SESSION['logged']) == true){ //LE CHERCHEUR PEUT TERMINER UN PRELEVEMENT
                    echo'<td><input type="submit" id="complete" class="bouton" name="complete" value="Clore"/></td>';
                }
-               else{
+               else{ //LE PRELEVEUR PEUT COMPLETER SON PRELEVEMENT
                    echo'<td><input type="submit" id="complete" class="bouton" name="complete" value="Compléter"/></td>';
                }
                echo"</tr>";

@@ -1,4 +1,8 @@
-<?php session_start(); ?>
+<?php //VARIABLES TEMPORAIRES --> prélèvement de la zone 1 de la ville 1 avec le groupe 1
+include_once 'Config.php';
+$IDgroupe = Config::GROUPE;
+$IDzone = Config::ZONE;
+$IDplage = Config::PLAGE; ?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -19,42 +23,47 @@
     </head>
     
     <body id="top">
-    <?php
+    <?php //CONNEXION BDD
     try{
-        $bdd = new PDO('mysql:host=localhost;dbname=projet_annelide;charset=utf8', 'root', '');
+        $bdd = new PDO('mysql:host='.Config::SERVERNAME.';dbname='.Config::DBNAME.';charset=utf8', Config::LOGIN, '');
     }
     catch (Exception $e){
             die('Erreur : ' . $e->getMessage());
     }
-    /*if(isset($_GET['ajout'])){
-    $req = $bdd->prepare('INSERT INTO bestioles (bestioles, nb) VALUES(?, ?)');
-    $req->execute(array($_GET['mob'], $_GET['nb']));}
-    $reponse->closeCursor();*/
     ?>
-        
-    <h1>Interface Préleveur - "Nom du groupe en Php"</h1>
+    <?php $reponse = $bdd->query("SELECT Nom FROM zones WHERE ID=".$IDzone); //REQUETE POUR LE GROUPE EN COURS
+    $donnees = $reponse->fetch();
+    echo "<h1>Interface Préleveur - ".$donnees['Nom']."</h1>"; ?>
     
     <span class="bouton" id="bouton_plage" onclick="javascript:afficher_cacher('plage');">
         Cacher les informations de la plage
     </span>
     <script type="text/javascript">
-    //<!--
+    //<!-- cacher une partie de la page (menu infos)
         afficher_cacher('plage');
     //-->
     </script>
     <div id="plage">
         <div id="infos-projet">
-            <p>"nom projet</p>
-            <p>"nom commune"</p>
-            <p>"date"</p>
-            <p>"nom plage"</p>
+            <?php //REQUETE POUR RECUPERER LES INFORMATIONS DU PROJET (ville, nom projet, date...)
+            $reponse = $bdd->query("SELECT Nom,Ville,Datepreleve FROM plage WHERE ID=".$IDplage);
+            $donnees = $reponse->fetch();
+            echo "<p>Projet: ".$donnees['Nom']."</p>";
+            echo "<p>Ville: ".$donnees['Ville']."</p>";
+            echo "<p>Date: ".$donnees['Datepreleve']."</p>"; 
+            $reponse->closeCursor();?>
         </div>
         <div id="coordonnees" class="clear">
-            <div class="couleur0-0">N20°14'5123" N20°14'5123"</div>
-            <div class="couleur0-1">N20°14'5123" N20°14'5123"</div>
-            <div>surface : "surface"</div>
-            <div class="couleur1-0">N20°14'5123" N20°14'5123"</div>
-            <div class="couleur1-1">N20°14'5123" N20°14'5123"</div>
+            <?php //REQUETE POUR AFFICHER L'ESPACE DE TRAVAIL (coords, superficie)
+            $reponse = $bdd->query("SELECT latA,longA,latB,longB,latC,longC,latD,longD,Superficie "
+                    . "FROM Zones WHERE ID=".$IDgroupe);
+            $donnees = $reponse->fetch();
+            echo "<div class=\"couleur0-0\"> ".$donnees['latA']." ".$donnees['longA']."</div>";
+            echo "<div class=\"couleur0-1\"> ".$donnees['latB']." ".$donnees['longB']."</div>";
+            echo"<div>Surface : ".$donnees['Superficie']." m²</div>";
+            echo "<div class=\"couleur1-0\"> ".$donnees['latC']." ".$donnees['longC']."</div>";
+            echo "<div class=\"couleur1-1\"> ".$donnees['latD']." ".$donnees['longD']."</div>"; 
+            $reponse->closeCursor();?>
         </div>
     </div>
     
@@ -82,13 +91,13 @@
                     <td><input type="number" min="0" step="1" name="nb" id="nb" placeholder="Choisissez un chiffre" required/></td>
                     <td><input type="submit" id="ajout" class="bouton" name="ajout" value="Ajouter"/></td>
                 </tr>
-                <?php
-                $reponse = $bdd->query("SELECT * FROM bestioles");
+                <?php //REQUETE POUR AFFICHER LA LISTE DES ESPECES TROUVE PAR LE GROUPE EN COURS
+                $reponse = $bdd->query("SELECT Nom FROM especes WHERE IDzone =".$IDzone);
                 while ($donnees = $reponse->fetch())
                 {
                    echo"<tr>";
-                   echo"<td>".$donnees['bestioles']."</td>";
-                   echo"<td>".$donnees['nb']."</td>";
+                   echo"<td>".$donnees['Nom']."</td>";
+                   echo"<td>0</td>";
                    echo'<td><input type="submit" id="modifie" class="bouton" name="modifie" value="Modifier"/></td>';
                    echo"</tr>";
                 }$reponse->closeCursor();?>
