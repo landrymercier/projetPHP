@@ -7,8 +7,8 @@ class PointGPS {
 
     public function __construct($abscisse_degre, $abscisse_minute, $abscisse_seconde, 
             $ordonnee_degre, $ordonnee_minute, $ordonnee_seconde) {
-        $this->x = $abscisse_degre.".".$abscisse_minute.$abscisse_seconde;
-        $this->y = $ordonnee_degre.".".$ordonnee_minute.$ordonnee_seconde;
+        $this->x = $abscisse_degre.".".$abscisse_minute.$abscisse_seconde;//conversion pour minutes et secondes
+        $this->y = $ordonnee_degre.".".$ordonnee_minute.$ordonnee_seconde;//conversion pour minutes et secondes
         
         /*conversion de la variable de type String vers le type float*/
         $x=floatval($this->x);
@@ -30,10 +30,11 @@ class PointGPS {
         $distance_x = ($pt2_x - $pt1_x) / 2;
         $distance_y = ($pt2_y - $pt1_y) / 2;
         
-        $a = (sin($distance_y) * sin($distance_y)) + cos($pt1_y) * cos($pt2_y) 
+        //calcul d'une distance terrestre (distance incurvée)
+        $angle_distance = (sin($distance_y) * sin($distance_y)) + cos($pt1_y) * cos($pt2_y) 
                 * (sin($distance_x) * sin($distance_x));
         
-        $distance = 2 * atan2(sqrt($a), sqrt(1 - $a));
+        $distance = 2 * atan2(sqrt($angle_distance), sqrt(1 - $angle_distance));
         
         return ($earth_radius * $distance);
     }
