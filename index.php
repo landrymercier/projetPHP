@@ -94,10 +94,10 @@ include_once 'Config.php';?>
                         <input type="number" min="0" max="90" step="1" name="latitude_degres_1" id="latitude_degres_1" placeholder="Saisissez une valeur en degrés" required/>
                         <label for="latitude_degres_1">deg</label>
 
-                        <input type="number" min="0" step="1" name="latitude_minutes_1" id="latitude_minutes_1" placeholder="Saisissez une valeur en minutes" required/>
+                        <input type="number" min="0" max="60" step="1" name="latitude_minutes_1" id="latitude_minutes_1" placeholder="Saisissez une valeur en minutes" required/>
                         <label for="latitude_minutes_1">min</label>
 
-                        <input type="number" min="0" step="1" name="latitude_secondes_1" id="latitude_secondes_1" placeholder="Saisissez une valeur en secondes" required/>
+                        <input type="number" min="1000" max="6099" step="1" name="latitude_secondes_1" id="latitude_secondes_1" placeholder="Saisissez une valeur en secondes" required/>
                         <label for="latitude_secondes_1">sec</label>
                     </p>
                     <p>
@@ -105,10 +105,10 @@ include_once 'Config.php';?>
                         <input type="number" min="-180" max="180" step="1" name="longitude_degres_1" id="longitude_degres_1" placeholder="Saisissez une valeur en degrés" required/>
                         <label for="longitude_degres_1">deg</label>
 
-                        <input type="number" min="0" step="1" name="longitude_minutes_1" id="longitude_minutes_1" placeholder="Saisissez une valeur en minutes" required/>
+                        <input type="number" min="0" max="60" step="1" name="longitude_minutes_1" id="longitude_minutes_1" placeholder="Saisissez une valeur en minutes" required/>
                         <label for="longitude_minutes_1">min</label>
 
-                        <input type="number" min="0" step="1" name="longitude_secondes_1" id="longitude_secondes_1" placeholder="Saisissez une valeur en secondes" required/>
+                        <input type="number" min="1000" max="6099" step="1" name="longitude_secondes_1" id="longitude_secondes_1" placeholder="Saisissez une valeur en secondes" required/>
                         <label for="longitude_secondes_1">sec</label>
                     </p>
             </div> 
@@ -119,10 +119,10 @@ include_once 'Config.php';?>
                         <input type="number" min="0" max="90" step="1" name="latitude_degres_2" id="latitude_degres_2" placeholder="Saisissez une valeur en degrés" required/>
                         <label for="latitude_degres_2">deg</label>
 
-                        <input type="number" min="0" step="1" name="latitude_minutes_2" id="latitude_minutes_2" placeholder="Saisissez une valeur en minutes" required/>
+                        <input type="number" min="0" max="60" step="1" name="latitude_minutes_2" id="latitude_minutes_2" placeholder="Saisissez une valeur en minutes" required/>
                         <label for="latitude_minutes_2">min</label>
 
-                        <input type="number" min="0" step="1" name="latitude_secondes_2" id="latitude_secondes_2" placeholder="Saisissez une valeur en secondes" required/>
+                        <input type="number" min="1000" max="6099" step="1" name="latitude_secondes_2" id="latitude_secondes_2" placeholder="Saisissez une valeur en secondes" required/>
                         <label for="latitude_secondes_2">sec</label>
                     </p>
                     <p>
@@ -130,10 +130,10 @@ include_once 'Config.php';?>
                         <input type="number" min="-180" max="180" step="1" name="longitude_degres_2" id="longitude_degres_2" placeholder="Saisissez une valeur en degrés" required/>
                         <label for="longitude_degres_2">deg</label>
 
-                        <input type="number" min="0" step="1" name="longitude_minutes_2" id="longitude_minutes_2" placeholder="Saisissez une valeur en minutes" required/>
+                        <input type="number" min="0" max="60" step="1" name="longitude_minutes_2" id="longitude_minutes_2" placeholder="Saisissez une valeur en minutes" required/>
                         <label for="longitude_minutes_2">min</label>
 
-                        <input type="number" min="0" step="1" name="longitude_secondes_2" id="longitude_secondes_2" placeholder="Saisissez une valeur en secondes" required/>
+                        <input type="number" min="1000" max="6099" step="1" name="longitude_secondes_2" id="longitude_secondes_2" placeholder="Saisissez une valeur en secondes" required/>
                         <label for="longitude_secondes_2">sec</label>
                     </p>
             </div>
@@ -144,10 +144,10 @@ include_once 'Config.php';?>
                         <input type="number" min="0" max="90" step="1" name="latitude_degres_3" id="latitude_degres_3" placeholder="Saisissez une valeur en degrés" required/>
                         <label for="latitude_degres_3">deg</label>
 
-                        <input type="number" min="0" step="1" name="latitude_minutes_3" id="latitude_minutes_3" placeholder="Saisissez une valeur en minutes" required/>
+                        <input type="number" min="0" max="60" step="1" name="latitude_minutes_3" id="latitude_minutes_3" placeholder="Saisissez une valeur en minutes" required/>
                         <label for="latitude_minutes_3">min</label>
 
-                        <input type="number" min="0" step="1" name="latitude_secondes_3" id="latitude_secondes_3" placeholder="Saisissez une valeur en secondes" required/>
+                        <input type="number" min="1000" max="6099" step="1" name="latitude_secondes_3" id="latitude_secondes_3" placeholder="Saisissez une valeur en secondes" required/>
                         <label for="latitude_secondes_3">sec</label>
                     </p>
                     <p>
@@ -155,10 +155,10 @@ include_once 'Config.php';?>
                         <input type="number" min="-180" max="180" step="1" name="longitude_degres_3" id="longitude_degres_3" placeholder="Saisissez une valeur en degrés" required/>
                         <label for="longitude_degres_3">deg</label>
 
-                        <input type="number" min="0" step="1" name="longitude_minutes_3" id="longitude_minutes_3" placeholder="Saisissez une valeur en minutes" required/>
+                        <input type="number" min="0" max="60" step="1" name="longitude_minutes_3" id="longitude_minutes_3" placeholder="Saisissez une valeur en minutes" required/>
                         <label for="longitude_minutes_3">min</label>
 
-                        <input type="number" min="0" step="1" name="longitude_secondes_3" id="longitude_secondes_3" placeholder="Saisissez une valeur en secondes" required/>
+                        <input type="number" min="1000" max="6099" step="1" name="longitude_secondes_3" id="longitude_secondes_3" placeholder="Saisissez une valeur en secondes" required/>
                         <label for="longitude_secondes_3">sec</label>
                     </p>
             </div> 
@@ -169,10 +169,10 @@ include_once 'Config.php';?>
                         <input type="number" min="0" max="90" step="1" name="latitude_degres_4" id="latitude_degres_4" placeholder="Saisissez une valeur en degrés" required/>
                         <label for="latitude_degres_4">deg</label>
 
-                        <input type="number" min="0" step="1" name="latitude_minutes_4" id="latitude_minutes_4" placeholder="Saisissez une valeur en minutes" required/>
+                        <input type="number" min="0" max="60" step="1" name="latitude_minutes_4" id="latitude_minutes_4" placeholder="Saisissez une valeur en minutes" required/>
                         <label for="latitude_minutes_4">min</label>
 
-                        <input type="number" min="0" step="1" name="latitude_secondes_4" id="latitude_secondes_4" placeholder="Saisissez une valeur en secondes" required/>
+                        <input type="number" min="1000" max="6099" step="1" name="latitude_secondes_4" id="latitude_secondes_4" placeholder="Saisissez une valeur en secondes" required/>
                         <label for="latitude_secondes_4">sec</label>
                     </p>
                     <p>
@@ -180,10 +180,10 @@ include_once 'Config.php';?>
                         <input type="number" min="-180" max="180" step="1" name="longitude_degres_4" id="longitude_degres_4" placeholder="Saisissez une valeur en degrés" required/>
                         <label for="longitude_degres_4">deg</label>
 
-                        <input type="number" min="0" step="1" name="longitude_minutes_4" id="longitude_minutes_4" placeholder="Saisissez une valeur en minutes" required/>
+                        <input type="number" min="0" max="60" step="1" name="longitude_minutes_4" id="longitude_minutes_4" placeholder="Saisissez une valeur en minutes" required/>
                         <label for="longitude_minutes_4">min</label>
 
-                        <input type="number" min="0" step="1" name="longitude_secondes_4" id="longitude_secondes_4" placeholder="Saisissez une valeur en secondes" required/>
+                        <input type="number" min="1000" max="6099" step="1" name="longitude_secondes_4" id="longitude_secondes_4" placeholder="Saisissez une valeur en secondes" required/>
                         <label for="longitude_secondes_4">sec</label>
                     </p>
             </div>
