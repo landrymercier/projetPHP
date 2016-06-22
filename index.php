@@ -38,8 +38,8 @@ include_once 'Config.php';
         }
         ?>
 
-        <form action="index.php" method="post">
-            <label for="nom">Projet :</label>
+        <form action="index.php" method="post" class="align-form-plage">
+            <label for="nom">Sélectionnez une plage :</label>
             <select name="idprojet" id="nom">
                 <?php
                 //LISTE DES PROJETS EN COURS, ON RECUPERE L'ID POUR L'ENVOYER DANS LA REQUETE SUIVANTE
@@ -50,7 +50,7 @@ include_once 'Config.php';
                 $reponse->closeCursor();
                 ?>
             </select>
-            <input type="submit" value="Envoyer" id="envoiprojet" name="envoiprojet"/>
+            <input type="submit" class="bouton" value="Choisir" id="envoiprojet" name="envoiprojet"/>
         </form>
 
 

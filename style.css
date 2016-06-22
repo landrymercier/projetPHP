@@ -52,6 +52,11 @@ input:-moz-placeholder, textarea:-moz-placeholder { color:rgba(0,181,146,0.9); }
 /*selecteur webkit*/
 input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { color:rgba(0,181,146,0.9); }
 
+.align-form-plage { text-align:right; }
+form.align-form-plage label, form.align-form-plage select { display:inline-block; }
+form.align-form-plage label { width:20%; text-align:left; }
+form.align-form-plage select { width:79%; }
+
 /*SAISIE COORDONNEES*/
 div.saisie-coordonnees input { width:auto; }
 
