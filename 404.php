@@ -19,6 +19,7 @@
         <h1> Vous vous êtes perdu ?</h1>
         <div>
             <img src="images/404.png" alt=""/>
+            <p class="font404">Vous ne savez plus ou vous etes ?</p>
         </div>
         <div>
             <h2>Qu'est ce que vous essayiez de faire ?</h2>

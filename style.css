@@ -1,22 +1,92 @@
 /**
 STYLE PAR DEFAUT POUR MOBILE
 */
-body { font-size:0.9em; background:rgba(0,181,146,0.1); padding-right:3em; }
+
+/*FONT POUR L'ENIGME DE LA 404*/
+@font-face {
+    font-family:'Ancient Hylian';
+    src: url('fonts/ancienthylian-webfont.woff2') format('woff2'),
+         url('fonts/ancienthylian-webfont.woff') format('woff');
+    font-weight:normal;
+    font-style:normal;
+}
+
+body { 
+    box-sizing:border-box;
+    font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-size:0.9em;
+    background:rgba(46,148,163,1) url("images/fond.png") no-repeat fixed center;
+    background-size:cover;
+    -webkit-background-size: cover;
+    color:rgba(0,30,34,1);
+    padding-right:3em; }
+
+h1 { font-variant:small-caps; text-align:center; letter-spacing:0.2em; border-bottom:1px solid rgba(0,30,34,1); 
+margin:0 0 1em; padding:0 0 0.5em; }
+
 .clear { clear:both; }
 
+
 /*FORMULAIRE*/
-fieldset, legend, table { width:100%; box-sizing:border-box; margin:1em 0; border:2px solid rgba(0,181,146,1); 
+fieldset, legend, table { width:100%; box-sizing:border-box; margin:1em 0; border:1px solid rgba(0,70,79,1); 
 border-radius:0.8em; }
-fieldset, legend { background:rgba(0,181,146,0.1); }
-legend { width:auto; padding:0 2em; background:rgba(167,229,216,1); }
+fieldset, legend { background:rgba(0,120,136,0.8); }
+legend { width:auto; padding:0 1em; background:rgba(0,140,159,1); }
 legend>h2, caption>h2 { margin:0.5em 0; font-size:1.1em; }
 table { border-collapse:collapse; }
+
+
+/*ELEMENT FORMULAIRE*/
+input, select { display:inline-block; width:100%; box-sizing:border-box; border:1px solid rgba(0,70,79,1); 
+border-radius:0.8em; background:rgba(0,140,159,0.5); padding:0.4em; }  
+
+/*impossible de mixer les selecteurs pour Firefox et les selecteurs pour Webkit : separer les selecteurs*/
+/*selecteur moz*/
+input:-moz-placeholder, textarea:-moz-placeholder { color:rgba(0,50,57,1); font-style:italic; }
+/*selecteur webkit*/
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { color:rgba(0,50,57,1); font-style:italic; }
+
+
+/*TABLEAU*/
+th { border:1px solid rgba(0,70,79,1); background:rgba(0,140,159,0.8); }
+tr:nth-child(even) { background:rgba(0,120,136,0.8); }
+tr:nth-child(odd) { background:rgba(0,110,124,0.8); }
+th, td { width:20%; text-align:center; padding:0.5em 0.2em; }
+th:first-child, td:first-child { width:60%; padding-left:0.5em; text-align:left; }
+
+
+/*NAVIGATION*/
+div.btn-session, footer { width:3em; }
+div.btn-session { position:fixed; top:0; right:0; }
+footer { position:fixed; bottom:0; right:0; }
+div.btn-session img, footer img { max-width:100%; }
+
+
+
+/*-------------------*/
+/*-------INDEX-------*/
+/*-------------------*/
+
+/*POSITIONNEMENT DU FORMULAIRE PLAGE*/
+form#align-form-plage label, form#align-form-plage select { display:inline-block; }
+
+/*SAISIE COORDONNEES*/
+div.saisie-coordonnees span { display:block; }
+div.saisie-coordonnees p input { text-align:right; }
+div.saisie-coordonnees p input:nth-child(2), div.saisie-coordonnees p input:nth-child(4) { width:4em; }
+div.saisie-coordonnees p input:nth-child(6) { width:5em; }
+
+
+
+
+
+
 
 /*POSITIONNEMENT INFOS PLAGE*/
 div#plage { box-sizing:border-box; padding:1.5em; background:rgba(0,181,146,0.1); border-radius:0.8em; }
 div#infos-projet, div#coordonnees { box-sizing:border-box; margin:1em 0; vertical-align:middle; }
-div#coordonnees { display:table; border-top:1px solid rgba(0,181,146,1); padding-top:1em; }
-div#coordonnees div { float:left; box-sizing:border-box; width:50%; text-align:left; }
+div#coordonnees { box-sizing:border-box; display:table; border-top:1px solid rgba(0,181,146,1); padding-top:1em; }
+div#coordonnees div { box-sizing:border-box; float:left; width:50%; text-align:left; }
 div#coordonnees div:nth-child(2), div#coordonnees div:nth-child(5) { float:right; text-align:right; }
 div#coordonnees div:nth-child(1) { padding:0 1em 1em 0; }
 div#coordonnees div:nth-child(2) { padding:0 0 1em 1em; }
@@ -24,9 +94,7 @@ div#coordonnees div:nth-child(4) { padding:1em 1em 0 0; }
 div#coordonnees div:nth-child(5) { padding:1em 0 0 1em; }
 div#coordonnees div:nth-child(3) { float:left; width:100%; padding:1em; text-align:center;  background:rgba(0,181,146,0.2); }
 
-/*NAVIGATION*/
-footer { position:fixed; bottom:0; right:0; width:3em; }
-footer img { max-width:100%; }
+
 
 /*CODE COULEUR COORDONNEES*/
 .couleur0-0 { color:rgba(0,181,146,1); }/*coin en haut à gauche*/
@@ -34,39 +102,25 @@ footer img { max-width:100%; }
 .couleur1-0 { color:rgba(0,61,26,1); }/*coin en bas à gauche*/
 .couleur1-1 { color:rgba(0,141,106,1); }/*coin en bas à droite*/
 
-/*TABLEAU*/
-th { border:1px solid rgba(0,181,146,1); }
-tr:nth-child(even) { background:rgba(0,181,146,0.4); }
-tr:nth-child(odd) { background:rgba(0,181,146,0.2); }
-th, td { width:20%; text-align:center; padding:0.5em 0.2em; }
-th:first-child, td:first-child { width:60%; padding-left:0.5em; text-align:left; }
-            
-/*ELEMENT FORMULAIRE*/
-input, select { display:inline-block; width:100%; box-sizing:border-box; border:1px solid rgba(0,181,146,1); 
-border-radius:0.8em; background:rgba(230,247,244,1); padding:0.4em; }
-input { background-color:transparent; }
-            
-/*impossible de mixer les selecteurs pour Firefox et les selecteurs pour Webkit : separer les selecteurs*/
-/*selecteur moz*/
-input:-moz-placeholder, textarea:-moz-placeholder { color:rgba(0,181,146,0.9); }
-/*selecteur webkit*/
-input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { color:rgba(0,181,146,0.9); }
 
-.align-form-plage { text-align:right; }
-form.align-form-plage label, form.align-form-plage select { display:inline-block; }
-form.align-form-plage label { width:20%; text-align:left; }
-form.align-form-plage select { width:79%; }
 
-/*SAISIE COORDONNEES*/
-div.saisie-coordonnees input { width:auto; }
+
+
+
+
+
+/*--------------------------*/
+/*-------INTERACTIONS-------*/
+/*--------------------------*/
 
 /*BOUTON*/
-.button, input.bouton, span#bouton_plage, a.bouton { cursor:pointer; margin:0 auto; padding:0.6em; color:rgba(255,255,255,1); 
-font-weight:bold; background:rgba(0,181,146,1); border-radius:0.8em; }
-input.bouton, span#bouton_plage, a.bouton { display:inline-block; border:1px solid rgba(0,181,146,1); margin:0.5em 0; }
+.bouton, input.bouton, span#bouton_plage, a.bouton { cursor:pointer; margin:0 auto; box-sizing:border-box; padding:0.6em; 
+color:rgba(255,255,255,1); font-weight:bold; background:rgba(0,90,101,1); border-radius:0.8em; }
+input.bouton, span#bouton_plage, a.bouton { display:inline-block; border:1px solid rgba(0,70,79,1); margin:0.5em 0; }
 a.bouton { text-decoration:none; }
-.bouton:hover, span#bouton_plage:hover, a.bouton:hover { color:rgba(0,181,146,1); background:rgba(0,181,146,0.2); }
+.bouton:hover, span#bouton_plage:hover, a.bouton:hover { background:rgba(0,140,159,1); }
 input.bouton { width:auto; }
+
 
 /*MESSAGES*/
 /*style commun aux messages*/
@@ -81,8 +135,11 @@ div.valide_content a { color:rgba(0,140,0,1); }
 div.error_content { border:2px solid rgba(140,0,0,1); color:rgba(140,0,0,1); }
 div.error_content a { color:rgba(0,140,0,1); }
 
+
 /*404*/
 #page404 div img { max-width:100%; }
+p.font404 { font-family:'Ancient Hylian'; }
+
 
 
 /**
@@ -90,12 +147,34 @@ STYLE POUR ECRAN
 */
 @media screen and (min-width:400px) {
     body { padding:0 10%; }
+    h1 { margin-top:1em; }
+    
+    /*FORMULAIRE*/
+    legend { padding:0 2em; }
 
+    /*TABLEAU*/
     th, td { width:10%; }
     th:first-child, td:first-child { width:80%; }
+    
+    
+    /*-------------------*/
+    /*-------INDEX-------*/
+    /*-------------------*/
+
+    /*POSITIONNEMENT DU FORMULAIRE PLAGE*/
+    form#align-form-plage { text-align:right; }
+    form#align-form-plage label { width:20%; text-align:left; }
+    form#align-form-plage select { width:79%; }
     
     /*POSITIONNEMENT INFOS PLAGE*/
     div#infos-projet, div#coordonnees { display:inline-block; }
     div#infos-projet { width:69%; }
     div#coordonnees { width:29%; border-top:none; padding-top:0; }
+    
+    /*SAISIE COORDONNEES*/
+    div#align-form-coordonnee { display:table; width:100%; }
+    div#align-form-coordonnee>div { display:table-row; }
+    div#align-form-coordonnee div.saisie-coordonnees { box-sizing:border-box; display:table-cell; width:50%; padding:0 3em; }
+    div#align-form-coordonnee div.saisie-coordonnees span { display:inline-block; }
+    div#align-form-coordonnee div.saisie-coordonnees:nth-child(2) { text-align:right; }
 }
