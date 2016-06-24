@@ -15,7 +15,7 @@ body {
     box-sizing:border-box;
     font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
     font-size:0.9em;
-    background:rgba(46,148,163,1) url("images/fond.png") no-repeat fixed center;
+    background:rgba(53,184,203,1) url("images/fond.png") no-repeat fixed center;
     background-size:cover;
     -webkit-background-size: cover;
     color:rgba(0,30,34,1);
@@ -26,19 +26,23 @@ margin:0 0 1em; padding:0 0 0.5em; }
 
 .clear { clear:both; }
 
+/*MARGES ENTRE LES CONTENEURS*/
+.marge-conteneur { margin:3em 0; }
+
 
 /*FORMULAIRE*/
 fieldset, legend, table { width:100%; box-sizing:border-box; margin:1em 0; border:1px solid rgba(0,70,79,1); 
 border-radius:0.8em; }
-fieldset, legend { background:rgba(0,120,136,0.8); }
-legend { width:auto; padding:0 1em; background:rgba(0,140,159,1); }
+fieldset, legend { background:rgba(0,184,203,0.8); }
+legend { width:auto; padding:0 1em; background:rgba(0,150,170,1); }
 legend>h2, caption>h2 { margin:0.5em 0; font-size:1.1em; }
 table { border-collapse:collapse; }
+caption { text-align:left; }
 
 
 /*ELEMENT FORMULAIRE*/
 input, select { display:inline-block; width:100%; box-sizing:border-box; border:1px solid rgba(0,70,79,1); 
-border-radius:0.8em; background:rgba(0,140,159,0.5); padding:0.4em; }  
+border-radius:0.8em; background:rgba(0,165,185,0.8); padding:0.4em; }  
 
 /*impossible de mixer les selecteurs pour Firefox et les selecteurs pour Webkit : separer les selecteurs*/
 /*selecteur moz*/
@@ -48,9 +52,9 @@ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { color:rg
 
 
 /*TABLEAU*/
-th { border:1px solid rgba(0,70,79,1); background:rgba(0,140,159,0.8); }
-tr:nth-child(even) { background:rgba(0,120,136,0.8); }
-tr:nth-child(odd) { background:rgba(0,110,124,0.8); }
+th { border:1px solid rgba(0,70,79,1); background:rgba(0,150,170,0.8); }
+tr:nth-child(even) { background:rgba(0,180,200,0.8); }
+tr:nth-child(odd) { background:rgba(0,165,185,0.8); }
 th, td { width:20%; text-align:center; padding:0.5em 0.2em; }
 th:first-child, td:first-child { width:60%; padding-left:0.5em; text-align:left; }
 
@@ -68,15 +72,36 @@ div.btn-session img, footer img { max-width:100%; }
 /*-------------------*/
 
 /*POSITIONNEMENT DU FORMULAIRE PLAGE*/
-form#align-form-plage label, form#align-form-plage select { display:inline-block; }
+#index_ifrocean form#align-form-plage { margin-bottom:2em; }
+#index_ifrocean form#align-form-plage label, form#align-form-plage select { display:inline-block; }
+
+/*POSITIONNEMENT DU TABLEAU DES GROUPES*/
+#index_ifrocean table { margin-top:2em; }
+
+/*POSITIONNEMENT DU FORMULAIRE GROUPE*/
+#index_ifrocean #align-form-groupe p { margin-top:0; }
 
 /*SAISIE COORDONNEES*/
-div.saisie-coordonnees span { display:block; }
-div.saisie-coordonnees p input { text-align:right; }
-div.saisie-coordonnees p input:nth-child(2), div.saisie-coordonnees p input:nth-child(4) { width:4em; }
-div.saisie-coordonnees p input:nth-child(6) { width:5em; }
+#index_ifrocean div.saisie-coordonnees h4 { text-align:left; }
+#index_ifrocean div.saisie-coordonnees span { display:inline-block; }
+#index_ifrocean div.saisie-coordonnees p, div.saisie-coordonnees p input { text-align:right; }
+#index_ifrocean div.saisie-coordonnees p input:nth-child(2), div.saisie-coordonnees p input:nth-child(4) { width:3em; }
+#index_ifrocean div.saisie-coordonnees p input:nth-child(6) { width:4em; }
 
 
+
+/*-------------------*/
+/*-------LOGIN-------*/
+/*-------------------*/
+form#align-form-login { padding:0 10%; }
+form#align-form-login div.align-btn-droite>* { vertical-align:middle; }
+
+
+
+/*--------------------*/
+/*-------LOGGED-------*/
+/*--------------------*/
+#logged_ifrocean h1 { border-bottom:none; }
 
 
 
@@ -121,19 +146,27 @@ a.bouton { text-decoration:none; }
 .bouton:hover, span#bouton_plage:hover, a.bouton:hover { background:rgba(0,140,159,1); }
 input.bouton { width:auto; }
 
+/*masque les fleches d'incrementation/decrementation des inputs de type number*/
+input[type=number] {-moz-appearance: textfield;}/*pour firefox 29+*/
+::-webkit-inner-spin-button, ::-webkit-outer-spin-button { -webkit-appearance: none;}/*pour chrome*/
+
+
+/*ALIGNEMENT DES BOUTONS*/
+div.align-btn-droite { text-align:right; padding:0 1em; }
+
 
 /*MESSAGES*/
 /*style commun aux messages*/
-div.valide_content, div.error_content { border-radius:0.8em; text-align:center; }
+div.valide_content, div.error_content { border-radius:0.8em; text-align:center; margin:3em 0; }
 div.valide_content a, div.error_content a { text-decoration:none; font-weight:bold; }
 div.valide_content a:hover, div.error_content a:hover { text-decoration:underline; }
 
 /*style pour les messages valides*/
-div.valide_content { border:2px solid rgba(0,140,0,1); color:rgba(0,140,0,1); }
-div.valide_content a { color:rgba(0,140,0,1); }
+div.valide_content { border:1px solid rgba(0,70,0,1); color:rgba(0,70,0,1); background-color:rgba(0,180,0,0.4); }
+div.valide_content a { color:rgba(0,70,0,1); }
 /*style^pour les messages d'erreurs'*/
-div.error_content { border:2px solid rgba(140,0,0,1); color:rgba(140,0,0,1); }
-div.error_content a { color:rgba(0,140,0,1); }
+div.error_content { border:1px solid rgba(70,0,0,1); color:rgba(70,0,0,1); background-color:rgba(180,0,0,0.4); }
+div.error_content a { color:rgba(0,70,0,1); }
 
 
 /*404*/
@@ -175,6 +208,14 @@ STYLE POUR ECRAN
     div#align-form-coordonnee { display:table; width:100%; }
     div#align-form-coordonnee>div { display:table-row; }
     div#align-form-coordonnee div.saisie-coordonnees { box-sizing:border-box; display:table-cell; width:50%; padding:0 3em; }
-    div#align-form-coordonnee div.saisie-coordonnees span { display:inline-block; }
     div#align-form-coordonnee div.saisie-coordonnees:nth-child(2) { text-align:right; }
+    
+    
+    
+    /*-------------------*/
+    /*-------LOGIN-------*/
+    /*-------------------*/
+    form#align-form-login label { display:inline-block; width:20%; text-align:left; }
+    form#align-form-login input:nth-child(2) { width:79%; }
+    form#align-form-login div.align-btn-droite a.bouton { padding:0.5em; }
 }

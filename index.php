@@ -19,7 +19,7 @@ include_once 'Config.php';
         <script type="text/javascript" src="scripts/scroll.js"></script>
     </head>
 
-    <body id="top"> 
+    <body id="index_ifrocean"> 
         <?php
         try {
             $bdd = new PDO('mysql:host=' . Config::SERVERNAME . ';dbname=' . Config::DBNAME . ';charset=utf8', Config::LOGIN, '');
@@ -40,7 +40,7 @@ include_once 'Config.php';
         ?>
         </div>
 
-        <form action="index.php" method="post" id="align-form-plage">
+        <form action="index.php" method="post" id="align-form-plage" class="marge-conteneur">
             <label for="nom">Sélectionnez une plage :</label>
             <select name="idprojet" id="nom">
                 <?php
@@ -52,12 +52,14 @@ include_once 'Config.php';
                 $reponse->closeCursor();
                 ?>
             </select>
-            <input type="submit" class="bouton" value="Choisir" id="envoiprojet" name="envoiprojet"/>
+            <div class="align-btn-droite">
+                <input type="submit" class="bouton" value="Choisir" id="envoiprojet" name="envoiprojet"/>
+            </div>
         </form>
 
 
-        <table>
-            <caption><h2>Groupe(s) assigné(s) au projet</h2></caption>
+        <table class="marge-conteneur">
+            <caption><h2>Groupe(s) assigné(s) à la plage</h2></caption>
             <thead><!--en tete de tableau-->
                 <tr>
                     <th>Nom du groupe</th>
@@ -99,17 +101,18 @@ include_once 'Config.php';
         <?php
         if (isset($_SESSION['logged']) == false) {
             echo'
-        <fieldset>
+        <fieldset  class="marge-conteneur">
             <legend><h2>Création d\'un groupe</h2></legend>
-            <form action="traitementGPS.php" method="post">
-            <p>
+            <form action="traitementGPS.php" method="post" id="align-form-groupe">
+            <p class="marge-conteneur">
                 <label for="nom-groupe">Nom du Groupe :</label>
                 <input type="text" name="nom-groupe" id="nom-groupe" placeholder="Choisissez un nom" required/>
             </p>
+            <h3>Coordonnées de la zone de prélèvement</h3>
             <div id="align-form-coordonnee">
                 <div>
-                    <div class="saisie-coordonnees">
-                        <h3>Coordonnees 1</h3>
+                    <div class="saisie-coordonnees marge-conteneur">
+                        <h4>Coordonnées du premier point</h4>
                         <p>
                             <span>Latitude</span>
                             <input type="number" min="0" max="90" step="1" name="latitude_degres_1" id="latitude_degres_1" placeholder="47" required/>
@@ -133,8 +136,8 @@ include_once 'Config.php';
                             <label for="longitude_secondes_1">"</label>
                         </p>
                     </div>
-                    <div class="saisie-coordonnees">
-                        <h3>Coordonnees 2</h3>
+                    <div class="saisie-coordonnees marge-conteneur">
+                        <h4>Coordonnées du deuxième point</h4>
                         <p>
                             <span>Latitude</span>
                             <input type="number" min="0" max="90" step="1" name="latitude_degres_2" id="latitude_degres_2" placeholder="48" required/>
@@ -160,8 +163,8 @@ include_once 'Config.php';
                     </div>
                 </div>
                 <div>
-                    <div class="saisie-coordonnees">
-                        <h3>Coordonnees 3</h3>
+                    <div class="saisie-coordonnees marge-conteneur">
+                        <h4>Coordonnées du troisième point</h4>
                         <p>
                             <span>Latitude</span>
                             <input type="number" min="0" max="90" step="1" name="latitude_degres_3" id="latitude_degres_3" placeholder="47" required/>
@@ -185,8 +188,8 @@ include_once 'Config.php';
                             <label for="longitude_secondes_3">"</label>
                         </p>
                     </div> 
-                    <div class="saisie-coordonnees">
-                        <h3>Coordonnees 4</h3>
+                    <div class="saisie-coordonnees marge-conteneur">
+                        <h4>Coordonnees du quatrième point</h4>
                         <p>
                             <span>Latitude</span>
                             <input type="number" min="0" max="90" step="1" name="latitude_degres_4" id="latitude_degres_4" placeholder="47" required/>
@@ -212,14 +215,16 @@ include_once 'Config.php';
                     </div>
                 </div>
             </div>
-            <input type="submit" id="cree" class="bouton" name="cree" value="Créer"/>
-            <input type="reset" class="bouton" value="Vider"/>
+            <div class="align-btn-droite">
+                <input type="submit" id="cree" class="bouton" name="cree" value="Créer"/>
+                <input type="reset" class="bouton" value="Vider"/>
+            </div>
         </form>
         </fieldset>';
         }
         ?>
         <footer>
-            <a href="#top" class="bouton" title="Haut de page"><img src="images/icone_fleche-retour.png" alt="Haut de page"/></a>
+            <a href="#index_ifrocean" class="bouton" title="Haut de page"><img src="images/icone_fleche-retour.png" alt="Haut de page"/></a>
         </footer>
     </body>
 </html>

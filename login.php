@@ -5,14 +5,19 @@
         <meta charset="UTF-8">
         <link href="style.css" rel="stylesheet" type="text/css"/>
     </head>
-    <body>
+    <body id="login_ifrocean">
         <h1>Connexion interface chercheur</h1>
-        <form action="logged.php" method="post"> 
-            <label for="pass">Mot de passe :</label><br>
-            <input type="password" id="pass" />
-            <input type="submit" id="se_connecte"  class="bouton" name="se_connecte" value="Se connecter"/>
-            <a href="index.php" class="bouton">Retour</a>
-        </form>    
+        <fieldset>
+            <legend><h2>Accès chercheur</h2></legend>
+            <form action="logged.php" method="post" id="align-form-login"> 
+                <label for="pass">Mot de passe :</label>
+                <input type="password" id="pass" />
+                <div class="align-btn-droite">
+                    <input type="submit" id="se_connecte"  class="bouton" name="se_connecte" value="Connexion"/>
+                    <a href="index.php" class="bouton">Retour</a>
+                </div>
+            </form> 
+        </fieldset>
     </body>       
 </html>
 
