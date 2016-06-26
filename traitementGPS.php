@@ -11,6 +11,8 @@ $y_degres_1=$_POST["longitude_degres_1"];
 $y_minutes_1=$_POST["longitude_minutes_1"];
 $y_secondes_1=$_POST["longitude_secondes_1"];*/
 
+//abscisse min et sec /1.5 et ordonnee min et sec /3 ???
+
 $x_degres_1=47;
 $x_minutes_1=21;
 $x_secondes_1=7146;
@@ -72,8 +74,9 @@ $zone[]=new TriangleGPS($pt3,$pt4,$pt1);
 $zone[]=new ZoneGPS($pt1,$pt2,$pt3,$pt4);
 
 echo "<br/>";
-echo "La surface = ".$zone[0]->calculerSurfaceZone();
+echo "La surface de ABC = ".$zone[0]->calculerSurfaceZone();
 echo "<br/>";
-echo "La surface = ".$zone[2]->calculerSurfaceZone();
+echo "La surface de CDA = ".$zone[2]->calculerSurfaceZone();
 echo"<br/>";
+echo "La surface totale = ".$zone_totale=($zone[0]->calculerSurfaceZone())+($zone[2]->calculerSurfaceZone());
 ?>

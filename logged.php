@@ -7,7 +7,7 @@ $_SESSION['logged'] = true;
         <title>Connexion réussie</title>
         <meta charset="UTF-8">
         <link href="style.css" rel="stylesheet" type="text/css"/>
-        <!--<meta http-equiv="Refresh" content="3; url=index.php">-->
+        <meta http-equiv="Refresh" content="3; url=index.php">
     </head>
     <body id="logged_ifrocean">
         <form action="chercheur" method="post"> 

@@ -17,7 +17,7 @@ include_once 'Config.php';?>
 
             <!--script js de la fonction afficher-cacher-->
             <script type="text/javascript" src="scripts/afficher-cacher.js"></script>
-        <?php if(isset($_SESSION['logged']) == false){echo'<META HTTP-EQUIV="Refresh" CONTENT="1; URL=index.php">';} ?>
+        <?php if(isset($_SESSION['logged']) == false){echo'<meta http-equiv="Refresh" content="1; url=index.php">';} ?>
     </head>
     
     <body id="top">

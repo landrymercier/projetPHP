@@ -29,7 +29,7 @@ echo $_GET['groupeid'];
         <script type="text/javascript" src="scripts/afficher-cacher.js"></script>
     </head>
 
-    <body id="top">
+    <body id="preleveur_ifrocean">
         <?php
         echo "<h1>Interface Préleveur - " . $donnees['Nom'] . "</h1>";
         ?>
@@ -42,15 +42,16 @@ echo $_GET['groupeid'];
             afficher_cacher('plage');
             //-->
         </script>
-        <div id="plage">
+        <div id="plage" class="marge-conteneur">
             <div id="infos-projet">
                 <?php
                 //REQUETE POUR RECUPERER LES INFORMATIONS DU PROJET (ville, nom projet, date...)
                 $reponse = $bdd->query("SELECT Nom,Ville,Datepreleve FROM plage WHERE ID=(SELECT IDplage FROM zones WHERE ID=".$_GET['groupeid'].")");
                 $donnees = $reponse->fetch();
-                echo "<p>Projet: " . $donnees['Nom'] . "</p>";
-                echo "<p>Ville: " . $donnees['Ville'] . "</p>";
-                echo "<p>Date: " . $donnees['Datepreleve'] . "</p>";
+                echo "<h2>Informations relatives à la plage étudiée</h2>";
+                echo "<p>Nom : " . $donnees['Nom'] . "</p>";
+                echo "<p>Ville : " . $donnees['Ville'] . "</p>";
+                echo "<p>Date : " . $donnees['Datepreleve'] . "</p>";
                 $reponse->closeCursor();
                 ?>
             </div>
@@ -60,18 +61,17 @@ echo $_GET['groupeid'];
                 $reponse = $bdd->query("SELECT latA,longA,latB,longB,latC,longC,latD,longD,Superficie "
                         . "FROM Zones WHERE ID=" . $_GET['groupeid']);
                 $donnees = $reponse->fetch();
-                echo "<div class=\"couleur0-0\"> " . $donnees['latA'] . " " . $donnees['longA'] . "</div>";
-                echo "<div class=\"couleur0-1\"> " . $donnees['latB'] . " " . $donnees['longB'] . "</div>";
+                echo "<div class=\"couleur0-0\"> " . $donnees['latA'] . "<br/>" . $donnees['longA'] . "</div>";
+                echo "<div class=\"couleur0-1\"> " . $donnees['latB'] . "<br/>" . $donnees['longB'] . "</div>";
                 echo"<div>Surface : " . $donnees['Superficie'] . " m²</div>";
-                echo "<div class=\"couleur1-0\"> " . $donnees['latC'] . " " . $donnees['longC'] . "</div>";
-                echo "<div class=\"couleur1-1\"> " . $donnees['latD'] . " " . $donnees['longD'] . "</div>";
+                echo "<div class=\"couleur1-0\"> " . $donnees['latC'] . "<br/>" . $donnees['longC'] . "</div>";
+                echo "<div class=\"couleur1-1\"> " . $donnees['latD'] . "<br/>" . $donnees['longD'] . "</div>";
                 $reponse->closeCursor();
                 ?>
             </div>
         </div>
 
-        <form method="post" action="">
-
+        <form method="post" action="" id="align-form-espece" class="marge-conteneur">
             <table>
                 <?php if(isset($_POST['ajout']))
                 {
@@ -88,22 +88,22 @@ echo $_GET['groupeid'];
                 <caption><h2>Prélèvement de la zone</h2></caption>  
                 <thead><!--en tete de tableau-->
                     <tr>
-                        <th>Espèces</th>
-                        <th>Nombres</th>
-                        <th>Fonctions</th>
+                        <th>Espèce</th>
+                        <th>Nbre</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tfoot><!--pied de tableau-->
                     <tr>
-                        <th>Espèces</th>
-                        <th>Nombres</th>
-                        <th>Fonctions</th>
+                        <th>Espèce</th>
+                        <th>Nbre</th>
+                        <th>Action</th>
                     </tr>
                 </tfoot>
                 <tbody><!--corp du tableau-->
                     <tr>
-                        <td><input type="text" name="mob" id="mob" placeholder="Choisissez un nom" required/></td>
-                        <td><input type="number" min="0" step="1" name="nb" id="nb" placeholder="Choisissez un chiffre" required/></td>
+                        <td><input type="text" name="mob" id="mob" placeholder="Nom de l'espèce" required/></td>
+                        <td><input type="number" min="0" max="99" step="1" name="nb" id="nb" placeholder="99" required/></td>
                         <td><input type="submit" id="ajout" class="bouton" name="ajout" value="Ajouter"/></td>
                     </tr>
                     <?php
@@ -127,13 +127,14 @@ echo $_GET['groupeid'];
                     ?>
                 </tbody>
             </table>
-
-            <a href="index.php" class="bouton">Retour</a>
-            <input type="submit" id="cloture" class="bouton" name="cloture" value="Cloturer"/>
+            <div class="align-btn-droite">
+                <a href="index.php" class="bouton">Retour</a>
+                <input type="submit" id="cloture" class="bouton" name="cloture" value="Cloturer"/>
+            </div>
         </form>
 
         <footer>
-            <a href="#top" class="bouton" title="Haut de page"><img src="images/icone_fleche-retour.png" alt="Haut de page"/></a>
+            <a href="#preleveur_ifrocean" class="bouton" title="Haut de page"><img src="images/icone_fleche-retour.png" alt="Haut de page"/></a>
         </footer>
     </body>
 </html>

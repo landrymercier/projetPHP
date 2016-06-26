@@ -23,6 +23,7 @@ body {
 
 h1 { font-variant:small-caps; text-align:center; letter-spacing:0.2em; border-bottom:1px solid rgba(0,30,34,1); 
 margin:0 0 1em; padding:0 0 0.5em; }
+h2 { margin:0.5em 0; font-size:1.2em; }
 
 .clear { clear:both; }
 
@@ -35,7 +36,6 @@ fieldset, legend, table { width:100%; box-sizing:border-box; margin:1em 0; borde
 border-radius:0.8em; }
 fieldset, legend { background:rgba(0,184,203,0.8); }
 legend { width:auto; padding:0 1em; background:rgba(0,150,170,1); }
-legend>h2, caption>h2 { margin:0.5em 0; font-size:1.1em; }
 table { border-collapse:collapse; }
 caption { text-align:left; }
 
@@ -105,32 +105,30 @@ form#align-form-login div.align-btn-droite>* { vertical-align:middle; }
 
 
 
-
+/*---------------------------------*/
+/*-------INTERFACE PRELEVEUR-------*/
+/*---------------------------------*/
 
 /*POSITIONNEMENT INFOS PLAGE*/
-div#plage { box-sizing:border-box; padding:1.5em; background:rgba(0,181,146,0.1); border-radius:0.8em; }
-div#infos-projet, div#coordonnees { box-sizing:border-box; margin:1em 0; vertical-align:middle; }
-div#coordonnees { box-sizing:border-box; display:table; border-top:1px solid rgba(0,181,146,1); padding-top:1em; }
-div#coordonnees div { box-sizing:border-box; float:left; width:50%; text-align:left; }
-div#coordonnees div:nth-child(2), div#coordonnees div:nth-child(5) { float:right; text-align:right; }
-div#coordonnees div:nth-child(1) { padding:0 1em 1em 0; }
-div#coordonnees div:nth-child(2) { padding:0 0 1em 1em; }
-div#coordonnees div:nth-child(4) { padding:1em 1em 0 0; }
-div#coordonnees div:nth-child(5) { padding:1em 0 0 1em; }
-div#coordonnees div:nth-child(3) { float:left; width:100%; padding:1em; text-align:center;  background:rgba(0,181,146,0.2); }
+#preleveur_ifrocean div#plage { margin-top:0; padding:1.5em; background:rgba(0,184,203,0.8); border:1px solid rgba(0,70,79,1); 
+border-radius:0.8em; }
+#preleveur_ifrocean div#infos-projet h2 { margin-top:0; }
+#preleveur_ifrocean div#infos-projet, 
+#preleveur_ifrocean div#coordonnees { display:table; margin:1em 0; vertical-align:middle; }
+#preleveur_ifrocean div#coordonnees { border-top:1px solid rgba(0,70,79,1); padding-top:1em; }/*code de la div#coordonnees specifique a la version mobile*/
+#preleveur_ifrocean div#coordonnees div { box-sizing:border-box; float:left; width:50%; text-align:left; }
+#preleveur_ifrocean div#coordonnees div:nth-child(2), 
+#preleveur_ifrocean div#coordonnees div:nth-child(5) { float:right; text-align:right; }
+#preleveur_ifrocean div#coordonnees div:nth-child(1) { padding:0 1em 1em 0; }
+#preleveur_ifrocean div#coordonnees div:nth-child(2) { padding:0 0 1em 1em; }
+#preleveur_ifrocean div#coordonnees div:nth-child(4) { padding:1em 1em 0 0; }
+#preleveur_ifrocean div#coordonnees div:nth-child(5) { padding:1em 0 0 1em; }
+#preleveur_ifrocean div#coordonnees div:nth-child(3) { float:left; width:80%; margin:0 10%; padding:1em; text-align:center; 
+background:rgba(0,70,79,0.2); }
 
-
-
-/*CODE COULEUR COORDONNEES*/
-.couleur0-0 { color:rgba(0,181,146,1); }/*coin en haut à gauche*/
-.couleur0-1 { color:rgba(0,101,66,1); }/*coin en haut à droite*/
-.couleur1-0 { color:rgba(0,61,26,1); }/*coin en bas à gauche*/
-.couleur1-1 { color:rgba(0,141,106,1); }/*coin en bas à droite*/
-
-
-
-
-
+/*POSITIONNEMENT DU TABLEAU DES ESPECES*/
+#preleveur_ifrocean form#align-form-espece td:nth-child(2) input { width:3em; text-align:center; }
+form#align-form-espece div.align-btn-droite>* { vertical-align:middle; }
 
 
 
@@ -150,14 +148,20 @@ input.bouton { width:auto; }
 input[type=number] {-moz-appearance: textfield;}/*pour firefox 29+*/
 ::-webkit-inner-spin-button, ::-webkit-outer-spin-button { -webkit-appearance: none;}/*pour chrome*/
 
-
 /*ALIGNEMENT DES BOUTONS*/
 div.align-btn-droite { text-align:right; padding:0 1em; }
 
 
+/*CODE COULEUR COORDONNEES*/
+.couleur0-0 { color:rgba(0,120,124,1); }/*coin en haut à gauche*/
+.couleur0-1 { color:rgba(0,80,84,1); }/*coin en haut à droite*/
+.couleur1-0 { color:rgba(0,60,64,1); }/*coin en bas à gauche*/
+.couleur1-1 { color:rgba(0,100,104,1); }/*coin en bas à droite*/
+
+
 /*MESSAGES*/
 /*style commun aux messages*/
-div.valide_content, div.error_content { border-radius:0.8em; text-align:center; margin:3em 0; }
+div.valide_content, div.error_content { border-radius:0.8em; text-align:center; margin:3em 0; padding:2% 10%; }
 div.valide_content a, div.error_content a { text-decoration:none; font-weight:bold; }
 div.valide_content a:hover, div.error_content a:hover { text-decoration:underline; }
 
@@ -167,11 +171,6 @@ div.valide_content a { color:rgba(0,70,0,1); }
 /*style^pour les messages d'erreurs'*/
 div.error_content { border:1px solid rgba(70,0,0,1); color:rgba(70,0,0,1); background-color:rgba(180,0,0,0.4); }
 div.error_content a { color:rgba(0,70,0,1); }
-
-
-/*404*/
-#page404 div img { max-width:100%; }
-p.font404 { font-family:'Ancient Hylian'; }
 
 
 
@@ -190,6 +189,7 @@ STYLE POUR ECRAN
     th:first-child, td:first-child { width:80%; }
     
     
+    
     /*-------------------*/
     /*-------INDEX-------*/
     /*-------------------*/
@@ -198,11 +198,6 @@ STYLE POUR ECRAN
     form#align-form-plage { text-align:right; }
     form#align-form-plage label { width:20%; text-align:left; }
     form#align-form-plage select { width:79%; }
-    
-    /*POSITIONNEMENT INFOS PLAGE*/
-    div#infos-projet, div#coordonnees { display:inline-block; }
-    div#infos-projet { width:69%; }
-    div#coordonnees { width:29%; border-top:none; padding-top:0; }
     
     /*SAISIE COORDONNEES*/
     div#align-form-coordonnee { display:table; width:100%; }
@@ -218,4 +213,16 @@ STYLE POUR ECRAN
     form#align-form-login label { display:inline-block; width:20%; text-align:left; }
     form#align-form-login input:nth-child(2) { width:79%; }
     form#align-form-login div.align-btn-droite a.bouton { padding:0.5em; }
+    
+    
+    
+    /*---------------------------------*/
+    /*-------INTERFACE PRELEVEUR-------*/
+    /*---------------------------------*/
+    
+    /*POSITIONNEMENT INFOS PLAGE*/
+    #preleveur_ifrocean div#infos-projet, #preleveur_ifrocean div#coordonnees { display:inline-block; }
+    #preleveur_ifrocean div#infos-projet { width:69%; }
+    #preleveur_ifrocean div#coordonnees { width:29%; border-top:none; padding-top:0; }
+    form#align-form-espece div.align-btn-droite a.bouton { padding:0.5em; }
 }

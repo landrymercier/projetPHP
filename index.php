@@ -63,13 +63,13 @@ include_once 'Config.php';
             <thead><!--en tete de tableau-->
                 <tr>
                     <th>Nom du groupe</th>
-                    <th>Fonctions</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tfoot><!--en tete de tableau-->
                 <tr>
                     <th>Nom du groupe</th>
-                    <th>Fonctions</th>
+                    <th>Action</th>
                 </tr>
             </tfoot>
             
