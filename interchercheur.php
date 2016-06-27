@@ -3,7 +3,7 @@ include_once 'Config.php';?>
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Panneau chercheur</title>
+        <title>Interface Chercheur</title>
         <meta charset="UTF-8">
         <link href="style.css" rel="stylesheet" type="text/css"/>
         <!--import javascript-->
