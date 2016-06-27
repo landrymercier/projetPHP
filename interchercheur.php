@@ -34,33 +34,40 @@ include_once 'Config.php';?>
     $req->closeCursor();}
     ?>
 
-    <h1>Panneau chercheur</h1>
+    <h1>Interface chercheur</h1>
         
-    <form>
-        <fieldset>
-            <legend><h2>Choix du projet</h2></legend>
+    <fieldset class="marge-conteneur">
+        <legend><h2>Choix de la plage</h2></legend>
+        <form action="interchercheur.php" method="get">
             <select name="listprojet">
-                <?php $reponse = $bdd->query("SELECT Nom FROM plage");
+                <?php $reponse = $bdd->query("SELECT ID,Nom FROM plage");
                     while ($donnees = $reponse->fetch()) {
-                    echo"<option>".$donnees['Nom']."</option>";}
+                    echo"<option value='" . $donnees['ID'] . "'>".$donnees['Nom']."</option>";}
                 $reponse->closeCursor();?>
             </select>
-        </fieldset>
-    </form>
+            <div class="align-btn-droite">
+                <input type="submit" class="bouton" value="Choisir" id="envoiprojet" name="envoiprojet"/>
+            </div>
+        </form>
+    </fieldset>
         
-    <form>
-        <fieldset>
-            <legend><h2>Choix du groupe</h2></legend>
+    
+    <fieldset class="marge-conteneur">
+        <legend><h2>Choix du groupe</h2></legend>
+        <form action="interchercheur.php" method="get">
             <select name="listtri">
                 <option>Vu globale</option>
                 <option>----------</option>
-                <?php $reponse = $bdd->query("SELECT Nom FROM Zones");
+                <?php $reponse = $bdd->query("SELECT Nom FROM Zones WHERE IDplage=$_GET[listprojet]");
                     while ($donnees = $reponse->fetch()) {
                     echo"<option>".$donnees['Nom']."</option>";}
                 ?>
             </select>
-        </fieldset>
-    </form>
+            <div class="align-btn-droite">
+                <input type="submit" class="bouton" value="Choisir" id="envoigroupe" name="envoigroupe"/>
+            </div>
+        </form>
+    </fieldset>
 
     <span class="bouton" id="bouton_plage" onclick="javascript:afficher_cacher('plage');">
         Cacher les informations de la plage
@@ -72,6 +79,7 @@ include_once 'Config.php';?>
     </script>
     <div id="plage">
         <div id="infos-projet">
+            <h2>Informations relatives à la plage étudiée</h2>
             <p>"nom projet</p>
             <p>"nom commune"</p>
             <p>"date"</p>
