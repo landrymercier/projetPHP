@@ -1,9 +1,6 @@
 <?php
 session_start();
-<<<<<<< HEAD
 //session_destroy(); 
-=======
->>>>>>> 2baf07d400dbc799d20be8245e3e1b665468423e
 include_once 'Config.php';
 ?>
 <!DOCTYPE html>
