@@ -1,6 +1,6 @@
 <?php
 session_start();
-session_destroy(); 
+//session_destroy(); 
 include_once 'Config.php';
 ?>
 <!DOCTYPE html>
@@ -37,6 +37,10 @@ include_once 'Config.php';
         } else {
             echo'<a href="login.php" class="bouton" title="Se connecter"><img src="images/icone_login.png" alt="Se connecter"/></a>';
         }
+        
+        if (isset($_POST['cloregroupe'])){$req = $bdd->prepare('UPDATE zones SET Clore = 1 WHERE ID='.$_POST['cloregroupe']);
+        $req->execute();
+        }
         ?>
         </div>
 
@@ -45,7 +49,7 @@ include_once 'Config.php';
             <select name="idprojet" id="nom">
                 <?php
                 //LISTE DES PROJETS EN COURS, ON RECUPERE L'ID POUR L'ENVOYER DANS LA REQUETE SUIVANTE
-                $reponse = $bdd->query("SELECT ID,Nom FROM plage");
+                $reponse = $bdd->query("SELECT ID,Nom FROM plage WHERE Clore = 0");
                 while ($donnees = $reponse->fetch()) {
                     echo "<option value='" . $donnees['ID'] . "'>" . $donnees['Nom'] . "</option>";
                 }
@@ -76,13 +80,16 @@ include_once 'Config.php';
                 <?php
                 if (isset($_POST['envoiprojet']) == "Envoyer") {
                     //AFFICHE LES GROUPES DEJA CREES SUIVANT LE PROJET SELECTIONNE
-                    $reponse = $bdd->query("SELECT ID,Nom FROM zones WHERE IDplage = (SELECT ID FROM plage WHERE id=" . $_POST['idprojet'] . ")");
+                    $reponse = $bdd->query("SELECT ID,Nom,Clore FROM zones WHERE IDplage = (SELECT ID FROM plage WHERE id=" . $_POST['idprojet'] . ")");
                     while ($donnees = $reponse->fetch()) {
                         echo"<tr>";
                         echo"<td>" . $donnees['Nom'] . "</td>";
-                        if (isset($_SESSION['logged']) == true) { //LE CHERCHEUR PEUT TERMINER UN PRELEVEMENT
-                            echo'<form action="interprel.php" method="post">';
+                         if($donnees['Clore'] == 1){ //SI LA ZONE EST CLOSE
                             echo'<td><input type="hidden" name="groupeid" value="'. $donnees['ID'] .'"/>';
+                            echo 'TERMINER' ;
+                        } elseif (isset($_SESSION['logged']) == true) { //LE CHERCHEUR PEUT TERMINER UN PRELEVEMENT
+                            echo'<form action="index.php" method="post">';
+                            echo'<td><input type="hidden" name="cloregroupe" value="'. $donnees['ID'] .'"/>';
                             echo'<input type="submit" class="bouton" value="Clore"/></td>';
                             echo'</form>';
                         } else { //LE PRELEVEUR PEUT COMPLETER SON PRELEVEMENT
@@ -104,6 +111,17 @@ include_once 'Config.php';
         <fieldset  class="marge-conteneur">
             <legend><h2>Création d\'un groupe</h2></legend>
             <form action="traitementGPS.php" method="post" id="align-form-groupe">
+            
+            <label for="nom">Sélectionnez une plage :</label>
+            <select name="idprojet" id="nom">';
+                $reponse = $bdd->query("SELECT ID,Nom FROM plage WHERE Clore = 0");
+                while ($donnees = $reponse->fetch()) {
+                    echo "<option value='" . $donnees['ID'] . "'>" . $donnees['Nom'] . "</option>";
+                }
+                $reponse->closeCursor();
+
+            echo'</select>
+            
             <p class="marge-conteneur">
                 <label for="nom-groupe">Nom du Groupe :</label>
                 <input type="text" name="nom-groupe" id="nom-groupe" placeholder="Choisissez un nom" required/>
