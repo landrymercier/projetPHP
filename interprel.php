@@ -2,14 +2,15 @@
 //VARIABLES TEMPORAIRES --> prélèvement de la zone 1 de la ville 1 avec le groupe 1
 include_once 'Config.php';
 echo $_GET['groupeid'];
-        //CONNEXION BDD
-        try {
-            $bdd = new PDO('mysql:host=' . Config::SERVERNAME . ';dbname=' . Config::DBNAME . ';charset=utf8', Config::LOGIN, '');
-        } catch (Exception $e) {
-            die('Erreur : ' . $e->getMessage());
-        }
-        $reponse = $bdd->query("SELECT Nom FROM zones WHERE ID=" . $_GET['groupeid']); //REQUETE POUR LE GROUPE EN COURS
-        $donnees = $reponse->fetch(); ?>
+//CONNEXION BDD
+try {
+    $bdd = new PDO('mysql:host=' . Config::SERVERNAME . ';dbname=' . Config::DBNAME . ';charset=utf8', Config::LOGIN, '');
+} catch (Exception $e) {
+    die('Erreur : ' . $e->getMessage());
+}
+$reponse = $bdd->query("SELECT Nom FROM zones WHERE ID=" . $_GET['groupeid']); //REQUETE POUR LE GROUPE EN COURS
+$donnees = $reponse->fetch();
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -46,7 +47,7 @@ echo $_GET['groupeid'];
             <div id="infos-projet">
                 <?php
                 //REQUETE POUR RECUPERER LES INFORMATIONS DU PROJET (ville, nom projet, date...)
-                $reponse = $bdd->query("SELECT Nom,Ville,Datepreleve FROM plage WHERE ID=(SELECT IDplage FROM zones WHERE ID=".$_GET['groupeid'].")");
+                $reponse = $bdd->query("SELECT Nom,Ville,Datepreleve FROM plage WHERE ID=(SELECT IDplage FROM zones WHERE ID=" . $_GET['groupeid'] . ")");
                 $donnees = $reponse->fetch();
                 echo "<h2>Informations relatives à la plage étudiée</h2>";
                 echo "<p>Nom : " . $donnees['Nom'] . "</p>";
@@ -73,19 +74,30 @@ echo $_GET['groupeid'];
 
         <form method="post" action="" id="align-form-espece" class="marge-conteneur">
             <table>
-                <?php if(isset($_POST['ajout']))
-                {
+                <?php //AJOUT D'UNE BESTIOLE
+                if (isset($_POST['ajout'])) {
                     $req = $bdd->prepare('INSERT INTO espece (Nom,IDzone) VALUES(?, ?)');
                     $req->execute(array($_POST['mob'], $_GET['groupeid']));
                     $req->closeCursor();
-                    $reponse = $bdd->prepare("SELECT IDzone FROM espece ORDER BY IDzone DESC LIMIT 1");
-                    $id = $reponse->fetch();
+                    $reponse = $bdd->query("SELECT IDespeces FROM espece ORDER BY IDzone DESC LIMIT 1");
+                    $donnees = $reponse->fetch();
                     $req->closeCursor();
                     $req = $bdd->prepare('INSERT INTO prelevement (IDzone,IDespece,quantite) VALUES(?, ?, ?)');
-                    $req->execute(array($_GET['groupeid'],$id,$_POST['nb']));
-                    $req->closeCursor();}
+                    $req->execute(array($_GET['groupeid'], $donnees['IDespeces'], $_POST['nb']));
+                    echo "IDespeces : " . $donnees['IDespeces'];
+                    echo "<br> nombre : " . $_POST['nb'];
+                    $req->closeCursor();
+                }
+                //MODIFICATION D'UNE BESTIOLE
+                if (isset($_POST['modifie'])) {$req = $bdd->prepare('UPDATE espece SET Nom = "'.$_POST['mob'].'" WHERE IDespeces='.$_POST['idespece']);
+                                                $req->execute();
+                                                $req = $bdd->prepare('UPDATE prelevement SET quantite = '.$_POST['nb'].' WHERE IDespece='.$_POST['idespece']);
+                                                $req->execute();
+                $req->closeCursor();
+                }
+                
                 ?>
-                <caption><h2>Prélèvement de la zone</h2></caption>  
+                <caption><h2>Prélèvement de la zone</h2></caption>
                 <thead><!--en tete de tableau-->
                     <tr>
                         <th>Espèce</th>
@@ -105,25 +117,30 @@ echo $_GET['groupeid'];
                         <td><input type="text" name="mob" id="mob" placeholder="Nom de l'espèce" required/></td>
                         <td><input type="number" min="0" max="99" step="1" name="nb" id="nb" placeholder="99" required/></td>
                         <td><input type="submit" id="ajout" class="bouton" name="ajout" value="Ajouter"/></td>
-                    </tr>
+                    </tr></form>
                     <?php
                     //REQUETE POUR AFFICHER LA LISTE DES ESPECES TROUVE PAR LE GROUPE EN COURS
-                    $reponse = $bdd->query("SELECT Nom,quantite FROM espece "
-                                            ."INNER JOIN prelevement ON prelevement.IDespece = espece.IDespeces "
-                                            ."WHERE prelevement.IDzone =".$_GET['groupeid']);
-                    if($reponse != null){
-                    while ($donnees = $reponse->fetch()) {
+                    $reponse = $bdd->query("SELECT IDespece,Nom,quantite FROM espece "
+                            . "INNER JOIN prelevement ON prelevement.IDespece = espece.IDespeces "
+                            . "WHERE prelevement.IDzone =" . $_GET['groupeid']);
+                    if ($reponse != null) {
+                        while ($donnees = $reponse->fetch()) {
+                            echo'<form method="post" action="">';
+                            echo"<tr>";
+                            echo'<td><input type="text" name="mob" id="mob" required/ value=' . $donnees['Nom'] . '></td>';
+                            echo'<td><input type="number" min="0" max="99" step="1" name="nb" id="nb" required/ value=' . $donnees['quantite'] . '></td>';
+                            echo'<input type="hidden" name="idespece" value="'. $donnees['IDespece'] .'"/>';
+                            echo'<td><input type="submit" id="modifie" class="bouton" name="modifie" value="Modifier"/></td>';
+                            echo"</tr>";
+                            echo'</form>';
+                        }$reponse->closeCursor();
+                    } else {
                         echo"<tr>";
-                        echo"<td>" . $donnees['Nom'] . "</td>";
-                        echo"<td>". $donnees['quantite'] ."</td>";
-                        echo'<td><input type="submit" id="modifie" class="bouton" name="modifie" value="Modifier"/></td>';
-                        echo"</tr>";
-                    }$reponse->closeCursor();}
-                    else{echo"<tr>";
                         echo"<td>Il n'y a encore aucune espèce inscrite</td>";
                         echo"<td></td>";
                         echo'<td></td>';
-                    echo"</tr>";}
+                        echo"</tr>";
+                    }
                     ?>
                 </tbody>
             </table>
@@ -131,10 +148,10 @@ echo $_GET['groupeid'];
                 <a href="index.php" class="bouton">Retour</a>
                 <input type="submit" id="cloture" class="bouton" name="cloture" value="Cloturer"/>
             </div>
-        </form>
 
-        <footer>
-            <a href="#preleveur_ifrocean" class="bouton" title="Haut de page"><img src="images/icone_fleche-retour.png" alt="Haut de page"/></a>
-        </footer>
+
+            <footer>
+                <a href="#preleveur_ifrocean" class="bouton" title="Haut de page"><img src="images/icone_fleche-retour.png" alt="Haut de page"/></a>
+            </footer>
     </body>
 </html>
