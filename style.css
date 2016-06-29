@@ -130,6 +130,11 @@ background:rgba(0,70,79,0.2); }
 #preleveur_ifrocean form#align-form-espece td:nth-child(2) input { width:3em; text-align:center; }
 form#align-form-espece div.align-btn-droite>* { vertical-align:middle; }
 
+/*AFFICHAGE DE LA MODIFICATION DES ESPECES DANS LE TABLEAU*/
+#preleveur_ifrocean td.modif-espece input { background:transparent; border:none; }
+#preleveur_ifrocean form#align-form-espece td.modif-espece:nth-child(2) input { width:100%; text-align:left; }
+#preleveur_ifrocean form#align-form-espece td.modif-espece:nth-child(3) input { width:3em; text-align:center; }
+
 
 
 /*--------------------------*/

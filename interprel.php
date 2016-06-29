@@ -125,14 +125,14 @@ $donnees = $reponse->fetch();
                             . "WHERE prelevement.IDzone =" . $_GET['groupeid']);
                     if ($reponse != null) {
                         while ($donnees = $reponse->fetch()) {
+                            echo'<tr>';
                             echo'<form method="post" action="">';
-                            echo"<tr>";
-                            echo'<td><input type="text" name="mob" id="mob" required/ value=' . $donnees['Nom'] . '></td>';
-                            echo'<td><input type="number" min="0" max="99" step="1" name="nb" id="nb" required/ value=' . $donnees['quantite'] . '></td>';
+                            echo'<td class="modif-espece"><input type="text" name="mob" id="mob" required/ value=' . $donnees['Nom'] . '></td>';
+                            echo'<td class="modif-espece"><input type="number" min="0" max="99" step="1" name="nb" id="nb" required/ value=' . $donnees['quantite'] . '></td>';
                             echo'<input type="hidden" name="idespece" value="'. $donnees['IDespece'] .'"/>';
                             echo'<td><input type="submit" id="modifie" class="bouton" name="modifie" value="Modifier"/></td>';
-                            echo"</tr>";
                             echo'</form>';
+                            echo'</tr>';
                         }$reponse->closeCursor();
                     } else {
                         echo"<tr>";
