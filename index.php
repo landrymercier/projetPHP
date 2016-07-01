@@ -139,7 +139,7 @@ include_once 'Config.php';
                             <input type="number" min="0" max="59" step="1" name="latitude_minutes_1" id="latitude_minutes_1" placeholder="13" required/>
                             <label for="latitude_minutes_1">\'</label>
 
-                            <input type="number" min="0" max="59.99" step="1" name="latitude_secondes_1" id="latitude_secondes_1" placeholder="7.086" required/>
+                            <input type="number" min="0" max="59.99" step="0.01" name="latitude_secondes_1" id="latitude_secondes_1" placeholder="7.09" required/>
                             <label for="latitude_secondes_1">"</label>
                         </p>
                         <p>
@@ -150,7 +150,7 @@ include_once 'Config.php';
                             <input type="number" min="0" max="59" step="1" name="longitude_minutes_1" id="longitude_minutes_1" placeholder="33" required/>
                             <label for="longitude_minutes_1">\'</label>
 
-                            <input type="number" min="0" max="59.99" step="1" name="longitude_secondes_1" id="longitude_secondes_1" placeholder="33.74" required/>
+                            <input type="number" min="0" max="59.99" step="0.01" name="longitude_secondes_1" id="longitude_secondes_1" placeholder="33.74" required/>
                             <label for="longitude_secondes_1">"</label>
                         </p>
                     </div>
@@ -164,7 +164,7 @@ include_once 'Config.php';
                             <input type="number" min="0" max="59" step="1" name="latitude_minutes_2" id="latitude_minutes_2" placeholder="00" required/>
                             <label for="latitude_minutes_2">\'</label>
 
-                            <input type="number" min="0" max="59.99" step="1" name="latitude_secondes_2" id="latitude_secondes_2" placeholder="19.96" required/>
+                            <input type="number" min="0" max="59.99" step="0.01" name="latitude_secondes_2" id="latitude_secondes_2" placeholder="19.96" required/>
                             <label for="latitude_secondes_2">"</label>
                         </p>
                         <p>
@@ -175,7 +175,7 @@ include_once 'Config.php';
                             <input type="number" min="0" max="59" step="1" name="longitude_minutes_2" id="longitude_minutes_2" placeholder="11" required/>
                             <label for="longitude_minutes_2">\'</label>
 
-                            <input type="number" min="0" max="59.99" step="1" name="longitude_secondes_2" id="longitude_secondes_2" placeholder="59.33" required/>
+                            <input type="number" min="0" max="59.99" step="0.01" name="longitude_secondes_2" id="longitude_secondes_2" placeholder="59.33" required/>
                             <label for="longitude_secondes_2">"</label>
                         </p>
                     </div>
@@ -191,7 +191,7 @@ include_once 'Config.php';
                             <input type="number" min="0" max="59" step="1" name="latitude_minutes_3" id="latitude_minutes_3" placeholder="18" required/>
                             <label for="latitude_minutes_3">\'</label>
 
-                            <input type="number" min="0" max="59.99" step="1" name="latitude_secondes_3" id="latitude_secondes_3" placeholder="5.706" required/>
+                            <input type="number" min="0" max="59.99" step="0.01" name="latitude_secondes_3" id="latitude_secondes_3" placeholder="5.71" required/>
                             <label for="latitude_secondes_3">"</label>
                         </p>
                         <p>
@@ -202,7 +202,7 @@ include_once 'Config.php';
                             <input type="number" min="0" max="59" step="1" name="longitude_minutes_3" id="longitude_minutes_3" placeholder="03" required/>
                             <label for="longitude_minutes_3">\'</label>
 
-                            <input type="number" min="0" max="59.99" step="1" name="longitude_secondes_3" id="longitude_secondes_3" placeholder="23.25" required/>
+                            <input type="number" min="0" max="59.99" step="0.01" name="longitude_secondes_3" id="longitude_secondes_3" placeholder="23.25" required/>
                             <label for="longitude_secondes_3">"</label>
                         </p>
                     </div> 
@@ -216,7 +216,7 @@ include_once 'Config.php';
                             <input type="number" min="0" max="59" step="1" name="latitude_minutes_4" id="latitude_minutes_4" placeholder="49" required/>
                             <label for="latitude_minutes_4">\'</label>
 
-                            <input type="number" min="0" max="59.99" step="1" name="latitude_secondes_4" id="latitude_secondes_4" placeholder="33.34" required/>
+                            <input type="number" min="0" max="59.99" step="0.01" name="latitude_secondes_4" id="latitude_secondes_4" placeholder="33.34" required/>
                             <label for="latitude_secondes_4">"</label>
                         </p>
                         <p>
@@ -227,7 +227,7 @@ include_once 'Config.php';
                             <input type="number" min="0" max="59" step="1" name="longitude_minutes_4" id="longitude_minutes_4" placeholder="16" required/>
                             <label for="longitude_minutes_4">\'</label>
 
-                            <input type="number" min="0" max="59.99" step="1" name="longitude_secondes_4" id="longitude_secondes_4" placeholder="15.53" required/>
+                            <input type="number" min="0" max="59.99" step="0.01" name="longitude_secondes_4" id="longitude_secondes_4" placeholder="15.53" required/>
                             <label for="longitude_secondes_4">"</label>
                         </p>
                     </div>
