@@ -10,6 +10,9 @@ class PointGPS {
         $this->x = $abscisse_degre+($abscisse_minute/60)+($abscisse_seconde/3600);
         $this->y = $ordonnee_degre+($ordonnee_minute/60)+($ordonnee_seconde/3600);
     }
+    
+    public function getX(){ return $this->x; }
+    public function getY(){ return $this->y; }
 
     public function calculerDistance($autrePoint) {
         $earth_radius = 6378137;   // Terre = sphère de 6378km de rayon
