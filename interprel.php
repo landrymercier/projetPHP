@@ -1,7 +1,7 @@
 <?php
 //VARIABLES TEMPORAIRES --> prélèvement de la zone 1 de la ville 1 avec le groupe 1
 include_once 'Config.php';
-echo $_GET['groupeid'];
+//echo $_GET['groupeid'];
 //CONNEXION BDD
 try {
     $bdd = new PDO('mysql:host=' . Config::SERVERNAME . ';dbname=' . Config::DBNAME . ';charset=utf8', Config::LOGIN, '');
@@ -114,12 +114,33 @@ $donnees = $reponse->fetch();
                 </tfoot>
                 <tbody><!--corp du tableau-->
                     <tr>
-                        <td><input type="text" name="mob" id="mob" placeholder="Nom de l'espèce" required/></td>
+                        <td>
+                            <input type="text" name="mob" id="mob" list="listemob" placeholder="Nom de l'espèce" required/>
+                            
+                            <?php
+                            //REQUETE POUR AFFICHER LA LISTE DES ESPECES TROUVE PAR LE GROUPE EN COURS
+                            $reponse = $bdd->query("SELECT IDespeces,Nom FROM espece");
+                            if ($reponse != null) {
+                                echo'<datalist id="listemob">';
+                                while ($donnees = $reponse->fetch()) {
+                                    
+                                    echo'<option value=' . $donnees['Nom'] . '></option>';
+                                    
+                                }
+                                echo'</datalist>';
+                                $reponse->closeCursor();
+                            }
+                            ?>
+                            
+                        </td>
                         <td><input type="number" min="0" max="99" step="1" name="nb" id="nb" placeholder="99" required/></td>
                         <td><input type="submit" id="ajout" class="bouton" name="ajout" value="Ajouter"/></td>
                     </tr></form>
                     <?php
                     //REQUETE POUR AFFICHER LA LISTE DES ESPECES TROUVE PAR LE GROUPE EN COURS
+                    /*
+                     * Vérifier si IDespece avec ou sans "S"
+                     */
                     $reponse = $bdd->query("SELECT IDespece,Nom,quantite FROM espece "
                             . "INNER JOIN prelevement ON prelevement.IDespece = espece.IDespeces "
                             . "WHERE prelevement.IDzone =" . $_GET['groupeid']);
