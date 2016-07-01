@@ -51,24 +51,6 @@ include_once 'Config.php';?>
         </form>
     </fieldset>
         
-    
-    <fieldset class="marge-conteneur">
-        <legend><h2>Choix du groupe</h2></legend>
-        <form action="interchercheur.php" method="get">
-            <select name="listtri">
-                <option>Vu globale</option>
-                <option>----------</option>
-                <?php $reponse = $bdd->query("SELECT Nom FROM Zones WHERE IDplage=$_GET[listprojet]");
-                    while ($donnees = $reponse->fetch()) {
-                    echo"<option>".$donnees['Nom']."</option>";}
-                ?>
-            </select>
-            <div class="align-btn-droite">
-                <input type="submit" class="bouton" value="Choisir" id="envoigroupe" name="envoigroupe"/>
-            </div>
-        </form>
-    </fieldset>
-
     <span class="bouton" id="bouton_plage" onclick="javascript:afficher_cacher('plage');">
         Cacher les informations de la plage
     </span>
@@ -97,6 +79,23 @@ include_once 'Config.php';?>
         </div>
     </div>
     
+    <fieldset class="marge-conteneur">
+        <legend><h2>Choix du groupe</h2></legend>
+        <form action="interchercheur.php" method="get">
+            <select name="listtri">
+                <option>Vu globale</option>
+                <option>----------</option>
+                <?php $reponse = $bdd->query("SELECT Nom FROM Zones WHERE IDplage=$_GET[listprojet]");
+                    while ($donnees = $reponse->fetch()) {
+                    echo"<option>".$donnees['Nom']."</option>";}
+                ?>
+            </select>
+            <div class="align-btn-droite">
+                <input type="submit" class="bouton" value="Choisir" id="envoigroupe" name="envoigroupe"/>
+            </div>
+        </form>
+    </fieldset>
+    
     <form method="GET" action="interchercheur.php">
         <table>
             <caption><h2>Prélèvement de la zone</h2></caption>  
@@ -117,14 +116,16 @@ include_once 'Config.php';?>
             <tbody><!--corp du tableau-->
                 <?php
                 $reponse = $bdd->query("SELECT * FROM Especes");
-                while ($donnees = $reponse->fetch())
-                {
-                    echo"<tr>";
-                    echo"<td>".$donnees['Nom']."</td>";
-                    echo"<td>0</td>";
-                    echo'<td><input type="submit" id="modif" class="bouton" name="modif" value="Modifier"/></td>';
-                    echo"</tr>";
-                }$reponse->closeCursor();?>
+                if ($reponse != null) {
+                    while ($donnees = $reponse->fetch())
+                    {
+                        echo"<tr>";
+                        echo"<td>".$donnees['Nom']."</td>";
+                        echo"<td>0</td>";
+                        echo'<td><input type="submit" id="modif" class="bouton" name="modif" value="Modifier"/></td>';
+                        echo"</tr>";
+                    }
+                $reponse->closeCursor();}?>
             </tbody>
         </table>         
     </form>
