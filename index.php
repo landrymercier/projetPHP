@@ -33,7 +33,7 @@ include_once 'Config.php';
         <div class="btn-session">
         <?php
         if (isset($_SESSION['logged']) == true) {//GESTION DE LA SESSION, LE CHERCHEUR EST LOGGUE, PAS LE PRELEVEUR
-            echo'<a href="interchercheur.php" class="bouton" title="Page Chercheur"><img src="images/icone_session.png" alt="Page chercheur"/></a>';
+            echo'<a href="tablechercheur.php" class="bouton" title="Page Chercheur"><img src="images/icone_session.png" alt="Page chercheur"/></a>';
         } else {
             echo'<a href="login.php" class="bouton" title="Se connecter"><img src="images/icone_login.png" alt="Se connecter"/></a>';
         }
