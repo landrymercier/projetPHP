@@ -36,7 +36,7 @@ include_once 'Config.php';
         ?>
 
         <h1>Panneau chercheur</h1>
-
+<a href="unlogged.php">Déconnexion </a>
         <table class="marge-conteneur">
             <caption><h2>Liste des projets</h2></caption>
             <thead><!--en tete de tableau-->
