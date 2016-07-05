@@ -36,15 +36,23 @@ include_once 'Config.php';
         ?>
 
         <h1>Panneau chercheur</h1>
-<a href="unlogged.php">Déconnexion </a>
+        <a href="unlogged.php">Déconnexion </a>
         <table class="marge-conteneur">
             <caption><h2>Liste des projets</h2></caption>
             <thead><!--en tete de tableau-->
                 <tr>
-                    <th>Nom du projet</th>
-                    <th>Ville</th>
-                    <th>Date</th>
-                    <th>Superficie</th>
+                    <th>Nom du projet
+                        <a href="tablechercheur.php?order=Nom&by=ASC">&uarr;</a> 
+                        <a href="tablechercheur.php?order=Nom&by=DESC">&darr;</a></th>
+                    <th>Ville
+                        <a href="tablechercheur.php?order=Ville&by=ASC">&uarr;</a> 
+                        <a href="tablechercheur.php?order=Ville&by=DESC">&darr;</a></th>
+                    <th>Date
+                        <a href="tablechercheur.php?order=Datepreleve&by=ASC">&uarr;</a> 
+                        <a href="tablechercheur.php?order=Datepreleve&by=DESC">&darr;</a></th>
+                    <th>Superficie
+                        <a href="tablechercheur.php?order=Superficie&by=ASC">&uarr;</a> 
+                        <a href="tablechercheur.php?order=Superficie&by=DESC">&darr;</a></th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -59,7 +67,13 @@ include_once 'Config.php';
             </tfoot>
 
             <?php
-            $reponse = $bdd->query("SELECT ID, Nom, Ville, Superficie, Datepreleve, Clore FROM plage ORDER BY Datepreleve DESC ");
+                $reponse = $bdd->query("SELECT ID, Nom, Ville, Superficie, Datepreleve, Clore FROM plage ORDER BY Datepreleve DESC ");
+            if (isset($_GET['order']) || isset($_GET['by'])) {
+                $reponse = $bdd->query("SELECT ID, Nom, Ville, Superficie, Datepreleve, Clore FROM plage ORDER BY " . $_GET['order'] . " " . $_GET['by']);
+            echo"order : ". $_GET['order'];
+            echo" by : ". $_GET['by'];
+                
+            }
             while ($donnees = $reponse->fetch()) {
                 echo"<tr>";
                 echo"<td>" . $donnees['Nom'] . "</td>";
@@ -68,6 +82,7 @@ include_once 'Config.php';
                 echo"<td>" . $donnees['Superficie'] . "</td>";
                 echo'<td>
                         <form action="interchercheur.php" method="get">
+                            <input type="hidden" name="Vue" value="Vue globale"/>
                             <input type="hidden" name="nomplage" value="' . $donnees['Nom'] . '"/>
                             <input type="hidden" name="idplage" value="' . $donnees['ID'] . '"/>
                             <input type="submit" id="voir" class="bouton" name="voir" value="Acceder"/>

@@ -37,82 +37,91 @@ include_once 'Config.php';
         }
         ?>
         <a href="tablechercheur.php">Retour à la liste des projets </a>
-        
-    <form>
-        <fieldset>
-            <legend><h2>Liste des vues</h2></legend>
-            <select name="listtri">
-                <option>Vu globale</option>
-                <option>----------</option>
-                <?php
-                $reponse = $bdd->query("SELECT ID,Nom,Clore FROM zones WHERE IDplage = (SELECT ID FROM plage WHERE id=" . $_GET['idplage'] . ")");
-                while ($donnees = $reponse->fetch()) {
-                    echo"<option>" . $donnees['Nom'] . "</option>";
-                }
-                ?>
-            </select>
-        </fieldset>
-    </form>
 
-    <span class="bouton" id="bouton_plage" onclick="javascript:afficher_cacher('plage');">
-        Cacher les informations de la plage
-    </span>
-    <script type="text/javascript">
-        //<!--
-        afficher_cacher('plage');
-        //-->
-    </script>
-    <div id="plage" class="marge-conteneur">
-        <div id="infos-projet">
-            <?php
-            //REQUETE POUR RECUPERER LES INFORMATIONS DU PROJET (ville, nom projet, date...)
-            $reponse = $bdd->query("SELECT Nom,Ville,Datepreleve FROM plage WHERE ID=" . $_GET['idplage']);
-            $donnees = $reponse->fetch();
-            echo "<h2>Informations relatives à la plage étudiée</h2>";
-            echo "<p>Nom : " . $donnees['Nom'] . "</p>";
-            echo "<p>Ville : " . $donnees['Ville'] . "</p>";
-            echo "<p>Date : " . $donnees['Datepreleve'] . "</p>";
-            $reponse->closeCursor();
-            ?>
+        <form action="interchercheur.php" method="get">
+            <fieldset>
+                <legend><h2>Liste des vues</h2></legend>
+                <select name="Vue">
+                    <option>Vue globale</option>
+                    <option disabled>──────────</option>
+                    <?php
+                    $reponse = $bdd->query("SELECT ID,Nom,Clore FROM zones WHERE IDplage = (SELECT ID FROM plage WHERE id=" . $_GET['idplage'] . ")");
+                    while ($donnees = $reponse->fetch()) {
+                        echo"<option>" . $donnees['Nom'] . "</option>";
+                    }
+                    
+                    echo'<input type="hidden" name="nomplage" value="'.$_GET['nomplage'].'"/>';
+                    echo'<input type="hidden" name="idplage" value="'.$_GET['idplage'].'"/>'; ?>
+                </select><input type="submit" id="voir" class="bouton" name="voir" value="Modifier la vue"/>
+            </fieldset>
+
+        </form>
+
+        <span class="bouton" id="bouton_plage" onclick="javascript:afficher_cacher('plage');">
+            Cacher les informations de la plage
+        </span>
+        <script type="text/javascript">
+            //<!--
+            afficher_cacher('plage');
+            //-->
+        </script>
+        <div id="plage" class="marge-conteneur">
+            <div id="infos-projet">
+                <?php
+                //REQUETE POUR RECUPERER LES INFORMATIONS DU PROJET (ville, nom projet, date...)
+                $reponse = $bdd->query("SELECT Nom,Ville,Datepreleve FROM plage WHERE ID=" . $_GET['idplage']);
+                $donnees = $reponse->fetch();
+                echo "<h2>Informations relatives à la plage étudiée</h2>";
+                echo "<p>Nom : " . $donnees['Nom'] . "</p>";
+                echo "<p>Ville : " . $donnees['Ville'] . "</p>";
+                echo "<p>Date : " . $donnees['Datepreleve'] . "</p>";
+                $reponse->closeCursor();
+                ?>
+            </div>
         </div>
-    </div>
 
-    <form method="GET" action="interchercheur.php">
-        <table>
-            <caption><h2>Prélèvement de la zone</h2></caption>  
-            <thead><!--en tete de tableau-->
-                <tr>
-                    <th>Espèces</th>
-                    <th>Nombres</th>
-                    <th>Fonctions</th>
-                </tr>
-            </thead>
-            <tfoot><!--pied de tableau-->
-                <tr>
-                    <th>Espèces</th>
-                    <th>Nombres</th>
-                    <th>Fonctions</th>
-                </tr>
-            </tfoot>
-            <tbody><!--corp du tableau-->
-                <?php
-                $reponse = $bdd->query("SELECT DISTINCT espece.Nom, prelevement.quantite FROM zones 
-                    INNER JOIN (espece INNER JOIN prelevement ON espece.IDespeces=prelevement.IDespece)
-                    ON zones.ID=espece.IDzone WHERE zones.IDplage=".$_GET['idplage']);
-                while ($donnees = $reponse->fetch()) {
-                    echo"<tr>";
-                    echo"<td>" . $donnees['Nom'] . "</td>";
-                    echo"<td>0</td>";
-                    echo'<td><input type="submit" id="modif" class="bouton" name="modif" value="Modifier"/></td>';
-                    echo"</tr>";
-                }$reponse->closeCursor();
-                ?>
-            </tbody>
-        </table>         
-    </form>
+        <form method="GET" action="interchercheur.php">
+            <table>
+                <caption><h2>Prélèvement de la zone</h2></caption>  
+                <thead><!--en tete de tableau-->
+                    <tr>
+                        <th>Espèces</th>
+                        <th>Nombres</th>
+                        <th>Fonctions</th>
+                    </tr>
+                </thead>
+                <tfoot><!--pied de tableau-->
+                    <tr>
+                        <th>Espèces</th>
+                        <th>Nombres</th>
+                        <th>Fonctions</th>
+                    </tr>
+                </tfoot>
+                <tbody><!--corp du tableau-->
+                    <?php
+                    if($_GET['Vue'] == 'Vue globale'){
+                        $reponse = $bdd->query("SELECT DISTINCT espece.Nom, prelevement.quantite FROM zones 
+                        INNER JOIN (espece INNER JOIN prelevement ON espece.IDespeces=prelevement.IDespece)
+                        ON zones.ID=espece.IDzone WHERE zones.IDplage=" . $_GET['idplage']);}
+                    else{
+                        $reponse = $bdd->query("SELECT DISTINCT espece.Nom, prelevement.quantite FROM zones 
+                        INNER JOIN (espece INNER JOIN prelevement ON espece.IDespeces=prelevement.IDespece)
+                        ON zones.ID=espece.IDzone WHERE zones.IDplage=" . $_GET['idplage']." AND zones.Nom='".$_GET['Vue']."'");
+                    }
+                    while ($donnees = $reponse->fetch()) {
+                        echo"<tr>";
+                        echo"<td>" . $donnees['Nom'] . "</td>";
+                        echo"<td>" . $donnees['quantite'] . "</td>";
+                        echo'<td><input type="submit" id="modif" class="bouton" name="modif" value="Modifier"/></td>';
+                        echo"</tr>";
+                    }$reponse->closeCursor();
+                    ?>
+                </tbody>
+            </table>         
+        </form>
 
-    <footer>
-        <a href="#top" class="bouton" title="Haut de page"><img src="images/icone_fleche-retour.png" alt="Haut de page"/></a>
-    </footer>
-</body>
+        <footer>
+            <a href="#top" class="bouton" title="Haut de page"><img src="images/icone_fleche-retour.png" alt="Haut de page"/></a>
+        </footer>
+    </body>
 </html>
