@@ -93,31 +93,22 @@ if (isset($_POST['cree'])) {
     $pt1_x . "," . $pt1_y . "," . $pt2_x . "," . $pt2_y . "," . $pt3_x . "," . $pt3_y . "," . $pt4_x . "," . $pt4_y;
 
 //CREATION DU GROUPE
-    $req = $bdd->prepare('INSERT INTO zones (IDplage,latA,longA,latB,longB,latC,longC,latD,longD,Nom,Superficie,Clore,deciXA,deciYA,deciXB,'
-            . 'deciYB,deciXC,deciYC,deciXD,deciYD) '
+    $req = $bdd->prepare('INSERT INTO zones (IDplage,latA,longA,latB,longB,latC,longC,latD,longD,Nom,Superficie,Clore,deciXA,deciYA,deciXB,deciYB,deciXC,deciYC,deciXD,deciYD) '
             . 'VALUES(:idplage,:latA,:lonA,:latB,:lonB,:latC,:lonC,:latD,:lonD,:nom,:super,:clos,:XA,:YA,:XB,:YB,:XC,:YC,:XD,:YD)');
 
     $req->execute(array(
         "idplage" => $_POST['idprojet'],
-        "latA" => $x_degres_1 . "°" . $x_minutes_1 . "'" . $x_secondes_1 . "\"",
-        "lonA" => $y_degres_1 . "°" . $y_minutes_1 . "'" . $y_secondes_1 . "\"",
-        "latB" => $x_degres_2 . "°" . $x_minutes_2 . "'" . $x_secondes_2 . "\"",
-        "lonB" => $y_degres_2 . "°" . $y_minutes_2 . "'" . $y_secondes_2 . "\"",
-        "latC" => $x_degres_3 . "°" . $x_minutes_3 . "'" . $x_secondes_3 . "\"",
-        "lonC" => $y_degres_3 . "°" . $y_minutes_3 . "'" . $y_secondes_3 . "\"",
-        "latD" => $x_degres_4 . "°" . $x_minutes_4 . "'" . $x_secondes_4 . "\"",
-        "lonD" => $y_degres_4 . "°" . $y_minutes_4 . "'" . $y_secondes_4 . "\"",
+        "latA" => $x_degres_1 . "°" . $x_minutes_1 . "'" . $x_secondes_1 . "\"", "lonA" => $y_degres_1 . "°" . $y_minutes_1 . "'" . $y_secondes_1 . "\"",
+        "latB" => $x_degres_2 . "°" . $x_minutes_2 . "'" . $x_secondes_2 . "\"", "lonB" => $y_degres_2 . "°" . $y_minutes_2 . "'" . $y_secondes_2 . "\"",
+        "latC" => $x_degres_3 . "°" . $x_minutes_3 . "'" . $x_secondes_3 . "\"", "lonC" => $y_degres_3 . "°" . $y_minutes_3 . "'" . $y_secondes_3 . "\"",
+        "latD" => $x_degres_4 . "°" . $x_minutes_4 . "'" . $x_secondes_4 . "\"", "lonD" => $y_degres_4 . "°" . $y_minutes_4 . "'" . $y_secondes_4 . "\"",
         "nom" => $_POST['nom-groupe'],
         "super" => $zone_totale,
         "clos" => 0,
-        "XA" => $pt1_x,
-        "YA" => $pt1_y,
-        "XB" => $pt2_x,
-        "YB" => $pt2_y,
-        "XC" => $pt3_x,
-        "YC" => $pt3_y,
-        "XD" => $pt4_x,
-        "YD" => $pt4_y));
+        "XA" => $pt1_x, "YA" => $pt1_y,
+        "XB" => $pt2_x, "YB" => $pt2_y,
+        "XC" => $pt3_x, "YC" => $pt3_y,
+        "XD" => $pt4_x, "YD" => $pt4_y));
     $req->closeCursor();
 }
 

@@ -28,12 +28,27 @@ include_once 'Config.php';
 
     <body id="top">
         <?php
-        echo "<h1>Interface Préleveur - " . $_GET['nomplage'] . "</h1>";
+        if (isset($_POST['cree'])) {
+            echo "<h1>Interface Préleveur - " . $_POST['nom-projet'] . "</h1>";
+        } else {
+            echo "<h1>Interface Préleveur - " . $_GET['nomplage'] . "</h1>";
+        }
 
         try {
             $bdd = new PDO('mysql:host=' . Config::SERVERNAME . ';dbname=' . Config::DBNAME . ';charset=utf8', Config::LOGIN, '');
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());
+        }
+
+        if (isset($_POST['cree'])) {
+            $req = $bdd->prepare('INSERT INTO plage(Nom,Ville,Superficie,Datepreleve,Clore) VALUES(:nom,:vil,:sup,:dat,:clo)');
+            $req->execute(array(
+                "nom" => $_POST['nom-projet'],
+                "vil" => $_POST['ville'],
+                "sup" => 0,
+                "dat" => $_POST['date'],
+                "clo" => 0));
+            $req->closeCursor();
         }
         ?>
         <a href="tablechercheur.php">Retour à la liste des projets </a>
@@ -45,13 +60,18 @@ include_once 'Config.php';
                     <option>Vue globale</option>
                     <option disabled>──────────</option>
                     <?php
-                    $reponse = $bdd->query("SELECT ID,Nom,Clore FROM zones WHERE IDplage = (SELECT ID FROM plage WHERE id=" . $_GET['idplage'] . ")");
-                    while ($donnees = $reponse->fetch()) {
-                        echo"<option>" . $donnees['Nom'] . "</option>";
+                    if (isset($_POST['cree'])) {
+                        
+                    } else {
+                        $reponse = $bdd->query("SELECT ID,Nom,Clore FROM zones WHERE IDplage = (SELECT ID FROM plage WHERE id=" . $_GET['idplage'] . ")");
+                        while ($donnees = $reponse->fetch()) {
+                            echo"<option>" . $donnees['Nom'] . "</option>";
+                        }
+
+                        echo'<input type="hidden" name="nomplage" value="' . $_GET['nomplage'] . '"/>';
+                        echo'<input type="hidden" name="idplage" value="' . $_GET['idplage'] . '"/>';
                     }
-                    
-                    echo'<input type="hidden" name="nomplage" value="'.$_GET['nomplage'].'"/>';
-                    echo'<input type="hidden" name="idplage" value="'.$_GET['idplage'].'"/>'; ?>
+                    ?>
                 </select><input type="submit" id="voir" class="bouton" name="voir" value="Modifier la vue"/>
             </fieldset>
 
@@ -69,13 +89,20 @@ include_once 'Config.php';
             <div id="infos-projet">
                 <?php
                 //REQUETE POUR RECUPERER LES INFORMATIONS DU PROJET (ville, nom projet, date...)
-                $reponse = $bdd->query("SELECT Nom,Ville,Datepreleve FROM plage WHERE ID=" . $_GET['idplage']);
-                $donnees = $reponse->fetch();
-                echo "<h2>Informations relatives à la plage étudiée</h2>";
-                echo "<p>Nom : " . $donnees['Nom'] . "</p>";
-                echo "<p>Ville : " . $donnees['Ville'] . "</p>";
-                echo "<p>Date : " . $donnees['Datepreleve'] . "</p>";
-                $reponse->closeCursor();
+                if (isset($_POST['cree'])) {
+                    echo "<h2>Informations relatives à la plage étudiée</h2>";
+                    echo "<p>Nom : " . $_POST['nom-projet'] . "</p>";
+                    echo "<p>Ville : " . $_POST['ville'] . "</p>";
+                    echo "<p>Date : " . $_POST['date'] . "</p>";
+                } else {
+                    $reponse = $bdd->query("SELECT Nom,Ville,Datepreleve FROM plage WHERE ID=" . $_GET['idplage']);
+                    $donnees = $reponse->fetch();
+                    echo "<h2>Informations relatives à la plage étudiée</h2>";
+                    echo "<p>Nom : " . $donnees['Nom'] . "</p>";
+                    echo "<p>Ville : " . $donnees['Ville'] . "</p>";
+                    echo "<p>Date : " . $donnees['Datepreleve'] . "</p>";
+                    $reponse->closeCursor();
+                }
                 ?>
             </div>
         </div>
@@ -99,22 +126,26 @@ include_once 'Config.php';
                 </tfoot>
                 <tbody><!--corp du tableau-->
                     <?php
-                    if($_GET['Vue'] == 'Vue globale'){
-                        $reponse = $bdd->query("SELECT DISTINCT espece.Nom, prelevement.quantite FROM zones 
+                    if (isset($_POST['cree'])) {
+                        
+                    } else {
+                        if ($_GET['Vue'] == 'Vue globale') {
+                            $reponse = $bdd->query("SELECT DISTINCT espece.Nom, prelevement.quantite FROM zones 
                         INNER JOIN (espece INNER JOIN prelevement ON espece.IDespeces=prelevement.IDespece)
-                        ON zones.ID=espece.IDzone WHERE zones.IDplage=" . $_GET['idplage']);}
-                    else{
-                        $reponse = $bdd->query("SELECT DISTINCT espece.Nom, prelevement.quantite FROM zones 
+                        ON zones.ID=espece.IDzone WHERE zones.IDplage=" . $_GET['idplage']);
+                        } else {
+                            $reponse = $bdd->query("SELECT DISTINCT espece.Nom, prelevement.quantite FROM zones 
                         INNER JOIN (espece INNER JOIN prelevement ON espece.IDespeces=prelevement.IDespece)
-                        ON zones.ID=espece.IDzone WHERE zones.IDplage=" . $_GET['idplage']." AND zones.Nom='".$_GET['Vue']."'");
+                        ON zones.ID=espece.IDzone WHERE zones.IDplage=" . $_GET['idplage'] . " AND zones.Nom='" . $_GET['Vue'] . "'");
+                        }
+                        while ($donnees = $reponse->fetch()) {
+                            echo"<tr>";
+                            echo"<td>" . $donnees['Nom'] . "</td>";
+                            echo"<td>" . $donnees['quantite'] . "</td>";
+                            echo'<td><input type="submit" id="modif" class="bouton" name="modif" value="Modifier"/></td>';
+                            echo"</tr>";
+                        }$reponse->closeCursor();
                     }
-                    while ($donnees = $reponse->fetch()) {
-                        echo"<tr>";
-                        echo"<td>" . $donnees['Nom'] . "</td>";
-                        echo"<td>" . $donnees['quantite'] . "</td>";
-                        echo'<td><input type="submit" id="modif" class="bouton" name="modif" value="Modifier"/></td>';
-                        echo"</tr>";
-                    }$reponse->closeCursor();
                     ?>
                 </tbody>
             </table>         
