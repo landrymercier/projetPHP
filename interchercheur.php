@@ -39,7 +39,8 @@ include_once 'Config.php';
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());
         }
-
+        
+//SI CREATION D'UN NOUVEAU PROJET
         if (isset($_POST['cree'])) {
             $req = $bdd->prepare('INSERT INTO plage(Nom,Ville,Superficie,Datepreleve,Clore) VALUES(:nom,:vil,:sup,:dat,:clo)');
             $req->execute(array(
@@ -50,6 +51,17 @@ include_once 'Config.php';
                 "clo" => 0));
             $req->closeCursor();
         }
+        
+//SI RECALCUL DE LA SUPERFICIE
+        if(isset($_POST['Recalc'])){
+            
+            $req = $bdd->query("SELECT SUM(Superficie) AS 'Superficie' FROM zones WHERE IDplage = " . $_GET['idplage']);
+            $calc = $req->fetch();
+            $req = $bdd->query("UPDATE plage SET Superficie = " . $calc['Superficie'] . " WHERE ID = " . $_GET['idplage']);
+            $sup = $req->fetch();
+                    
+        }
+        
         ?>
         <a href="tablechercheur.php">Retour à la liste des projets </a>
 
@@ -85,6 +97,19 @@ include_once 'Config.php';
             afficher_cacher('plage');
             //-->
         </script>
+        
+        <form method="post">
+        <input type="submit" id="Modif-projet" class="bouton" name="Modif-projet" value="Modifier les informations"/>
+        </form>
+        
+        <form method="post">
+        <input type="submit" id="Recalc" class="bouton" name="Recalc" value="Recalculer la superficie"/>
+        </form>
+        
+        <form method="post">
+        <input type="submit" id="KML" class="bouton" name="KML" value="Exporter KML"/>
+        </form>
+        
         <div id="plage" class="marge-conteneur">
             <div id="infos-projet">
                 <?php
@@ -94,13 +119,15 @@ include_once 'Config.php';
                     echo "<p>Nom : " . $_POST['nom-projet'] . "</p>";
                     echo "<p>Ville : " . $_POST['ville'] . "</p>";
                     echo "<p>Date : " . $_POST['date'] . "</p>";
+                    echo "<p>Superficie totale : 0 m²</p>";
                 } else {
-                    $reponse = $bdd->query("SELECT Nom,Ville,Datepreleve FROM plage WHERE ID=" . $_GET['idplage']);
+                    $reponse = $bdd->query("SELECT Nom,Ville,Datepreleve,Superficie FROM plage WHERE ID=" . $_GET['idplage']);
                     $donnees = $reponse->fetch();
                     echo "<h2>Informations relatives à la plage étudiée</h2>";
                     echo "<p>Nom : " . $donnees['Nom'] . "</p>";
                     echo "<p>Ville : " . $donnees['Ville'] . "</p>";
                     echo "<p>Date : " . $donnees['Datepreleve'] . "</p>";
+                    echo "<p>Superficie totale : " . $donnees['Superficie'] . "</p>";
                     $reponse->closeCursor();
                 }
                 ?>
