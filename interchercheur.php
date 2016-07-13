@@ -58,9 +58,18 @@ include_once 'Config.php';
             $req = $bdd->query("SELECT SUM(Superficie) AS 'Superficie' FROM zones WHERE IDplage = " . $_GET['idplage']);
             $calc = $req->fetch();
             $req = $bdd->query("UPDATE plage SET Superficie = " . $calc['Superficie'] . " WHERE ID = " . $_GET['idplage']);
-            $sup = $req->fetch();
-                    
+            $sup = $req->fetch();         
         }
+        
+        //FERMETURE DES GROUPES
+        if(isset($_POST['CloreAll'])){
+            
+            $req = $bdd->query("UPDATE zones SET Clore = 1 WHERE IDplage = " . $_GET['idplage']);
+            $sup = $req->fetch();
+            echo"UPDATE zones SET Clore = 1 WHERE IDplage = " . $_GET['idplage'];
+        }
+        
+//FERMETURE DE TOUS LES GROUPES LIES AU PROJET
         
         ?>
         <a href="tablechercheur.php">Retour à la liste des projets </a>
@@ -100,13 +109,8 @@ include_once 'Config.php';
         
         <form method="post">
         <input type="submit" id="Modif-projet" class="bouton" name="Modif-projet" value="Modifier les informations"/>
-        </form>
-        
-        <form method="post">
         <input type="submit" id="Recalc" class="bouton" name="Recalc" value="Recalculer la superficie"/>
-        </form>
-        
-        <form method="post">
+        <input type="submit" id="KML" class="bouton" name="CloreAll" value="Clore tous les groupes"/>
         <input type="submit" id="KML" class="bouton" name="KML" value="Exporter KML"/>
         </form>
         
@@ -127,7 +131,8 @@ include_once 'Config.php';
                     echo "<p>Nom : " . $donnees['Nom'] . "</p>";
                     echo "<p>Ville : " . $donnees['Ville'] . "</p>";
                     echo "<p>Date : " . $donnees['Datepreleve'] . "</p>";
-                    echo "<p>Superficie totale : " . $donnees['Superficie'] . "</p>";
+                    echo "<p>Superficie totale : " . $donnees['Superficie'] . " m²</p>";
+                    echo "<p>Nombre de groupes : " . $donnees['Datepreleve'] . "</p>";
                     $reponse->closeCursor();
                 }
                 ?>
@@ -157,9 +162,9 @@ include_once 'Config.php';
                         
                     } else {
                         if ($_GET['Vue'] == 'Vue globale') {
-                            $reponse = $bdd->query("SELECT DISTINCT espece.Nom, prelevement.quantite FROM zones 
+                            $reponse = $bdd->query("SELECT DISTINCT espece.Nom, SUM(prelevement.quantite) AS quantite FROM zones 
                         INNER JOIN (espece INNER JOIN prelevement ON espece.IDespeces=prelevement.IDespece)
-                        ON zones.ID=espece.IDzone WHERE zones.IDplage=" . $_GET['idplage']);
+                        ON zones.ID=espece.IDzone WHERE zones.IDplage=" . $_GET['idplage'] ." GROUP BY espece.Nom");
                         } else {
                             $reponse = $bdd->query("SELECT DISTINCT espece.Nom, prelevement.quantite FROM zones 
                         INNER JOIN (espece INNER JOIN prelevement ON espece.IDespeces=prelevement.IDespece)

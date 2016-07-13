@@ -40,6 +40,9 @@ include_once 'Config.php';
         if (isset($_POST['cloregroupe'])){$req = $bdd->prepare('UPDATE zones SET Clore = 1 WHERE ID='.$_POST['cloregroupe']);
         $req->execute();
         }
+        if (isset($_POST['opengroupe'])){$req = $bdd->prepare('UPDATE zones SET Clore = 0 WHERE ID='.$_POST['opengroupe']);
+        $req->execute();
+        }
         ?>
         </div>
 
@@ -83,14 +86,19 @@ include_once 'Config.php';
                     while ($donnees = $reponse->fetch()) {
                         echo"<tr>";
                         echo"<td>" . $donnees['Nom'] . "</td>";
-                         if($donnees['Clore'] == 1){ //SI LA ZONE EST CLOSE
-                            echo'<td><input type="hidden" name="groupeid" value="'. $donnees['ID'] .'"/>';
-                            echo 'TERMINER' ;
+                         
+                        if (isset($_SESSION['logged']) == true && $donnees['Clore'] == 1) { //LE CHERCHEUR PEUT OUVRIR UN PRELEVEMENT
+                            echo'<form action="index.php" method="post">';
+                            echo'<td><input type="hidden" name="opengroupe" value="'. $donnees['ID'] .'"/>';
+                            echo'<input type="submit" class="bouton" value="Ouvrir"/></td>';
+                            echo'</form>';
                         } elseif (isset($_SESSION['logged']) == true) { //LE CHERCHEUR PEUT TERMINER UN PRELEVEMENT
                             echo'<form action="index.php" method="post">';
                             echo'<td><input type="hidden" name="cloregroupe" value="'. $donnees['ID'] .'"/>';
                             echo'<input type="submit" class="bouton" value="Clore"/></td>';
                             echo'</form>';
+                        } elseif($donnees['Clore'] == 1){ //SI LA ZONE EST CLOSE
+                            echo'<td>Clos</td>';
                         } else { //LE PRELEVEUR PEUT COMPLETER SON PRELEVEMENT
                             echo'<form action="interprel.php" method="get">';
                             echo'<td><input type="hidden" name="groupeid" value="'. $donnees['ID'] .'"/>';
