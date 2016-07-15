@@ -3,6 +3,7 @@
     <head>
         <title>Connexion interface chercheur</title>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
         <link href="style.css" rel="stylesheet" type="text/css"/>
     </head>
     <body id="login_ifrocean">

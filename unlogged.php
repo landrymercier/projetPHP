@@ -6,6 +6,7 @@
     <head>
         <title>Déconnexion réussie</title>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
         <link href="style.css" rel="stylesheet" type="text/css"/>
         <meta http-equiv="Refresh" content="3; url=index.php">
     </head>

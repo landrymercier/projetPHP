@@ -4,7 +4,7 @@ STYLE PAR DEFAUT POUR MOBILE
 
 /*FONT POUR L'ENIGME DE LA 404*/
 @font-face {
-    font-family:'Ancient Hylian';
+    font-family:'AncientHylian';
     src: url('fonts/ancienthylian-webfont.woff2') format('woff2'),
          url('fonts/ancienthylian-webfont.woff') format('woff');
     font-weight:normal;
@@ -13,7 +13,7 @@ STYLE PAR DEFAUT POUR MOBILE
 
 body { 
     box-sizing:border-box;
-    font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-family:'Trebuchet MS', Arial, Helvetica, sans-serif;
     font-size:0.9em;
     background:rgba(53,184,203,1) url("images/fond.png") no-repeat fixed center;
     background-size:cover;
@@ -25,6 +25,13 @@ h1 { font-variant:small-caps; text-align:center; letter-spacing:0.2em; border-bo
 margin:0 0 1em; padding:0 0 0.5em; }
 h2 { margin:0.5em 0; font-size:1.2em; }
 
+hr { height:1px; color:rgba(0,30,34,1); background-color:rgba(0,30,34,1); border:0; }
+
+img { max-width:100%; height:auto; }
+
+a { color:rgba(0,30,34,1); font-weight:bold; font-style:italic; text-decoration:none; }
+a:hover, a:active { text-decoration:underline; }
+
 .clear { clear:both; }
 
 /*MARGES ENTRE LES CONTENEURS*/
@@ -34,7 +41,7 @@ h2 { margin:0.5em 0; font-size:1.2em; }
 /*FORMULAIRE*/
 fieldset, legend, table { width:100%; box-sizing:border-box; margin:1em 0; border:1px solid rgba(0,70,79,1); 
 border-radius:0.8em; }
-fieldset, legend { background:rgba(0,184,203,0.8); }
+fieldset { background:rgba(0,184,203,0.8); }
 legend { width:auto; padding:0 1em; background:rgba(0,150,170,1); }
 table { border-collapse:collapse; }
 caption { text-align:left; }
@@ -63,7 +70,6 @@ th:first-child, td:first-child { width:60%; padding-left:0.5em; text-align:left;
 div.btn-session, footer { width:3em; }
 div.btn-session { position:fixed; top:0; right:0; }
 footer { position:fixed; bottom:0; right:0; }
-div.btn-session img, footer img { max-width:100%; }
 
 
 
@@ -146,7 +152,8 @@ form#align-form-espece div.align-btn-droite>* { vertical-align:middle; }
 color:rgba(255,255,255,1); font-weight:bold; background:rgba(0,90,101,1); border-radius:0.8em; }
 input.bouton, span#bouton_plage, a.bouton { display:inline-block; border:1px solid rgba(0,70,79,1); margin:0.5em 0; }
 a.bouton { text-decoration:none; }
-.bouton:hover, span#bouton_plage:hover, a.bouton:hover { background:rgba(0,140,159,1); }
+.bouton:hover, .bouton:active, span#bouton_plage:hover, span#bouton_plage:active, a.bouton:hover, a.bouton:active 
+{ background:rgba(0,140,159,1); }
 input.bouton { width:auto; }
 
 /*masque les fleches d'incrementation/decrementation des inputs de type number*/
@@ -168,7 +175,8 @@ div.align-btn-droite { text-align:right; padding:0 1em; }
 /*style commun aux messages*/
 div.valide_content, div.error_content { border-radius:0.8em; text-align:center; margin:3em 0; padding:2% 10%; }
 div.valide_content a, div.error_content a { text-decoration:none; font-weight:bold; }
-div.valide_content a:hover, div.error_content a:hover { text-decoration:underline; }
+div.valide_content a:hover, div.valide_content a:active, div.error_content a:hover, div.error_content a:active 
+{ text-decoration:underline; }
 
 /*style pour les messages valides*/
 div.valide_content { border:1px solid rgba(0,70,0,1); color:rgba(0,70,0,1); background-color:rgba(0,180,0,0.4); }
@@ -179,10 +187,58 @@ div.error_content a { color:rgba(0,70,0,1); }
 
 
 
+/*-----------------*/
+/*-------404-------*/
+/*-----------------*/
+div.display404 { position:relative; width:auto; }
+div.enigme404 { z-index:1; position:absolute; top:8%; right:0; box-sizing:border-box; width:100%; height:7em; 
+background:rgba(0,184,203,0.8); border:1px solid rgba(0,70,79,1); border-radius:0.8em; 
+font-size:0.8em; padding:1em; line-height:1em; }
+div.enigme404:hover { font-family:'Trebuchet MS', Arial, Helvetica, sans-serif; }
+div.enigme404 div.position-enigme404 { position:relative; }
+span.traduction404 { width:6em; text-align:center; position:absolute; bottom:0; right:0; font-size:0.9em; 
+display:inline-block; font-family:'Trebuchet MS', Arial, Helvetica, sans-serif; }
+div.position-enigme404 p { position:absolute; top:0; left:0; margin:0; }
+div.display-enigme404 { position:relative; padding-top:7em; }
+img.aura404 { opacity:0.2; cursor:pointer; position:absolute; top:22%; left:26%; z-index:1; width:19%; padding-top:5.4em; }
+img.aura404:hover, img.aura404:active { opacity:1; }
+
+div.recompence404 { z-index:2; position:absolute; top:0; left:0; box-sizing:border-box; width:100%; 
+padding:10% 3% 10% 8%; background:rgba(0,150,170,1); border-radius:0.8em; }
+
+div.map-hover { z-index:3; position:absolute; top:0; left:0; box-sizing:border-box; width:100%; 
+padding:10% 3% 10% 8%; }
+div.map-hover img.ilecarte404 { opacity:0; box-sizing:border-box; }
+div.map-hover img.ilecarte404:hover, div.map-hover img.ilecarte404:active { opacity:0.5; }
+div.map-hover img.NW { position:absolute; top:66%; left:12.4%; width:24%; }
+div.map-hover img.W { position:absolute; top:241%; left:19.8%; width:5.8%; }
+div.map-hover img.SW { position:absolute; top:352%; left:19.8%; width:17%; }
+div.map-hover img.N { position:absolute; top:126%; left:63.1%; width:5.2%; }
+div.map-hover img.C-NW { position:absolute; top:199%; left:41.5%; width:3.5%; }
+div.map-hover img.C-SE { position:absolute; top:289%; left:53.4%; width:2.2%; }
+div.map-hover img.S { position:absolute; top:374.5%; left:49.6%; width:6.6%; }
+div.map-hover img.NE { position:absolute; top:141.5%; left:87%; width:6.5%; }
+div.map-hover img.E { position:absolute; top:239.8%; left:73%; width:2%; }
+div.map-hover img.SE { position:absolute; top:320%; left:70%; width:5%; }
+
+div.btn-close-recompence404 { z-index:4; position:absolute; top:-3%; right:0; width:3em; }
+img.poiscom404 { cursor:pointer; z-index:4; position:absolute; top:2%; left:2%; width:19%; 
+transform:rotate(0deg); transform-origin:50% 50%; transition:all 2s; }
+img.poiscom404:hover { transform:rotate(360deg); }
+img.carte404 { opacity:0.8; }
+div.recompence404 figure { margin:0; }
+div.recompence404 figcaption { text-align:center; font-weight:bold; }
+
+div.message404-standard { padding:5%; background:rgba(0,184,203,0.8); border:1px solid rgba(0,70,79,1); border-radius:0.8em; }
+div.message404-standard ul { padding-left:1em; }
+div.message404-standard ul li { margin:0.5em 0; }
+
+
+
 /**
 STYLE POUR ECRAN
 */
-@media screen and (min-width:400px) {
+@media screen and (min-width:400px){
     body { padding:0 10%; }
     h1 { margin-top:1em; }
     
@@ -229,5 +285,27 @@ STYLE POUR ECRAN
     div#infos-projet, div#coordonnees { display:inline-block; }
     div#infos-projet { width:69%; }
     div#coordonnees { width:29%; border-top:none; padding-top:0; }
-    form#align-form-espece div.align-btn-droite a.bouton { padding:0.5em; }
+    form#align-form-espece div.align-btn-droite a.bouton { padding:0.5em; }  
+}
+
+@media screen and (min-device-width:768px){
+    /*-----------------*/
+    /*-------404-------*/
+    /*-----------------*/
+    div.recompence404 { padding:7% 3% 5% 8%; }
+    
+    div.map-hover img.NW { position:absolute; top:48%; left:12.2%; }
+    div.map-hover img.W { position:absolute; top:222%; left:19.5%; width:5.8%; }
+    div.map-hover img.SW { position:absolute; top:331%; left:19.5%; width:17%; }
+    div.map-hover img.N { position:absolute; top:109%; left:62.4%; width:5.2%; }
+    div.map-hover img.C-NW { position:absolute; top:180%; left:41%; width:3.5%; }
+    div.map-hover img.C-SE { position:absolute; top:268.5%; left:52.8%; width:2.2%; }
+    div.map-hover img.S { position:absolute; top:353%; left:49%; width:6.6%; }
+    div.map-hover img.NE { position:absolute; top:123%; left:86%; width:6.5%; }
+    div.map-hover img.E { position:absolute; top:220%; left:72.3%; width:2%; }
+    div.map-hover img.SE { position:absolute; top:299%; left:69.2%; width:5%; }
+    
+    div.display404, div.message404-standard { box-sizing:border-box; }
+    div.display404 { float:left; width:70%; margin-right:2%;}
+    div.message404-standard { float:left; width:28%; padding:2%; }
 }

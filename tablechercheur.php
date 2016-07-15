@@ -7,18 +7,8 @@ include_once 'Config.php';
     <head>
         <title>Panneau chercheur</title>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
         <link href="style.css" rel="stylesheet" type="text/css"/>
-        <!--import javascript-->
-        <!--import de la bibliotheque jQuery pour les animations-->
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
-        <!--script javascript-->
-        <!--script js de la fonction easing de jQuery non incluse dans la bibliotheque par defaut-->
-        <script type="text/javascript" src="scripts/jquery.easing.1.3.js"></script>
-        <!--script js de la fonction softScroll pour les ancres-->
-        <script type="text/javascript" src="scripts/scroll.js"></script>
-
-        <!--script js de la fonction afficher-cacher-->
-        <script type="text/javascript" src="scripts/afficher-cacher.js"></script>
         <?php
         if (isset($_SESSION['logged']) == false) {
             echo'<meta http-equiv="Refresh" content="1; url=index.php">';
@@ -120,9 +110,20 @@ include_once 'Config.php';
         </form>
         </fieldset>
         
-
         <footer>
             <a href="#top" class="bouton" title="Haut de page"><img src="images/icone_fleche-retour.png" alt="Haut de page"/></a>
         </footer>
+        
+        <!--import javascript-->
+        <!--import de la bibliotheque jQuery pour les animations-->
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+        <!--script javascript-->
+        <!--script js de la fonction easing de jQuery non incluse dans la bibliotheque par defaut-->
+        <script type="text/javascript" src="scripts/jquery.easing.1.3.js"></script>
+        <!--script js de la fonction softScroll pour les ancres-->
+        <script type="text/javascript" src="scripts/scroll.js"></script>
+
+        <!--script js de la fonction afficher-cacher-->
+        <script type="text/javascript" src="scripts/afficher-cacher.js"></script>
     </body>
 </html>
