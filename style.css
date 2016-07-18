@@ -91,6 +91,7 @@ footer { position:fixed; bottom:0; right:0; }
 #index_ifrocean div.saisie-coordonnees h4 { text-align:left; }
 #index_ifrocean div.saisie-coordonnees span { display:inline-block; }
 #index_ifrocean div.saisie-coordonnees p, div.saisie-coordonnees p input { text-align:right; }
+#index_ifrocean div.saisie-coordonnees p { width:17em; margin-left:auto; margin-right:auto; }
 #index_ifrocean div.saisie-coordonnees p input:nth-child(2), div.saisie-coordonnees p input:nth-child(4) { width:3em; }
 #index_ifrocean div.saisie-coordonnees p input:nth-child(6) { width:4em; }
 
@@ -140,6 +141,10 @@ form#align-form-espece div.align-btn-droite>* { vertical-align:middle; }
 #preleveur_ifrocean td.modif-espece input { background:transparent; border:none; }
 #preleveur_ifrocean form#align-form-espece td.modif-espece:nth-child(2) input { width:100%; text-align:left; }
 #preleveur_ifrocean form#align-form-espece td.modif-espece:nth-child(3) input { width:3em; text-align:center; }
+
+/*AFFICHAGE DU TABLEAU DES PLAGES*/
+#table-chercheur_ifrocean th, #table-chercheur_ifrocean td { width:12%; }
+#table-chercheur_ifrocean th:first-child, #table-chercheur_ifrocean td:first-child { width:40%; }
 
 
 
@@ -235,10 +240,16 @@ div.message404-standard ul li { margin:0.5em 0; }
 
 
 
+@media screen and (min-width:768px){
+    div#align-form-coordonnee div.saisie-coordonnees {  }
+}
+
+
+
 /**
 STYLE POUR ECRAN
 */
-@media screen and (min-width:400px){
+@media screen and (min-width:1024px){
     body { padding:0 10%; }
     h1 { margin-top:1em; }
     
@@ -286,9 +297,9 @@ STYLE POUR ECRAN
     div#infos-projet { width:69%; }
     div#coordonnees { width:29%; border-top:none; padding-top:0; }
     form#align-form-espece div.align-btn-droite a.bouton { padding:0.5em; }  
-}
 
-@media screen and (min-device-width:768px){
+    
+    
     /*-----------------*/
     /*-------404-------*/
     /*-----------------*/

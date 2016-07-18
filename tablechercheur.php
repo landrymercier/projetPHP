@@ -16,7 +16,7 @@ include_once 'Config.php';
         ?>
     </head>
 
-    <body id="top">
+    <body id="table-chercheur_ifrocean">
         <?php
         try {
             $bdd = new PDO('mysql:host=' . Config::SERVERNAME . ';dbname=' . Config::DBNAME . ';charset=utf8', Config::LOGIN, '');
@@ -28,10 +28,10 @@ include_once 'Config.php';
         <h1>Panneau chercheur</h1>
         <a href="unlogged.php">Déconnexion </a>
         <table class="marge-conteneur">
-            <caption><h2>Liste des projets</h2></caption>
+            <caption><h2>Liste des plages</h2></caption>
             <thead><!--en tete de tableau-->
                 <tr>
-                    <th>Nom du projet
+                    <th>Nom de la plage
                         <a href="tablechercheur.php?order=Nom&by=ASC">&uarr;</a> 
                         <a href="tablechercheur.php?order=Nom&by=DESC">&darr;</a></th>
                     <th>Ville
@@ -49,7 +49,7 @@ include_once 'Config.php';
             </thead>
             <tfoot><!--en tete de tableau-->
                 <tr>
-                    <th>Nom du projet</th>
+                    <th>Nom de la plage</th>
                     <th>Ville</th>
                     <th>Date</th>
                     <th>Superficie</th>
@@ -92,11 +92,11 @@ include_once 'Config.php';
 
         </table>
                 <fieldset  class="marge-conteneur">
-            <legend><h2>Création d'un nouveau projet</h2></legend>
+            <legend><h2>Création d'une nouvelle plage</h2></legend>
             <form action="interchercheur.php" method="post" id="align-form-groupe">
             
             <p class="marge-conteneur">
-                <label for="nom-groupe">Nom du Projet :</label>
+                <label for="nom-groupe">Nom de la plage :</label>
                 <input type="text" name="nom-projet" id="nom-projet" placeholder="Entrez un nom" required/>
             <h4>Informations</h4>
                         <p>
@@ -111,7 +111,7 @@ include_once 'Config.php';
         </fieldset>
         
         <footer>
-            <a href="#top" class="bouton" title="Haut de page"><img src="images/icone_fleche-retour.png" alt="Haut de page"/></a>
+            <a href="#table-chercheur_ifrocean" class="bouton" title="Haut de page"><img src="images/icone_fleche-retour.png" alt="Haut de page"/></a>
         </footer>
         
         <!--import javascript-->
