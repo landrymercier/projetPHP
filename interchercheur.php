@@ -62,7 +62,7 @@ include_once 'Config.php';
 //FERMETURE DE TOUS LES GROUPES LIES AU PROJET
         
         ?>
-        <a href="tablechercheur.php">Retour à la liste des projets </a>
+        <a href="tablechercheur.php">Retour à la liste des plages </a>
 
         <form action="interchercheur.php" method="get">
             <fieldset>
@@ -83,7 +83,10 @@ include_once 'Config.php';
                         echo'<input type="hidden" name="idplage" value="' . $_GET['idplage'] . '"/>';
                     }
                     ?>
-                </select><input type="submit" id="voir" class="bouton" name="voir" value="Modifier la vue"/>
+                </select>
+                <div class="align-btn-droite">
+                    <input type="submit" id="voir" class="bouton" name="voir" value="Modifier la vue"/>
+                </div>
             </fieldset>
 
         </form>
@@ -91,20 +94,15 @@ include_once 'Config.php';
         <span class="bouton" id="bouton_plage" onclick="javascript:afficher_cacher('plage');">
             Cacher les informations de la plage
         </span>
-        <script type="text/javascript">
-            //<!--
-            afficher_cacher('plage');
-            //-->
-        </script>
-        
-        <form method="post">
-        <input type="submit" id="Modif-projet" class="bouton" name="Modif-projet" value="Modifier les informations"/>
-        <input type="submit" id="Recalc" class="bouton" name="Recalc" value="Recalculer la superficie"/>
-        <input type="submit" id="KML" class="bouton" name="CloreAll" value="Clore tous les groupes"/>
-        <input type="submit" id="KML" class="bouton" name="KML" value="Exporter KML"/>
-        </form>
         
         <div id="plage" class="marge-conteneur">
+            <form method="post">
+                <input type="submit" id="Modif-projet" class="bouton" name="Modif-projet" value="Modifier les informations"/>
+                <input type="submit" id="Recalc" class="bouton" name="Recalc" value="Recalculer la superficie"/>
+                <input type="submit" id="KML" class="bouton" name="CloreAll" value="Clore tous les groupes"/>
+                <input type="submit" id="KML" class="bouton" name="KML" value="Exporter KML"/>
+            </form>
+            
             <div id="infos-projet">
                 <?php
                 //REQUETE POUR RECUPERER LES INFORMATIONS DU PROJET (ville, nom projet, date...)
@@ -188,5 +186,10 @@ include_once 'Config.php';
 
         <!--script js de la fonction afficher-cacher-->
         <script type="text/javascript" src="scripts/afficher-cacher.js"></script>
+        <script type="text/javascript">
+            //<!--
+            afficher_cacher('plage');
+            //-->
+        </script>
     </body>
 </html>

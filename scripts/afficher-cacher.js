@@ -1,6 +1,6 @@
 /*SOURCE = http://www.supportduweb.com/scripts_tutoriaux-code-source-33-afficher-cacher-un-div-element-en-javascript.html*/
 function afficher_cacher(id)
-{console.log(id);
+{
     if(document.getElementById(id).style.display==="none")
     {
         document.getElementById(id).style.display="block";

@@ -26,11 +26,7 @@ $donnees = $reponse->fetch();
         <span class="bouton" id="bouton_plage" onclick="javascript:afficher_cacher('plage');">
             Cacher les informations de la plage
         </span>
-        <script type="text/javascript">
-            //<!-- cacher une partie de la page (menu infos)
-            afficher_cacher('plage');
-            //-->
-        </script>
+        
         <div id="plage" class="marge-conteneur">
             <div id="infos-projet">
                 <?php
@@ -180,6 +176,7 @@ $donnees = $reponse->fetch();
                 <a href="#preleveur_ifrocean" class="bouton" title="Haut de page"><img src="images/icone_fleche-retour.png" alt="Haut de page"/></a>
             </footer>
 
+<<<<<<< HEAD
             <!--import javascript-->
             <!--import de la bibliotheque jQuery pour les animations-->
             <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
@@ -191,5 +188,14 @@ $donnees = $reponse->fetch();
 
             <!--script js de la fonction afficher-cacher-->
             <script type="text/javascript" src="scripts/afficher-cacher.js"></script>
+=======
+        <!--script js de la fonction afficher-cacher-->
+        <script type="text/javascript" src="scripts/afficher-cacher.js"></script>
+        <script type="text/javascript">
+            //<!-- cacher une partie de la page (menu infos)
+            afficher_cacher('plage');
+            //-->
+        </script>
+>>>>>>> 8d1d45b13fe87fabc31a3b48f7582b73a7494181
     </body>
 </html>
