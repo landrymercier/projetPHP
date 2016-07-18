@@ -99,7 +99,10 @@ include_once 'Config.php';
             <form method="post">
                 <input type="submit" id="Modif-projet" class="bouton" name="Modif-projet" value="Modifier les informations"/>
                 <input type="submit" id="Recalc" class="bouton" name="Recalc" value="Recalculer la superficie"/>
-                <input type="submit" id="KML" class="bouton" name="CloreAll" value="Clore tous les groupes"/>
+                <input type="submit" id="CloreAll" class="bouton" name="CloreAll" value="Clore tous les groupes"/>
+            </form>
+            <form method="get" action="exportKML.php">
+                <?php echo'<input type="hidden" name="idplage" value="' . $_GET['idplage'] . '"/>' ?>
                 <input type="submit" id="KML" class="bouton" name="KML" value="Exporter KML"/>
             </form>
             

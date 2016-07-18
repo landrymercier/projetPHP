@@ -5,7 +5,7 @@ header('Pragma: no-cache');
 
 include_once 'Config.php';
 
-$id_plage=1/*$_POST["plage"]*/;
+$id_plage=$_GET["idplage"];
 
 try {
     $bdd = new PDO('mysql:host=' . Config::SERVERNAME . ';dbname=' . Config::DBNAME . ';charset=utf8', Config::LOGIN, '');
@@ -18,7 +18,7 @@ try {
 <Document>
     <?php $reponse = $bdd->query("SELECT ID, Nom FROM plage WHERE ID=".$id_plage);
     while ($donnees = $reponse->fetch()) {
-	echo "<name>Ifrocean 2016 - ".$donnees['Nom']." | id_plage : ".$donnees['ID']."</name>";
+	echo "<name>Ifrocean 2016 - ".$donnees['Nom']."</name>";
     }$reponse->closeCursor(); ?>
     
     <StyleMap id="m_ylw-pushpin1">
@@ -54,15 +54,9 @@ try {
     <Folder>
         <?php $reponse = $bdd->query("SELECT ID, Nom, Superficie FROM plage WHERE ID=".$id_plage);
         while ($donnees = $reponse->fetch()) {
-	echo "<name>".$donnees['Nom']." | id_plage : ".$donnees['ID']."</name>";
+	echo "<name>".$donnees['Nom']."</name>";
 	echo "<open>1</open>";
-	echo "<description>Superficie : ".$donnees['Superficie']." m²
-
-        Hediste diversicolor 	39989 	3/m²
-        Amblyosyllis formosa 	1 	0,00/m²
-        Arenicola marina	 	8967 	0,68/m²
-        
-        </description>";
+	echo "<description>Superficie : ".$donnees['Superficie']." m²</description>";
         }$reponse->closeCursor(); ?>
 	<Style>
             <ListStyle>
@@ -77,17 +71,17 @@ try {
         . "FROM zones WHERE IDplage=".$id_plage);
     while ($donnees = $reponse->fetch()) {
     echo"<Placemark>";
-        echo"<name>Nom du groupe : " . $donnees['NOMzone'] ." | id_plage : ". $donnees['IDplage'] . " | id du groupe : ".$donnees['ID']."</name>";
+        echo"<name>Nom du groupe : " . $donnees['NOMzone'] ."</name>";
             echo"<description>";
-            echo"Superficie de la zone de prélèvement : ".$donnees['Superficie']." m² | ";
+            echo"Superficie de la zone de prélèvement : ".$donnees['Superficie']." m²";
             $reponse2 = $bdd->query("SELECT IDespeces, espece.Nom AS NOMespece, espece.IDzone, "
                     . "prelevement.IDzone, IDespece, quantite, ID "
                     . "FROM espece, prelevement, zones "
                     . "WHERE IDespeces=IDespece AND espece.IDzone=prelevement.IDzone AND espece.IDzone=ID AND ID=".$donnees['ID']);
-            echo"id groupe req1 = ".$donnees['ID']." vs ";
+            
             while ($donnees2 = $reponse2->fetch()) {
-                echo"id groupe req2 = ".$donnees2['ID']."<br/>";
-                echo"Espece(s) répertoriée(s) : ".$donnees2['NOMespece']." | nombre d'individu : ".$donnees2['quantite'].",°-°, ";
+                echo"<br/>";
+                echo"Espece(s) répertoriée(s) : ".$donnees2['NOMespece']." | nombre d'individu : ".$donnees2['quantite'].", ";
             }$reponse2->closeCursor();
             echo"</description>";
             echo"<styleUrl>#m_ylw-pushpin1</styleUrl>";
