@@ -94,11 +94,6 @@ include_once 'Config.php';
         <span class="bouton" id="bouton_plage" onclick="javascript:afficher_cacher('plage');">
             Cacher les informations de la plage
         </span>
-        <script type="text/javascript">
-            //<!--
-            afficher_cacher('plage');
-            //-->
-        </script>
         
         <div id="plage" class="marge-conteneur">
             <form method="post">
@@ -191,5 +186,10 @@ include_once 'Config.php';
 
         <!--script js de la fonction afficher-cacher-->
         <script type="text/javascript" src="scripts/afficher-cacher.js"></script>
+        <script type="text/javascript">
+            //<!--
+            afficher_cacher('plage');
+            //-->
+        </script>
     </body>
 </html>
