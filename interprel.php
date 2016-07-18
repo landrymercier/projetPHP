@@ -72,9 +72,10 @@ $donnees = $reponse->fetch();
                     $req->closeCursor();
 
                     //RECHERCHE DE L'INDEX DE LA CREATURE AJOUTE
-                    $reponse = $bdd->query("SELECT IDespeces FROM espece ORDER BY IDzone DESC LIMIT 1");
+                    $reponse = $bdd->query("SELECT IDespeces FROM espece ORDER BY IDespeces DESC LIMIT 1");
                     $donnees = $reponse->fetch();
                     $req->closeCursor();
+                    
 
                     //AJOUT DU NOMBRE RELEVE AVEC L'INDEX RECUPERE
                     $req = $bdd->prepare('INSERT INTO prelevement (IDzone,IDespece,quantite) VALUES(:idz, :ide, :q)');
@@ -83,6 +84,7 @@ $donnees = $reponse->fetch();
                     $req->bindValue(':q', $_POST['nb']);
                     $req->execute();
                     $req->closeCursor();
+                    echo"INSERT INTO prelevement (IDzone,IDespece,quantite) VALUES ".$_GET['groupeid'].", ".$donnees['IDespeces'].", ".$_POST['nb'];
                 }
                 //MODIFICATION D'UNE BESTIOLE
                 if (isset($_POST['modifie'])) {
@@ -167,23 +169,27 @@ $donnees = $reponse->fetch();
             </table>
             <div class="align-btn-droite">
                 <a href="index.php" class="bouton">Retour</a>
-                <?php echo"<a href='clore.php?groupeid=".$_GET['groupeid']."' class='bouton'>Clore</a>"; ?>
+                <form name="form2" >
+                    <input name="confirm1" type="text" value="Oui ou non?">
+                    <input type="button"  value="Envoyer" onclick="confirm(document.form2.confirm1.value)">
+                </form>
+                <!-- <?php echo"<a href='clore.php?groupeid=" . $_GET['groupeid'] . "' class='bouton'>Clore</a>"; ?> -->
             </div>
 
             <footer>
                 <a href="#preleveur_ifrocean" class="bouton" title="Haut de page"><img src="images/icone_fleche-retour.png" alt="Haut de page"/></a>
             </footer>
-            
-        <!--import javascript-->
-        <!--import de la bibliotheque jQuery pour les animations-->
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
-        <!--script javascript-->
-        <!--script js de la fonction easing de jQuery non incluse dans la bibliotheque par defaut-->
-        <script type="text/javascript" src="scripts/jquery.easing.1.3.js"></script>
-        <!--script js de la fonction softScroll pour les ancres-->
-        <script type="text/javascript" src="scripts/scroll.js"></script>
 
-        <!--script js de la fonction afficher-cacher-->
-        <script type="text/javascript" src="scripts/afficher-cacher.js"></script>
+            <!--import javascript-->
+            <!--import de la bibliotheque jQuery pour les animations-->
+            <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+            <!--script javascript-->
+            <!--script js de la fonction easing de jQuery non incluse dans la bibliotheque par defaut-->
+            <script type="text/javascript" src="scripts/jquery.easing.1.3.js"></script>
+            <!--script js de la fonction softScroll pour les ancres-->
+            <script type="text/javascript" src="scripts/scroll.js"></script>
+
+            <!--script js de la fonction afficher-cacher-->
+            <script type="text/javascript" src="scripts/afficher-cacher.js"></script>
     </body>
 </html>
