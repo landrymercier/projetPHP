@@ -26,11 +26,7 @@ $donnees = $reponse->fetch();
         <span class="bouton" id="bouton_plage" onclick="javascript:afficher_cacher('plage');">
             Cacher les informations de la plage
         </span>
-        <script type="text/javascript">
-            //<!-- cacher une partie de la page (menu infos)
-            afficher_cacher('plage');
-            //-->
-        </script>
+        
         <div id="plage" class="marge-conteneur">
             <div id="infos-projet">
                 <?php
@@ -185,5 +181,10 @@ $donnees = $reponse->fetch();
 
         <!--script js de la fonction afficher-cacher-->
         <script type="text/javascript" src="scripts/afficher-cacher.js"></script>
+        <script type="text/javascript">
+            //<!-- cacher une partie de la page (menu infos)
+            afficher_cacher('plage');
+            //-->
+        </script>
     </body>
 </html>
