@@ -1,0 +1,89 @@
+Le chercheur:
+--Est défini d'office
+--Peut se logguer (mot de passe à définir)
+--Peut se délogguer
+--Peut accéder à tout (sauf l'interface préleveur)
+--Peut ajouter des espèces
+--Pëut modifier des espèces
+--Peut supprimer des espèces
+--Peut créer des plages
+--Peut modifier des plages
+--Peut clore des plages
+--Peut clore des groupes
+--Peut ouvrir des groupes
+
+
+
+Le préleveur:
+--Peut créer un groupe
+--Peut ajouter des espèces
+--Peut modifier des espèces
+--Clore un groupe
+
+
+
+
+Les plages :
+--Le préleveur:
+----Voir les plages en cours
+
+--Le chercheur:
+----Voir les plages
+----Accéder aux plages
+----Modifier les informations des plages (à faire)
+----Modifier les informations des groupes (à faire... mais en dernier)
+----Rendre inaccessible un plages
+----Créer une plage
+----Trier les plages (vues)
+
+
+Les groupes :
+--Le préleveur:
+----Créer un groupe
+----Accéder à un groupe
+----Clore un groupe
+
+--Le chercheur:
+----Voir les groupes
+----Clore un groupe
+----Ouvrir un groupe
+
+
+Les espèces :
+--Le préleveur:
+----Rajouter une espèce
+----Modifier une espèce
+
+--Le chercheur:
+----Modifier une espèce
+----Supprimer une espèce (à faire)
+----Ajouter une espèce
+
+
+
+
+
+
+
+
+LANDRY
+bouton vert tablechercheur
+iles compatible
+cacher interchercheur
+RESPONSIVE
+
+
+
+MANUEL
+test navigateur
+compatibilité css
+test sql
+
+
+
+
+QUENTIN
+condition table
+MENU VALIDATION
+supprimer projet
+
