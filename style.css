@@ -178,17 +178,19 @@ div.align-btn-droite { text-align:right; padding:0 1em; }
 
 /*MESSAGES*/
 /*style commun aux messages*/
-div.valide_content, div.error_content { border-radius:0.8em; text-align:center; margin:3em 0; padding:2% 10%; }
-div.valide_content a, div.error_content a { text-decoration:none; font-weight:bold; }
-div.valide_content a:hover, div.valide_content a:active, div.error_content a:hover, div.error_content a:active 
+.valide_content, .error_content { border-radius:0.8em; text-align:center; margin:3em 0; padding:2% 10%; }
+.valide_content a, .error_content a { text-decoration:none; font-weight:bold; }
+.valide_content a:hover, .valide_content a:active, .error_content a:hover, .error_content a:active, 
+#table-chercheur_ifrocean .valide_content a:hover, #table-chercheur_ifrocean .valide_content a:active 
 { text-decoration:underline; }
 
 /*style pour les messages valides*/
-div.valide_content { border:1px solid rgba(0,70,0,1); color:rgba(0,70,0,1); background-color:rgba(0,180,0,0.4); }
-div.valide_content a { color:rgba(0,70,0,1); }
+.valide_content, #table-chercheur_ifrocean .valide_content 
+{ border:1px solid rgba(0,70,0,1); color:rgba(0,70,0,1); background-color:rgba(0,180,0,0.4); }
+.valide_content a { color:rgba(0,70,0,1); }
 /*style^pour les messages d'erreurs'*/
-div.error_content { border:1px solid rgba(70,0,0,1); color:rgba(70,0,0,1); background-color:rgba(180,0,0,0.4); }
-div.error_content a { color:rgba(0,70,0,1); }
+.error_content { border:1px solid rgba(70,0,0,1); color:rgba(70,0,0,1); background-color:rgba(180,0,0,0.4); }
+.error_content a { color:rgba(0,70,0,1); }
 
 
 

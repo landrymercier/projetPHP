@@ -83,7 +83,9 @@ include_once 'Config.php';
                             <input type="hidden" name="Vue" value="Vue globale"/>
                             <input type="hidden" name="nomplage" value="' . $donnees['Nom'] . '"/>
                             <input type="hidden" name="idplage" value="' . $donnees['ID'] . '"/>
-                            <input type="submit" id="voir" class="bouton" name="voir" value="Acceder"/>
+                            <input type="submit" id="voir" class="bouton ';
+                if ($dcpt['ID']==$dcpttt['ID'] && $dcpt['ID']!=0){ echo'valide_content'; }
+                echo'" name="voir" value="Acceder"/>
                         </form>
                     </td>';
                 echo"</tr>";
