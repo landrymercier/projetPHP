@@ -29,13 +29,6 @@ include_once 'Config.php';
         } else {
             echo'<a href="login.php" class="bouton" title="Se connecter"><img src="images/icone_login.png" alt="Se connecter"/></a>';
         }
-        
-        if (isset($_POST['cloregroupe'])){$req = $bdd->prepare('UPDATE zones SET Clore = 1 WHERE ID='.$_POST['cloregroupe']);
-        $req->execute();
-        }
-        if (isset($_POST['opengroupe'])){$req = $bdd->prepare('UPDATE zones SET Clore = 0 WHERE ID='.$_POST['opengroupe']);
-        $req->execute();
-        }
         ?>
         </div>
 

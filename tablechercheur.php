@@ -23,6 +23,13 @@ include_once 'Config.php';
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());
         }
+        
+        //SUPPRESSION DE LA PLAGE
+            if (isset($_GET['supprimer'])) {
+                echo"BWAAAAAAAH";
+            $req = $bdd->prepare("UPDATE plage SET Clore = 2 WHERE ID =".$_GET['idplage']);
+            $req->execute();
+        }
         ?>
 
         <h1>Panneau chercheur</h1>
@@ -59,11 +66,9 @@ include_once 'Config.php';
             </tfoot>
 
             <?php
-            $reponse = $bdd->query("SELECT ID, Nom, Ville, Superficie, Datepreleve, Clore FROM plage ORDER BY Datepreleve DESC ");
+            $reponse = $bdd->query("SELECT ID, Nom, Ville, Superficie, Datepreleve, Clore FROM plage WHERE Clore < 2 ORDER BY Datepreleve DESC ");
             if (isset($_GET['order']) || isset($_GET['by'])) {
-                $reponse = $bdd->query("SELECT ID, Nom, Ville, Superficie, Datepreleve, Clore FROM plage ORDER BY " . $_GET['order'] . " " . $_GET['by']);
-                echo"order : " . $_GET['order'];
-                echo" by : " . $_GET['by'];
+                $reponse = $bdd->query("SELECT ID, Nom, Ville, Superficie, Datepreleve, Clore FROM plage WHERE Clore < 2 ORDER BY " . $_GET['order'] . " " . $_GET['by']);
             }
             while ($donnees = $reponse->fetch()) {
                 echo"<tr>";

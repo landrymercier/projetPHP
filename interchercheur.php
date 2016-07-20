@@ -17,7 +17,7 @@ include_once 'Config.php';
     </head>
 
     <body id="interchercheur_ifrocean">
-        <?php
+ <?php
         if (isset($_POST['cree'])) {
             echo "<h1>Interface Préleveur - " . $_POST['nom-projet'] . "</h1>";
         } else {
@@ -29,6 +29,7 @@ include_once 'Config.php';
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());
         }
+       
         
 //SI CREATION D'UN NOUVEAU PROJET
         if (isset($_POST['cree'])) {
@@ -104,13 +105,19 @@ include_once 'Config.php';
                 <input type="submit" id="CloreAll" class="bouton" name="CloreAll" value="Clore tous les groupes"/>
             </form>
             <form method="get" action="gestiongroupe.php">
-                <input type="submit" id="" class="bouton" name="" value="Gestion des groupe"/>
+                <?php echo'<input type="hidden" id="idplage" name="idplage" value="'.$_GET['idplage'].'">
+                <input type="hidden" name="nomplage" value="' . $_GET['nomplage'] . '"/>'
+                        . '<input type="hidden" name="nbgroupe" value="' . $_GET['nbgroupe'] . '"/>';?>
+            <input type="submit" id="" class="bouton" name="" value="Gestion des groupe"/>
             </form>
             <?php if (!isset($_POST['cree'])){echo'<form method="get" action="exportKML.php">
                  <input type="hidden" name="idplage" value="' . $_GET['idplage'] . '"/> 
                 <input type="submit" id="KML" class="bouton" name="KML" value="Exporter KML"/>
-            </form>';}
-                    ?>
+            </form>';} ?>
+            <form method="get" action="tablechercheur.php">
+                <?php echo'<input type="hidden" id="idplage" name="idplage" value="'.$_GET['idplage'].'">' ?>
+            <input type="submit" id="" class="bouton" name="supprimer" value="Supprimer le projet"/>
+            </form>
             
             <div id="infos-projet">
                 <?php

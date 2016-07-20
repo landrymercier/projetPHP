@@ -23,10 +23,19 @@ include_once 'Config.php';
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());
         }
+
+        if (isset($_POST['cloregroupe'])) {
+            $req = $bdd->prepare('UPDATE zones SET Clore = 1 WHERE ID=' . $_POST['cloregroupe']);
+            $req->execute();
+        }
+        if (isset($_POST['opengroupe'])) {
+            $req = $bdd->prepare('UPDATE zones SET Clore = 0 WHERE ID=' . $_POST['opengroupe']);
+            $req->execute();
+        }
         ?>
 
         <h1>Panneau chercheur</h1>
-        <a href="unlogged.php">Déconnexion </a>
+        <?php echo'<a href="interchercheur.php?idplage='. $_GET['idplage'] .'&nomplage=' .$_GET['nomplage'].'&Vue=Vue globale&nbgroupe=' .$_GET['nomplage'].'.php">Retour</a>' ?>
         <table class="marge-conteneur">
             <caption><h2>Liste des plages</h2></caption>
             <thead><!--en tete de tableau-->
@@ -45,11 +54,11 @@ include_once 'Config.php';
             </tfoot>
 
             <?php
-            $reponse = $bdd->query("SELECT ID, Nom, Ville,Clore FROM zones WHERE IDplage=" . $_GET['idplage']);
+            $reponse = $bdd->query("SELECT ID, Nom, Clore FROM zones WHERE IDplage=" . $_GET['idplage']);
             while ($donnees = $reponse->fetch()) {
                 echo"<tr>";
                 echo"<td>" . $donnees['Nom'] . "</td>";
-                if ($donnees['Clore'] == 1) {
+                if ($donnees['Clore'] == 0) {
                     echo"<td>En cours</td>";
                 } else {
                     echo"<td>Clos</td>";
@@ -60,7 +69,7 @@ include_once 'Config.php';
                     echo'<input type="submit" class="bouton" value="Ouvrir"/></td>';
                     echo'</form>';
                 } else {
-                    echo'<form action="index.php" method="post">';
+                    echo'<form action="" method="post">';
                     echo'<td><input type="hidden" name="cloregroupe" value="' . $donnees['ID'] . '"/>';
                     echo'<input type="submit" class="bouton" value="Clore"/></td>';
                     echo'</form>';
