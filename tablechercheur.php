@@ -102,8 +102,16 @@ include_once 'Config.php';
                 <input type="text" name="nom-projet" id="nom-projet" placeholder="Entrez un nom" required/>
             <h4>Informations</h4>
                         <p>
+                            <label for="ville">Nom de la ville :</label>
                             <input type="text" name="ville" id="ville" placeholder="Entrez une ville" required/>
-                            <input type="date" name="date" id="date" placeholder="Entrez une date" required/>
+                        </p>
+                        <p class="align-date-creation-plage">
+                            <label>Date de création :</label>
+                            <input type="number" step="1" min="1" max="31" name="jour" id="jour" placeholder="25" required/>
+                            /
+                            <input type="number" step="1" min="1" max="12" name="mois" id="mois" placeholder="07" required/>
+                            /
+                            <input type="number" step="1" min="2016" name="annee" id="annee" placeholder="2016" required/>
                         </p>
             <div class="align-btn-droite">
                 <input type="submit" id="cree" class="bouton" name="cree" value="Créer"/>

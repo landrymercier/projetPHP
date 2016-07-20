@@ -146,6 +146,14 @@ form#align-form-espece div.align-btn-droite>* { vertical-align:middle; }
 #table-chercheur_ifrocean th, #table-chercheur_ifrocean td { width:12%; }
 #table-chercheur_ifrocean th:first-child, #table-chercheur_ifrocean td:first-child { width:40%; }
 
+/*AFFICHAGE DES BOUTONS RELATIFS A LA PLAGE*/
+#interchercheur_ifrocean #plage form { display:inline-block; }
+
+/**/
+#table-chercheur_ifrocean p.align-date-creation-plage input { width:2.5em; text-align:right; }
+#table-chercheur_ifrocean p.align-date-creation-plage input:nth-child(4) { width:3.5em; }
+
+
 
 
 /*--------------------------*/
@@ -181,14 +189,14 @@ div.align-btn-droite { text-align:right; padding:0 1em; }
 .valide_content, .error_content { border-radius:0.8em; text-align:center; margin:3em 0; padding:2% 10%; }
 .valide_content a, .error_content a { text-decoration:none; font-weight:bold; }
 .valide_content a:hover, .valide_content a:active, .error_content a:hover, .error_content a:active, 
-#table-chercheur_ifrocean .valide_content a:hover, #table-chercheur_ifrocean .valide_content a:active 
-{ text-decoration:underline; }
+#table-chercheur_ifrocean input.valide_content:hover, #table-chercheur_ifrocean input.valide_content:active 
+{ color:rgba(28,210,149,1); background-color:rgba(0,90,0,1); }
 
 /*style pour les messages valides*/
 .valide_content, #table-chercheur_ifrocean .valide_content 
-{ border:1px solid rgba(0,70,0,1); color:rgba(0,70,0,1); background-color:rgba(0,180,0,0.4); }
+{ border:1px solid rgba(0,70,0,1); color:rgba(0,70,0,1); background-color:rgba(8,170,109,1); }
 .valide_content a { color:rgba(0,70,0,1); }
-/*style^pour les messages d'erreurs'*/
+/*style pour les messages d'erreurs*/
 .error_content { border:1px solid rgba(70,0,0,1); color:rgba(70,0,0,1); background-color:rgba(180,0,0,0.4); }
 .error_content a { color:rgba(0,70,0,1); }
 
