@@ -83,6 +83,7 @@ include_once 'Config.php';
                             <input type="hidden" name="Vue" value="Vue globale"/>
                             <input type="hidden" name="nomplage" value="' . $donnees['Nom'] . '"/>
                             <input type="hidden" name="idplage" value="' . $donnees['ID'] . '"/>
+                            <input type="hidden" name="nbgroupe" value="' . $dcpttt['ID'] . '"/>
                             <input type="submit" id="voir" class="bouton ';
                 if ($dcpt['ID']==$dcpttt['ID'] && $dcpt['ID']!=0){ echo'valide_content'; }
                 echo'" name="voir" value="Acceder"/>
@@ -95,7 +96,9 @@ include_once 'Config.php';
         </table>
                 <fieldset  class="marge-conteneur">
             <legend><h2>Création d'une nouvelle plage</h2></legend>
-            <form action="interchercheur.php" method="post" id="align-form-groupe">
+            
+            
+            <form action="interchercheur.php?idplage" method="post" id="align-form-groupe">
             
             <p class="marge-conteneur">
                 <label for="nom-groupe">Nom de la plage :</label>

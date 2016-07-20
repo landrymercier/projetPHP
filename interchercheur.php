@@ -37,9 +37,11 @@ include_once 'Config.php';
                 "nom" => $_POST['nom-projet'],
                 "vil" => $_POST['ville'],
                 "sup" => 0,
-                "dat" => $_POST['date'],
+                "dat" => $_POST['annee']."-".$_POST['mois']."-".$_POST['jour'],
                 "clo" => 0));
             $req->closeCursor();
+            $req = $bdd->query("SELECT ID FROM plage ORDER BY ID DESC LIMIT 1");
+            $id = $req->fetch();
         }
         
 //SI RECALCUL DE LA SUPERFICIE
@@ -104,10 +106,11 @@ include_once 'Config.php';
             <form method="get" action="gestiongroupe.php">
                 <input type="submit" id="" class="bouton" name="" value="Gestion des groupe"/>
             </form>
-            <form method="get" action="exportKML.php">
-                <?php echo'<input type="hidden" name="idplage" value="' . $_GET['idplage'] . '"/>' ?>
+            <?php if (!isset($_POST['cree'])){echo'<form method="get" action="exportKML.php">
+                 <input type="hidden" name="idplage" value="' . $_GET['idplage'] . '"/> 
                 <input type="submit" id="KML" class="bouton" name="KML" value="Exporter KML"/>
-            </form>
+            </form>';}
+                    ?>
             
             <div id="infos-projet">
                 <?php
@@ -116,7 +119,7 @@ include_once 'Config.php';
                     echo "<h2>Informations relatives à la plage étudiée</h2>";
                     echo "<p>Nom : " . $_POST['nom-projet'] . "</p>";
                     echo "<p>Ville : " . $_POST['ville'] . "</p>";
-                    echo "<p>Date : " . $_POST['date'] . "</p>";
+                    echo "<p>Date : " . $_POST['jour'] ."-". $_POST['mois'] ."-". $_POST['annee'] . "</p>";
                     echo "<p>Superficie totale : 0 m²</p>";
                 } else {
                     $reponse = $bdd->query("SELECT Nom,Ville,Datepreleve,Superficie FROM plage WHERE ID=" . $_GET['idplage']);
@@ -126,7 +129,7 @@ include_once 'Config.php';
                     echo "<p>Ville : " . $donnees['Ville'] . "</p>";
                     echo "<p>Date : " . $donnees['Datepreleve'] . "</p>";
                     echo "<p>Superficie totale : " . $donnees['Superficie'] . " m²</p>";
-                    echo "<p>Nombre de groupes : " . $donnees['Datepreleve'] . "</p>";
+                    echo "<p>Nombre de groupes : " . $_GET['nbgroupe'] . "</p>";
                     $reponse->closeCursor();
                 }
                 ?>

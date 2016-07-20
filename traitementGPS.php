@@ -56,7 +56,7 @@ $pt3_x = $pt3->getX();
 $pt3_y = $pt3->getY();
 $pt4_x = $pt4->getX();
 $pt4_y = $pt4->getY();
-echo $pt1_x . "/" . $pt1_y . "<br/>" . $pt2_x . "/" . $pt2_y . "<br/>" . $pt3_x . "/" . $pt3_y . "<br/>" . $pt4_x . "/" . $pt4_y . "<br/>";
+//echo $pt1_x . "/" . $pt1_y . "<br/>" . $pt2_x . "/" . $pt2_y . "<br/>" . $pt3_x . "/" . $pt3_y . "<br/>" . $pt4_x . "/" . $pt4_y . "<br/>";
 //enregister les variables ci dessus en base pour l'export kml
 
 $pt1->calculerDistance($pt2);
@@ -80,18 +80,17 @@ if (isset($_POST['cree'])) {
     } catch (Exception $e) {
         die('Erreur : ' . $e->getMessage());
     }
-    echo"<br><br>";
-    echo $_POST['idprojet'] . " , " . $x_degres_1 . "°" . $x_minutes_1 . "'" . $x_secondes_1 . "\"" . " , " .
-    $y_degres_1 . "°" . $y_minutes_1 . "'" . $y_secondes_1 . "\"" . " , " .
-    $x_degres_2 . "°" . $x_minutes_2 . "'" . $x_secondes_2 . "\"" . " , " .
-    $y_degres_2 . "°" . $y_minutes_2 . "'" . $y_secondes_2 . "\"" . " , " .
-    $x_degres_3 . "°" . $x_minutes_3 . "'" . $x_secondes_3 . "\"" . " , " .
-    $y_degres_3 . "°" . $y_minutes_3 . "'" . $y_secondes_3 . "\"" . " , " .
-    $x_degres_4 . "°" . $x_minutes_4 . "'" . $x_secondes_4 . "\"" . " , " .
-    $y_degres_4 . "°" . $y_minutes_4 . "'" . $y_secondes_4 . "\"" . " , " .
-    $_POST['nom-groupe'] . " , " . $zone_totale . " , 0," .
-    $pt1_x . "," . $pt1_y . "," . $pt2_x . "," . $pt2_y . "," . $pt3_x . "," . $pt3_y . "," . $pt4_x . "," . $pt4_y;
-
+    //echo"<br><br>";
+    //echo $_POST['idprojet'] . " , " . $x_degres_1 . "°" . $x_minutes_1 . "'" . $x_secondes_1 . "\"" . " , " .
+    //$y_degres_1 . "°" . $y_minutes_1 . "'" . $y_secondes_1 . "\"" . " , " .
+    //$x_degres_2 . "°" . $x_minutes_2 . "'" . $x_secondes_2 . "\"" . " , " .
+    //$y_degres_2 . "°" . $y_minutes_2 . "'" . $y_secondes_2 . "\"" . " , " .
+    //$x_degres_3 . "°" . $x_minutes_3 . "'" . $x_secondes_3 . "\"" . " , " .
+    //$y_degres_3 . "°" . $y_minutes_3 . "'" . $y_secondes_3 . "\"" . " , " .
+    //$x_degres_4 . "°" . $x_minutes_4 . "'" . $x_secondes_4 . "\"" . " , " .
+    //$y_degres_4 . "°" . $y_minutes_4 . "'" . $y_secondes_4 . "\"" . " , " .
+    //$_POST['nom-groupe'] . " , " . $zone_totale . " , 0," .
+    //$pt1_x . "," . $pt1_y . "," . $pt2_x . "," . $pt2_y . "," . $pt3_x . "," . $pt3_y . "," . $pt4_x . "," . $pt4_y;
 //CREATION DU GROUPE
     $req = $bdd->prepare('INSERT INTO zones (IDplage,latA,longA,latB,longB,latC,longC,latD,longD,Nom,Superficie,Clore,deciXA,deciYA,deciXB,deciYB,deciXC,deciYC,deciXD,deciYD) '
             . 'VALUES(:idplage,:latA,:lonA,:latB,:lonB,:latC,:lonC,:latD,:lonD,:nom,:super,:clos,:XA,:YA,:XB,:YB,:XC,:YC,:XD,:YD)');
@@ -110,7 +109,29 @@ if (isset($_POST['cree'])) {
         "XC" => $pt3_x, "YC" => $pt3_y,
         "XD" => $pt4_x, "YD" => $pt4_y));
     $req->closeCursor();
-}
 
-echo'<a href="index.php">Retour vers l\'index </a>';
+
+    $req = $bdd->query('SELECT ID FROM zones ORDER BY ID DESC LIMIT 1');
+    $id = $req->fetch();
+
+
+    echo'<html>
+    <head>
+        <title>Connexion réussie</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <link href="style.css" rel="stylesheet" type="text/css"/>
+        <meta http-equiv="Refresh" content="3; url=interprel.php?groupeid=' . $id['ID'] . '">
+    </head>
+    
+    <body id="logged_ifrocean">
+        <div class="valide_content">
+            <h1>Création de groupe réussie !</h1>
+            <p>Si vous n\'êtes pas redirigé dans quelques secondes, cliquez sur ce <a href="interprel.php?groupeid=' . $id['ID'] . '">lien</a>.</p>
+        </div>  
+    </body>       
+</html>';
+} else {
+    echo'<a href="index.php">Oups, il semble y avoir eu des erreurs, <a href="index.php">cliquez ici</a> pour retourner vers l\'index </a>';
+}
 ?>
