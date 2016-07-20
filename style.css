@@ -121,7 +121,7 @@ div#plage { margin-top:0; padding:1.5em; background:rgba(0,184,203,0.8); border:
 border-radius:0.8em; }
 div#infos-projet h2 { margin-top:0; }
 div#infos-projet, 
-div#coordonnees { display:table; margin:1em 0; vertical-align:middle; }
+div#coordonnees { display:table; margin:1em auto; vertical-align:middle; }
 div#coordonnees { border-top:1px solid rgba(0,70,79,1); padding-top:1em; }/*code de la div#coordonnees specifique a la version mobile*/
 div#coordonnees div { box-sizing:border-box; float:left; width:50%; text-align:left; }
 div#coordonnees div:nth-child(2), 

@@ -16,7 +16,7 @@ include_once 'Config.php';
         ?>
     </head>
 
-    <body id="top">
+    <body id="interchercheur_ifrocean">
         <?php
         if (isset($_POST['cree'])) {
             echo "<h1>Interface Préleveur - " . $_POST['nom-projet'] . "</h1>";
@@ -101,6 +101,9 @@ include_once 'Config.php';
                 <input type="submit" id="Recalc" class="bouton" name="Recalc" value="Recalculer la superficie"/>
                 <input type="submit" id="CloreAll" class="bouton" name="CloreAll" value="Clore tous les groupes"/>
             </form>
+            <form method="get" action="gestiongroupe.php">
+                <input type="submit" id="" class="bouton" name="" value="Gestion des groupe"/>
+            </form>
             <form method="get" action="exportKML.php">
                 <?php echo'<input type="hidden" name="idplage" value="' . $_GET['idplage'] . '"/>' ?>
                 <input type="submit" id="KML" class="bouton" name="KML" value="Exporter KML"/>
@@ -175,7 +178,7 @@ include_once 'Config.php';
         </form>
 
         <footer>
-            <a href="#top" class="bouton" title="Haut de page"><img src="images/icone_fleche-retour.png" alt="Haut de page"/></a>
+            <a href="#interchercheur_ifrocean" class="bouton" title="Haut de page"><img src="images/icone_fleche-retour.png" alt="Haut de page"/></a>
         </footer>
         
         <!--import javascript-->
