@@ -17,7 +17,7 @@
                     <span class="bouton traduction404" id="bouton_traduire404" onclick="javascript:traduire('traduire404');">
                         Traduire
                     </span>
-                    <p id="traduire404" style="font-family:'AncientHylian';">
+                    <p id="traduire404" style="">
                         Je vous salue visiteur !<br/>
                         Comment ? Vous vous etes perdu ?<br/>
                         Peut etre puis-je vous aider...<br/>
@@ -105,12 +105,8 @@
     }
     
     function traduire(id) {
-        if(document.getElementById(id).style.fontFamily==="AncientHylian")
-        {
-            document.getElementById(id).style.fontFamily="Arial";
-            document.getElementById('bouton_'+id).style.display="none";
-        }
-        return true;
+        $("#traduire404").css('font-family', 'Arial');
+        $("#bouton_traduire404").css('display', 'none');
     }
     </script>
     

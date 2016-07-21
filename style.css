@@ -213,6 +213,7 @@ div.enigme404:hover { font-family:'Trebuchet MS', Arial, Helvetica, sans-serif; 
 div.enigme404 div.position-enigme404 { position:relative; }
 span.traduction404 { width:6em; text-align:center; position:absolute; bottom:0; right:0; font-size:0.9em; 
 display:inline-block; font-family:'Trebuchet MS', Arial, Helvetica, sans-serif; }
+#traduire404 { font-family:'AncientHylian'; }
 div.position-enigme404 p { position:absolute; top:0; left:0; margin:0; }
 div.display-enigme404 { position:relative; padding-top:7em; }
 img.aura404 { opacity:0.2; cursor:pointer; position:absolute; top:22%; left:26%; z-index:1; width:19%; padding-top:5.4em; }
