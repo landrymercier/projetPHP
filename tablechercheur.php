@@ -31,9 +31,6 @@ include 'cherchclass.php';
         <div class="btn-session">
             <a href="unlogged.php" class="bouton" title="Se déconnecter"><img src="images/icone_deconnexion.png" alt="Se déconnecter"/></a>
         </div>
-        <div class="btn-sitemap">
-            <a href="404.php" class="bouton" title="Plan du site"><img src="images/icone_sitemap.png" alt="Plan du site"/></a>
-        </div>
         <table class="marge-conteneur">
             <caption><h2>Liste des plages</h2></caption>
             <thead><!--en tete de tableau-->
