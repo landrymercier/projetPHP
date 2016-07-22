@@ -59,7 +59,7 @@ $_SESSION['nbgroupe'] = $_GET['nbgroupe'];
         <div class="btn-session">
             <a href="unlogged.php" class="bouton" title="Se déconnecter"><img src="images/icone_deconnexion.png" alt="Se déconnecter"/></a>
         </div>
-        <a href="tablechercheur.php">Retour à la liste des plages </a>
+        <a href="tablechercheur.php" class="bouton">Retour à la liste des plages </a>
 
         <form action="interchercheur.php" method="get">
             <fieldset>

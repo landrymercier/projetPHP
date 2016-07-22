@@ -38,9 +38,9 @@ include_once 'Config.php';
         <div class="btn-session">
             <a href="unlogged.php" class="bouton" title="Se déconnecter"><img src="images/icone_deconnexion.png" alt="Se déconnecter"/></a>
         </div>
-        <?php echo'<a href="interchercheur.php?Vue=Vue globale&nbgroupe=' .$_SESSION['nomplage'].'.php">Retour</a>' ?>
+        <?php echo'<a href="interchercheur.php?Vue=Vue globale&nbgroupe=' .$_SESSION['nomplage'].'.php" class="bouton">Retour à la liste des vues</a>' ?>
         <table class="marge-conteneur">
-            <caption><h2>Liste des plages</h2></caption>
+            <caption><h2>Liste des groupes</h2></caption>
             <thead><!--en tete de tableau-->
                 <tr>
                     <th>Nom du groupe</th>

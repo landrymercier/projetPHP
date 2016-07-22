@@ -153,6 +153,7 @@ form#align-form-espece div.align-btn-droite>* { vertical-align:middle; }
 /**/
 #table-chercheur_ifrocean p.align-date-creation-plage input { width:2.5em; text-align:right; }
 #table-chercheur_ifrocean p.align-date-creation-plage input:nth-child(4) { width:3.5em; }
+#table-chercheur_ifrocean table.marge-conteneur { margin-top:1em; }
 
 
 
@@ -164,7 +165,8 @@ form#align-form-espece div.align-btn-droite>* { vertical-align:middle; }
 /*BOUTON*/
 .bouton, input.bouton, span#bouton_plage, a.bouton { cursor:pointer; margin:0 auto; box-sizing:border-box; padding:0.6em; 
 color:rgba(255,255,255,1); font-weight:bold; background:rgba(0,90,101,1); border-radius:0.8em; }
-input.bouton, span#bouton_plage, a.bouton { display:inline-block; border:1px solid rgba(0,70,79,1); margin:0.5em 0; }
+input.bouton, span#bouton_plage, a.bouton
+{ display:inline-block; border:1px solid rgba(0,70,79,1); margin:0.5em 0; font-style:normal; }
 a.bouton { text-decoration:none; }
 .bouton:hover, .bouton:active, span#bouton_plage:hover, span#bouton_plage:active, a.bouton:hover, a.bouton:active 
 { background:rgba(0,140,159,1); }
