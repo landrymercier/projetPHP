@@ -2,7 +2,7 @@
 session_start();
 $_SESSION['logged'] = true;
 ?>
-
+<!DOCTYPE html>
 <html>
     <head>
         <title>Connexion réussie</title>

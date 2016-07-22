@@ -67,8 +67,9 @@ th:first-child, td:first-child { width:60%; padding-left:0.5em; text-align:left;
 
 
 /*NAVIGATION*/
-div.btn-session, footer { width:3em; }
+div.btn-session, div.btn-sitemap, footer { width:3em; }
 div.btn-session { position:fixed; top:0; right:0; }
+div.btn-sitemap { position:fixed; top:4em; right:0; }
 footer { position:fixed; bottom:0; right:0; }
 
 
@@ -227,9 +228,9 @@ padding:10% 3% 10% 8%; }
 div.map-hover img.ilecarte404 { opacity:0; box-sizing:border-box; }
 div.map-hover img.ilecarte404:hover, div.map-hover img.ilecarte404:active { opacity:0.5; }
 div.map-hover img.NW { position:absolute; top:66%; left:12.4%; width:24%; }
-div.map-hover img.W { position:absolute; top:241%; left:19.8%; width:5.8%; }
-div.map-hover img.SW { position:absolute; top:352%; left:19.8%; width:17%; }
-div.map-hover img.N { position:absolute; top:126%; left:63.1%; width:5.2%; }
+div.map-hover img.W { position:absolute; top:241%; left:19.5%; width:5.8%; }
+div.map-hover img.SW { position:absolute; top:350%; left:19.5%; width:16.9%; }
+div.map-hover img.N { position:absolute; top:126%; left:62.7%; width:5.2%; }
 div.map-hover img.C-NW { position:absolute; top:199%; left:41.5%; width:3.5%; }
 div.map-hover img.C-SE { position:absolute; top:289%; left:53.4%; width:2.2%; }
 div.map-hover img.S { position:absolute; top:374.5%; left:49.6%; width:6.6%; }
@@ -314,19 +315,6 @@ STYLE POUR ECRAN
     /*-----------------*/
     /*-------404-------*/
     /*-----------------*/
-    div.recompence404 { padding:7% 3% 5% 8%; }
-    
-    div.map-hover img.NW { position:absolute; top:48%; left:12.2%; }
-    div.map-hover img.W { position:absolute; top:222%; left:19.5%; width:5.8%; }
-    div.map-hover img.SW { position:absolute; top:331%; left:19.5%; width:17%; }
-    div.map-hover img.N { position:absolute; top:109%; left:62.4%; width:5.2%; }
-    div.map-hover img.C-NW { position:absolute; top:180%; left:41%; width:3.5%; }
-    div.map-hover img.C-SE { position:absolute; top:268.5%; left:52.8%; width:2.2%; }
-    div.map-hover img.S { position:absolute; top:353%; left:49%; width:6.6%; }
-    div.map-hover img.NE { position:absolute; top:123%; left:86%; width:6.5%; }
-    div.map-hover img.E { position:absolute; top:220%; left:72.3%; width:2%; }
-    div.map-hover img.SE { position:absolute; top:299%; left:69.2%; width:5%; }
-    
     div.display404, div.message404-standard { box-sizing:border-box; }
     div.display404 { float:left; width:70%; margin-right:2%;}
     div.message404-standard { float:left; width:28%; padding:2%; }

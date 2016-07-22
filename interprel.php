@@ -22,7 +22,11 @@ $donnees = $reponse->fetch();
         <?php
         echo "<h1>Interface Préleveur - " . $donnees['Nom'] . "</h1>";
         ?>
-
+        
+        <div class="btn-sitemap">
+            <a href="404.php" class="bouton" title="Plan du site"><img src="images/icone_sitemap.png" alt="Plan du site"/></a>
+        </div>
+        
         <span class="bouton" id="bouton_plage" onclick="javascript:afficher_cacher('plage');">
             Cacher les informations de la plage
         </span>

@@ -1,6 +1,6 @@
 <?php 
 header('Content-Type: text/xml');
-//header('Content-Disposition: attachment; filename=plage.kml');
+header('Content-Disposition: attachment; filename=plage.kml');
 header('Pragma: no-cache');
 
 include_once 'Config.php';

@@ -56,6 +56,12 @@ $_SESSION['nbgroupe'] = $_GET['nbgroupe'];
 //FERMETURE DE TOUS LES GROUPES LIES AU PROJET
         
         ?>
+        <div class="btn-session">
+            <a href="unlogged.php" class="bouton" title="Se déconnecter"><img src="images/icone_deconnexion.png" alt="Se déconnecter"/></a>
+        </div>
+        <div class="btn-sitemap">
+            <a href="404.php" class="bouton" title="Plan du site"><img src="images/icone_sitemap.png" alt="Plan du site"/></a>
+        </div>
         <a href="tablechercheur.php">Retour à la liste des plages </a>
 
         <form action="interchercheur.php" method="get">

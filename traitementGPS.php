@@ -115,7 +115,8 @@ if (isset($_POST['cree'])) {
     $id = $req->fetch();
 
 
-    echo'<html>
+    echo'<!DOCTYPE html>
+    <html>
     <head>
         <title>Connexion réussie</title>
         <meta charset="UTF-8">

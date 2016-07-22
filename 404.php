@@ -14,10 +14,10 @@
         <div class="display404">
             <div class="enigme404">
                 <div class="position-enigme404">
-                    <span class="bouton traduction404" id="bouton_traduire404" onclick="javascript:traduire('traduire404');">
+                    <span class="bouton traduction404" id="bouton_traduire404" onclick="traduire('traduire404');">
                         Traduire
                     </span>
-                    <p id="traduire404" style="">
+                    <p id="traduire404">
                         Je vous salue visiteur !<br/>
                         Comment ? Vous vous etes perdu ?<br/>
                         Peut etre puis-je vous aider...<br/>
@@ -37,7 +37,7 @@
                 
                 <img src="images/404/404.png" alt=""/>
             </div>
-            <div class="recompence404" id="recompence404" style="display:none;">
+            <div class="recompence404" id="recompence404" style="/*display:none;*/">
                 <div class="btn-close-recompence404">
                     <a onclick="afficher_cacher('recompence404');" class="bouton" title="">
                         <img src="images/icone_supprimer.png" alt="Fermer"/>
