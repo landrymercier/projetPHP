@@ -101,7 +101,6 @@ include 'cherchclass.php';
         <fieldset  class="marge-conteneur">
             <legend><h2>Création d'une nouvelle plage</h2></legend>
 
-
             <form action="interchercheur.php?idplage" method="post" id="align-form-groupe">
 
                 <p class="marge-conteneur">

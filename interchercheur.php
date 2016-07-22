@@ -88,13 +88,17 @@ $_SESSION['nbgroupe'] = $_GET['nbgroupe'];
 
         </form>
 
-        <span class="bouton" id="bouton_plage" onclick="javascript:afficher_cacher('plage');">
+        <span class="bouton" id="bouton_plage" onclick="afficher_cacher('plage');">
             Cacher les informations de la plage
         </span>
-        
+        <script type="text/javascript">
+            //<!--
+            afficher_cacher('plage');
+            //-->
+        </script>
         <div id="plage" class="marge-conteneur">
             <form method="post">
-                <input type="submit" id="Modif-projet" class="bouton" name="Modif-projet" value="Modifier les informations"/>
+                <!--<input type="submit" id="Modif-projet" class="bouton" name="Modif-projet" value="Modifier les informations"/>-->
                 <input type="submit" id="Recalc" class="bouton" name="Recalc" value="Recalculer la superficie"/>
                 <input type="submit" id="CloreAll" class="bouton" name="CloreAll" value="Clore tous les groupes"/>
             </form>
@@ -106,7 +110,7 @@ $_SESSION['nbgroupe'] = $_GET['nbgroupe'];
                 <input type="submit" id="KML" class="bouton" name="KML" value="Exporter KML"/>
             </form>';} ?>
             <form method="get" action="tablechercheur.php">
-            <input type="submit" id="" class="bouton" name="supprimer" value="Supprimer le projet"/>
+            <input type="submit" id="" class="bouton error_content" name="supprimer" value="Supprimer le projet"/>
             </form>
             
             <div id="infos-projet">
@@ -192,10 +196,5 @@ $_SESSION['nbgroupe'] = $_GET['nbgroupe'];
 
         <!--script js de la fonction afficher-cacher-->
         <script type="text/javascript" src="scripts/afficher-cacher.js"></script>
-        <script type="text/javascript">
-            //<!--
-            afficher_cacher('plage');
-            //-->
-        </script>
     </body>
 </html>

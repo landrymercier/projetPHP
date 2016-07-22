@@ -23,7 +23,7 @@ $donnees = $reponse->fetch();
         echo "<h1>Interface Préleveur - " . $donnees['Nom'] . "</h1>";
         ?>
         
-        <span class="bouton" id="bouton_plage" onclick="javascript:afficher_cacher('plage');">
+        <span class="bouton" id="bouton_plage" onclick="afficher_cacher('plage');">
             Cacher les informations de la plage
         </span>
         <script type="text/javascript">

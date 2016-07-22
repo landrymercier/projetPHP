@@ -189,17 +189,36 @@ div.align-btn-droite { text-align:right; padding:0 1em; }
 /*style commun aux messages*/
 .valide_content, .error_content { border-radius:0.8em; text-align:center; margin:3em 0; padding:2% 10%; }
 .valide_content a, .error_content a { text-decoration:none; font-weight:bold; }
-.valide_content a:hover, .valide_content a:active, .error_content a:hover, .error_content a:active, 
-#table-chercheur_ifrocean input.valide_content:hover, #table-chercheur_ifrocean input.valide_content:active 
-{ color:rgba(28,210,149,1); background-color:rgba(0,90,0,1); }
+
 
 /*style pour les messages valides*/
-.valide_content, #table-chercheur_ifrocean .valide_content 
-{ border:1px solid rgba(0,70,0,1); color:rgba(0,70,0,1); background-color:rgba(8,170,109,1); }
-.valide_content a { color:rgba(0,70,0,1); }
+.valide_content, .valide_content h1 { color:rgba(0,70,0,1); }
+.valide_content h1 { border-bottom: 1px solid rgba(0,70,0,1); }
+.valide_content, #table-chercheur_ifrocean .valide_content, a.valide_content  
+{ border:1px solid rgba(0,70,0,1); background-color:rgba(8,170,109,1); }
+.valide_content a { color:rgba(0,70,0,1); font-style:normal; }
+.valide_content a:hover, .valide_content a:active { text-decoration:underline; }
+
+#table-chercheur_ifrocean input.valide_content:hover, #table-chercheur_ifrocean input.valide_content:active, 
+a:hover.valide_content, a:active.valide_content 
+{ background-color:rgba(0,90,0,1); text-decoration:none; }
+
 /*style pour les messages d'erreurs*/
-.error_content { border:1px solid rgba(70,0,0,1); color:rgba(70,0,0,1); background-color:rgba(180,0,0,0.4); }
-.error_content a { color:rgba(0,70,0,1); }
+.error_content, .error_content h1 { color:rgba(70,0,0,1); }
+.error_content h1 { border-bottom: 1px solid rgba(70,0,0,1); }
+.error_content, #interchercheur_ifrocean .error_content, a.error_content 
+{ border:1px solid rgba(70,0,0,1); background-color:rgba(170,78,48,1); }
+.error_content a { color:rgba(70,0,0,1); font-style:normal; }
+.error_content a:hover, .error_content a:active { text-decoration:underline; }
+
+#interchercheur_ifrocean input.error_content:hover, #interchercheur_ifrocean input.error_content:active,
+a:hover.error_content, a:active.error_content
+{ background-color:rgba(90,0,0,1); text-decoration:none; }
+
+/*style commun aux messages (correctifs)*/
+a.valide_content, a.error_content { color:rgba(255,255,255,1); }
+#clore_ifrocean a.valide_content, #clore_ifrocean a.error_content { margin-left:0.5em; margin-right:0.5em; }
+#clore_ifrocean a.valide_content img, #clore_ifrocean a.error_content img { width:2em; }
 
 
 
@@ -316,6 +335,6 @@ STYLE POUR ECRAN
     /*-------404-------*/
     /*-----------------*/
     div.display404, div.message404-standard { box-sizing:border-box; }
-    div.display404 { float:left; width:70%; margin-right:2%;}
+    div.display404 { float:left; width:70%; margin-left:2%;}
     div.message404-standard { float:left; width:28%; padding:2%; }
 }

@@ -11,6 +11,25 @@
     <body id="page404">
         <h1> Vous vous êtes perdu ?</h1>
         
+        <div class="message404-standard">
+            <h2>Vous êtes perdu ?</h2>
+            <p>Vous êtes Préleveur et vous voulez remplir vos tableau de recherche ?</p>
+            <ul>
+                <li>Retournez à <a href="index.php">l'accueil</a>, sélectionnez une plage et choissisez votre groupe 
+                    dans la liste.</li>
+                <li>Sinon, créez un nouveau groupe <a href="index.php#creation-groupe">ici</a>.</li>
+            </ul>
+            <hr/>
+            <p>Vous êtes chercheur et vous voulez consulter les données collectées ?</p>
+            <ul>
+                <li>Connectez-vous <a href="login.php">ici</a>.</li>
+            </ul>
+            <hr/>
+            <p>Vous ne savez pas trop ?</p>
+            <ul>
+                <li>Demandez de l'aide à votre <a href="mailto:unchercheur@danslanature.bzh">chercheur</a> !</li>
+            </ul>
+        </div>
         <div class="display404">
             <div class="enigme404">
                 <div class="position-enigme404">
@@ -37,7 +56,7 @@
                 
                 <img src="images/404/404.png" alt=""/>
             </div>
-            <div class="recompence404" id="recompence404" style="/*display:none;*/">
+            <div class="recompence404" id="recompence404" style="display:none;">
                 <div class="btn-close-recompence404">
                     <a onclick="afficher_cacher('recompence404');" class="bouton" title="">
                         <img src="images/icone_supprimer.png" alt="Fermer"/>
@@ -62,25 +81,7 @@
                 <figure>
             </div>
         </div>
-        <div class="message404-standard">
-            <h2>Vous êtes perdu ?</h2>
-            <p>Vous êtes Préleveur et vous voulez remplir vos tableau de recherche ?</p>
-            <ul>
-                <li>Retournez à <a href="index.php">l'accueil</a>, sélectionnez une plage et choissisez votre groupe 
-                    dans la liste.</li>
-                <li>Sinon, créez un nouveau groupe <a href="index.php#creation-groupe">ici</a>.</li>
-            </ul>
-            <hr/>
-            <p>Vous êtes chercheur et vous voulez consulter les données collectées ?</p>
-            <ul>
-                <li>Connectez-vous <a href="login.php">ici</a>.</li>
-            </ul>
-            <hr/>
-            <p>Vous ne savez pas trop ?</p>
-            <ul>
-                <li>Demandez de l'aide à votre <a href="mailto:unchercheur@danslanature.bzh">chercheur</a> !</li>
-            </ul>
-        </div>
+        
         <div class="clear"></div>
 
     <footer>
