@@ -1,11 +1,12 @@
 <?php 
+session_start();
 header('Content-Type: text/xml');
-//header('Content-Disposition: attachment; filename=plage.kml');
+header('Content-Disposition: attachment; filename=plage.kml');
 header('Pragma: no-cache');
 
 include_once 'Config.php';
 
-$id_plage=$_GET["idplage"];
+$id_plage=$_SESSION["idplage"];
 
 try {
     $bdd = new PDO('mysql:host=' . Config::SERVERNAME . ';dbname=' . Config::DBNAME . ';charset=utf8', Config::LOGIN, '');
