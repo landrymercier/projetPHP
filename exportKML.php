@@ -92,10 +92,10 @@ try {
                     <outerBoundaryIs>
                         <LinearRing>
                             <coordinates>
-                            ".$donnees['deciXA'].",".$donnees['deciYA'].",0 
-                            ".$donnees['deciXB'].",".$donnees['deciYB'].",0 
-                            ".$donnees['deciXC'].",".$donnees['deciYC'].",0 
-                            ".$donnees['deciXD'].",".$donnees['deciYD'].",0 
+                            ".$donnees['deciYA'].",".$donnees['deciXA'].",0 
+                            ".$donnees['deciYB'].",".$donnees['deciXB'].",0 
+                            ".$donnees['deciYD'].",".$donnees['deciXD'].",0 
+                            ".$donnees['deciYC'].",".$donnees['deciXC'].",0 
                             </coordinates>
                         </LinearRing>
                     </outerBoundaryIs>
