@@ -35,7 +35,7 @@ include_once 'Config.php';
         ?>
 
         <h1>Panneau chercheur</h1>
-        <?php echo'<a href="interchercheur.php?idplage='. $_GET['idplage'] .'&nomplage=' .$_GET['nomplage'].'&Vue=Vue globale&nbgroupe=' .$_GET['nomplage'].'.php">Retour</a>' ?>
+        <?php echo'<a href="interchercheur.php?Vue=Vue globale&nbgroupe=' .$_SESSION['nomplage'].'.php">Retour</a>' ?>
         <table class="marge-conteneur">
             <caption><h2>Liste des plages</h2></caption>
             <thead><!--en tete de tableau-->
@@ -54,7 +54,7 @@ include_once 'Config.php';
             </tfoot>
 
             <?php
-            $reponse = $bdd->query("SELECT ID, Nom, Clore FROM zones WHERE IDplage=" . $_GET['idplage']);
+            $reponse = $bdd->query("SELECT ID, Nom, Clore FROM zones WHERE IDplage=" . $_SESSION['idplage']);
             while ($donnees = $reponse->fetch()) {
                 echo"<tr>";
                 echo"<td>" . $donnees['Nom'] . "</td>";

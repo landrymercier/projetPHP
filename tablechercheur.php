@@ -1,6 +1,7 @@
 <?php
 session_start();
-include_once 'Config.php';
+include_once 'config.php';
+include 'cherchclass.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -18,16 +19,10 @@ include_once 'Config.php';
 
     <body id="table-chercheur_ifrocean">
         <?php
-        try {
-            $bdd = new PDO('mysql:host=' . Config::SERVERNAME . ';dbname=' . Config::DBNAME . ';charset=utf8', Config::LOGIN, '');
-        } catch (Exception $e) {
-            die('Erreur : ' . $e->getMessage());
-        }
-        
+        $bdd = CONNECTBDD();
         //SUPPRESSION DE LA PLAGE
-            if (isset($_GET['supprimer'])) {
-                echo"BWAAAAAAAH";
-            $req = $bdd->prepare("UPDATE plage SET Clore = 2 WHERE ID =".$_GET['idplage']);
+        if (isset($_GET['supprimer'])) {
+            $req = $bdd->prepare("UPDATE plage SET Clore = 2 WHERE ID =" . $_SESSION['idplage']);
             $req->execute();
         }
         ?>
@@ -81,7 +76,7 @@ include_once 'Config.php';
                 $cpttt = $bdd->query("SELECT COUNT(ID) AS 'ID' FROM zones WHERE IDplage = " . $donnees['ID']);
                 $dcpt = $cpt->fetch();
                 $dcpttt = $cpttt->fetch();
-                    echo"<td>" . $dcpt['ID'] . " / " . $dcpttt['ID'] . "</td>"; 
+                echo"<td>" . $dcpt['ID'] . " / " . $dcpttt['ID'] . "</td>";
 
                 echo'<td>
                         <form action="interchercheur.php" method="get">
@@ -90,7 +85,9 @@ include_once 'Config.php';
                             <input type="hidden" name="idplage" value="' . $donnees['ID'] . '"/>
                             <input type="hidden" name="nbgroupe" value="' . $dcpttt['ID'] . '"/>
                             <input type="submit" id="voir" class="bouton ';
-                if ($dcpt['ID']==$dcpttt['ID'] && $dcpt['ID']!=0){ echo'valide_content'; }
+                if ($dcpt['ID'] == $dcpttt['ID'] && $dcpt['ID'] != 0) {
+                    echo'valide_content';
+                }
                 echo'" name="voir" value="Acceder"/>
                         </form>
                     </td>';
@@ -99,39 +96,39 @@ include_once 'Config.php';
             ?>
 
         </table>
-                <fieldset  class="marge-conteneur">
+        <fieldset  class="marge-conteneur">
             <legend><h2>Création d'une nouvelle plage</h2></legend>
-            
-            
+
+
             <form action="interchercheur.php?idplage" method="post" id="align-form-groupe">
-            
-            <p class="marge-conteneur">
-                <label for="nom-groupe">Nom de la plage :</label>
-                <input type="text" name="nom-projet" id="nom-projet" placeholder="Entrez un nom" required/>
-            <h4>Informations</h4>
-                        <p>
-                            <label for="ville">Nom de la ville :</label>
-                            <input type="text" name="ville" id="ville" placeholder="Entrez une ville" required/>
-                        </p>
-                        <p class="align-date-creation-plage">
-                            <label>Date de création :</label>
-                            <input type="number" step="1" min="1" max="31" name="jour" id="jour" placeholder="25" required/>
-                            /
-                            <input type="number" step="1" min="1" max="12" name="mois" id="mois" placeholder="07" required/>
-                            /
-                            <input type="number" step="1" min="2016" name="annee" id="annee" placeholder="2016" required/>
-                        </p>
-            <div class="align-btn-droite">
-                <input type="submit" id="cree" class="bouton" name="cree" value="Créer"/>
-                <input type="reset" class="bouton" value="Vider"/>
-            </div>
-        </form>
+
+                <p class="marge-conteneur">
+                    <label for="nom-groupe">Nom de la plage :</label>
+                    <input type="text" name="nom-projet" id="nom-projet" placeholder="Entrez un nom" required/>
+                <h4>Informations</h4>
+                <p>
+                    <label for="ville">Nom de la ville :</label>
+                    <input type="text" name="ville" id="ville" placeholder="Entrez une ville" required/>
+                </p>
+                <p class="align-date-creation-plage">
+                    <label>Date de création :</label>
+                    <input type="number" step="1" min="1" max="31" name="jour" id="jour" placeholder="25" required/>
+                    /
+                    <input type="number" step="1" min="1" max="12" name="mois" id="mois" placeholder="07" required/>
+                    /
+                    <input type="number" step="1" min="2016" name="annee" id="annee" placeholder="2016" required/>
+                </p>
+                <div class="align-btn-droite">
+                    <input type="submit" id="cree" class="bouton" name="cree" value="Créer"/>
+                    <input type="reset" class="bouton" value="Vider"/>
+                </div>
+            </form>
         </fieldset>
-        
+
         <footer>
             <a href="#table-chercheur_ifrocean" class="bouton" title="Haut de page"><img src="images/icone_fleche-retour.png" alt="Haut de page"/></a>
         </footer>
-        
+
         <!--import javascript-->
         <!--import de la bibliotheque jQuery pour les animations-->
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>

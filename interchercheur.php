@@ -1,15 +1,23 @@
 <?php
 session_start();
 include_once 'Config.php';
+include_once 'cherchclass.php';
+if(isset($_GET['voir'])){
+$_SESSION['idplage'] = $_GET['idplage'];
+$_SESSION['nomplage'] = $_GET['nomplage'];
+$_SESSION['nbgroupe'] = $_GET['nbgroupe'];
+}
 ?>
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Interface Préleveur - <?php echo $_GET['nomplage']; ?></title>
+        <title>Interface Préleveur - <?php echo $_SESSION['nomplage']; ?></title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
         <link href="style.css" rel="stylesheet" type="text/css"/>
         <?php
+        echo"idplage:".$_SESSION['idplage'];
+        echo"nomplage:".$_SESSION['nomplage'];
         if (isset($_SESSION['logged']) == false) {
             echo'<meta http-equiv="Refresh" content="1; url=index.php">';
         }
@@ -21,45 +29,28 @@ include_once 'Config.php';
         if (isset($_POST['cree'])) {
             echo "<h1>Interface Préleveur - " . $_POST['nom-projet'] . "</h1>";
         } else {
-            echo "<h1>Interface Préleveur - " . $_GET['nomplage'] . "</h1>";
+            echo "<h1>Interface Préleveur - " . $_SESSION['nomplage'] . "</h1>";
         }
 
-        try {
-            $bdd = new PDO('mysql:host=' . Config::SERVERNAME . ';dbname=' . Config::DBNAME . ';charset=utf8', Config::LOGIN, '');
-        } catch (Exception $e) {
-            die('Erreur : ' . $e->getMessage());
-        }
+    $bdd = CONNECTBDD();
        
         
 //SI CREATION D'UN NOUVEAU PROJET
         if (isset($_POST['cree'])) {
-            $req = $bdd->prepare('INSERT INTO plage(Nom,Ville,Superficie,Datepreleve,Clore) VALUES(:nom,:vil,:sup,:dat,:clo)');
-            $req->execute(array(
-                "nom" => $_POST['nom-projet'],
-                "vil" => $_POST['ville'],
-                "sup" => 0,
-                "dat" => $_POST['annee']."-".$_POST['mois']."-".$_POST['jour'],
-                "clo" => 0));
-            $req->closeCursor();
-            $req = $bdd->query("SELECT ID FROM plage ORDER BY ID DESC LIMIT 1");
-            $id = $req->fetch();
+            CreaProjet($_POST['nom-projet'],$_POST['ville'],$_POST['annee'],$_POST['mois'],$_POST['jour']);
         }
         
 //SI RECALCUL DE LA SUPERFICIE
         if(isset($_POST['Recalc'])){
-            
-            $req = $bdd->query("SELECT SUM(Superficie) AS 'Superficie' FROM zones WHERE IDplage = " . $_GET['idplage']);
-            $calc = $req->fetch();
-            $req = $bdd->query("UPDATE plage SET Superficie = " . $calc['Superficie'] . " WHERE ID = " . $_GET['idplage']);
-            $sup = $req->fetch();         
+            RecalcSuper($_SESSION['idplage']);
         }
         
         //FERMETURE DES GROUPES
         if(isset($_POST['CloreAll'])){
             
-            $req = $bdd->query("UPDATE zones SET Clore = 1 WHERE IDplage = " . $_GET['idplage']);
+            $req = $bdd->query("UPDATE zones SET Clore = 1 WHERE IDplage = " . $_SESSION['idplage']);
             $sup = $req->fetch();
-            echo"UPDATE zones SET Clore = 1 WHERE IDplage = " . $_GET['idplage'];
+            echo"UPDATE zones SET Clore = 1 WHERE IDplage = " . $_SESSION['idplage'];
         }
         
 //FERMETURE DE TOUS LES GROUPES LIES AU PROJET
@@ -77,18 +68,18 @@ include_once 'Config.php';
                     if (isset($_POST['cree'])) {
                         
                     } else {
-                        $reponse = $bdd->query("SELECT ID,Nom,Clore FROM zones WHERE IDplage = (SELECT ID FROM plage WHERE id=" . $_GET['idplage'] . ")");
+                        $reponse = $bdd->query("SELECT ID,Nom,Clore FROM zones WHERE IDplage = (SELECT ID FROM plage WHERE id=" . $_SESSION['idplage'] . ")");
                         while ($donnees = $reponse->fetch()) {
-                            echo"<option>" . $donnees['Nom'] . "</option>";
+                            if($_GET['Vue']==$donnees['Nom']){
+                            echo"<option selected='selected'>" . $donnees['Nom'] . "</option>";}
+                            else{
+                            echo"<option>" . $donnees['Nom'] . "</option>";}
                         }
-
-                        echo'<input type="hidden" name="nomplage" value="' . $_GET['nomplage'] . '"/>';
-                        echo'<input type="hidden" name="idplage" value="' . $_GET['idplage'] . '"/>';
                     }
                     ?>
                 </select>
                 <div class="align-btn-droite">
-                    <input type="submit" id="voir" class="bouton" name="voir" value="Modifier la vue"/>
+                    <input type="submit" id="voire" class="bouton" name="voire" value="Modifier la vue"/>
                 </div>
             </fieldset>
 
@@ -105,17 +96,13 @@ include_once 'Config.php';
                 <input type="submit" id="CloreAll" class="bouton" name="CloreAll" value="Clore tous les groupes"/>
             </form>
             <form method="get" action="gestiongroupe.php">
-                <?php echo'<input type="hidden" id="idplage" name="idplage" value="'.$_GET['idplage'].'">
-                <input type="hidden" name="nomplage" value="' . $_GET['nomplage'] . '"/>'
-                        . '<input type="hidden" name="nbgroupe" value="' . $_GET['nbgroupe'] . '"/>';?>
+                <?php if (!isset($_POST['cree'])) {echo'<input type="hidden" name="nbgroupe" value="' . $_SESSION['nbgroupe'] . '"/>';}?>
             <input type="submit" id="" class="bouton" name="" value="Gestion des groupe"/>
             </form>
             <?php if (!isset($_POST['cree'])){echo'<form method="get" action="exportKML.php">
-                 <input type="hidden" name="idplage" value="' . $_GET['idplage'] . '"/> 
                 <input type="submit" id="KML" class="bouton" name="KML" value="Exporter KML"/>
             </form>';} ?>
             <form method="get" action="tablechercheur.php">
-                <?php echo'<input type="hidden" id="idplage" name="idplage" value="'.$_GET['idplage'].'">' ?>
             <input type="submit" id="" class="bouton" name="supprimer" value="Supprimer le projet"/>
             </form>
             
@@ -129,14 +116,14 @@ include_once 'Config.php';
                     echo "<p>Date : " . $_POST['jour'] ."-". $_POST['mois'] ."-". $_POST['annee'] . "</p>";
                     echo "<p>Superficie totale : 0 m²</p>";
                 } else {
-                    $reponse = $bdd->query("SELECT Nom,Ville,Datepreleve,Superficie FROM plage WHERE ID=" . $_GET['idplage']);
+                    $reponse = $bdd->query("SELECT Nom,Ville,Datepreleve,Superficie FROM plage WHERE ID=" . $_SESSION['idplage']);
                     $donnees = $reponse->fetch();
                     echo "<h2>Informations relatives à la plage étudiée</h2>";
                     echo "<p>Nom : " . $donnees['Nom'] . "</p>";
                     echo "<p>Ville : " . $donnees['Ville'] . "</p>";
                     echo "<p>Date : " . $donnees['Datepreleve'] . "</p>";
                     echo "<p>Superficie totale : " . $donnees['Superficie'] . " m²</p>";
-                    echo "<p>Nombre de groupes : " . $_GET['nbgroupe'] . "</p>";
+                    echo "<p>Nombre de groupes : " . $_SESSION['nbgroupe'] . "</p>";
                     $reponse->closeCursor();
                 }
                 ?>
@@ -168,11 +155,11 @@ include_once 'Config.php';
                         if ($_GET['Vue'] == 'Vue globale') {
                             $reponse = $bdd->query("SELECT DISTINCT espece.Nom, SUM(prelevement.quantite) AS quantite FROM zones 
                         INNER JOIN (espece INNER JOIN prelevement ON espece.IDespeces=prelevement.IDespece)
-                        ON zones.ID=espece.IDzone WHERE zones.IDplage=" . $_GET['idplage'] ." GROUP BY espece.Nom");
+                        ON zones.ID=espece.IDzone WHERE zones.IDplage=" . $_SESSION['idplage'] ." GROUP BY espece.Nom");
                         } else {
                             $reponse = $bdd->query("SELECT DISTINCT espece.Nom, prelevement.quantite FROM zones 
                         INNER JOIN (espece INNER JOIN prelevement ON espece.IDespeces=prelevement.IDespece)
-                        ON zones.ID=espece.IDzone WHERE zones.IDplage=" . $_GET['idplage'] . " AND zones.Nom='" . $_GET['Vue'] . "'");
+                        ON zones.ID=espece.IDzone WHERE zones.IDplage=" . $_SESSION['idplage'] . " AND zones.Nom='" . $_GET['Vue'] . "'");
                         }
                         while ($donnees = $reponse->fetch()) {
                             echo"<tr>";
