@@ -31,8 +31,8 @@ include_once 'Config.php';
         }
         ?>
         </div>
-        <div class="btn-sitemap">
-            <a href="404.php" class="bouton" title="Plan du site"><img src="images/icone_sitemap.png" alt="Plan du site"/></a>
+        <div class="btn-aide">
+            <a href="404.php" class="bouton" title="Aide"><img src="images/icone_aide.png" alt="Aide"/></a>
         </div>
 
         <form action="index.php" method="post" id="align-form-plage" class="marge-conteneur">

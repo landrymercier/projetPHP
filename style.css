@@ -67,9 +67,9 @@ th:first-child, td:first-child { width:60%; padding-left:0.5em; text-align:left;
 
 
 /*NAVIGATION*/
-div.btn-session, div.btn-sitemap, footer { width:3em; }
+div.btn-session, div.btn-aide, footer { width:3em; }
 div.btn-session { position:fixed; top:0; right:0; }
-div.btn-sitemap { position:fixed; top:4em; right:0; }
+div.btn-aide { position:fixed; top:4em; right:0; }
 footer { position:fixed; bottom:0; right:0; }
 
 
@@ -150,7 +150,7 @@ form#align-form-espece div.align-btn-droite>* { vertical-align:middle; }
 /*AFFICHAGE DES BOUTONS RELATIFS A LA PLAGE*/
 #interchercheur_ifrocean #plage form { display:inline-block; }
 
-/**/
+/*AFFICHAGE DES CHAMPS DE CREATION DE PLAGE*/
 #table-chercheur_ifrocean p.align-date-creation-plage input { width:2.5em; text-align:right; }
 #table-chercheur_ifrocean p.align-date-creation-plage input:nth-child(4) { width:3.5em; }
 #table-chercheur_ifrocean table.marge-conteneur { margin-top:1em; }
@@ -227,6 +227,11 @@ a.valide_content, a.error_content { color:rgba(255,255,255,1); }
 /*-----------------*/
 /*-------404-------*/
 /*-----------------*/
+div.message404-standard { margin-bottom:5%; padding:5%; background:rgba(0,184,203,0.8); 
+                      border:1px solid rgba(0,70,79,1); border-radius:0.8em; }
+div.message404-standard ul { padding-left:1em; }
+div.message404-standard ul li { margin:0.5em 0; }
+
 div.display404 { position:relative; width:auto; }
 div.enigme404 { z-index:1; position:absolute; top:8%; right:0; box-sizing:border-box; width:100%; height:7em; 
 background:rgba(0,184,203,0.8); border:1px solid rgba(0,70,79,1); border-radius:0.8em; 
@@ -241,41 +246,153 @@ div.display-enigme404 { position:relative; padding-top:7em; }
 img.aura404 { opacity:0.2; cursor:pointer; position:absolute; top:22%; left:26%; z-index:1; width:19%; padding-top:5.4em; }
 img.aura404:hover, img.aura404:active { opacity:1; }
 
-div.recompence404 { z-index:2; position:absolute; top:0; left:0; box-sizing:border-box; width:100%; 
-padding:10% 3% 10% 8%; background:rgba(0,150,170,1); border-radius:0.8em; }
+div.recompence404 { z-index:2;
+                    position:absolute; top:0; left:0; box-sizing:border-box;
+                    width:100%;
+                    padding:10% 3% 10% 8%;
+                    background:rgba(0,150,170,1); border-radius:0.8em;
+}
+div.map-hover{  z-index:3;
+                position:relative;
+                box-sizing:border-box; 
+                width:219px;
+                /*320 - 101
+                = 18,45% de 320 (marge pour les boutons de navigation)
+                + 10% de 320 (marge interne gauche de recompence404)
+                + 3% de 320 (marge interne droite de recompence404)*/
+                height:173px;
+                /*219 (longueur image) * 607 (hauteur réelle de l'image)
+                /770 (longueur réelle de l'image)*/
+                background:url(images/404/404_carte.jpg);
+                background-size:cover;
+                opacity:0.8;
+}
+div.recompence404 p { width:219px; text-align:center; font-style:italic; }
+img.poiscom404 {    cursor:pointer; z-index:4; position:absolute; top:2%; left:2%;
+                    width:55px; /* 219/4 */
+                    transform:rotate(0deg); transform-origin:50% 50%; transition:all 2s; }
+img.poiscom404:hover, img.poiscom404:active { transform:rotate(360deg); }
 
-div.map-hover { z-index:3; position:absolute; top:0; left:0; box-sizing:border-box; width:100%; 
-padding:10% 3% 10% 8%; }
+@media screen and (min-width:480px){
+    div.map-hover{  width:329px;
+                    /*480 - 151
+                    = 18,45% de 480 (marge pour les boutons de navigation)
+                    + 10% de 480 (marge interne gauche de recompence404)
+                    + 3% de 480 (marge interne droite de recompence404)*/
+                    height:259px;
+                    /*329 (longueur image) * 607 (hauteur réelle de l'image)
+                    /770 (longueur réelle de l'image)*/ }
+    div.recompence404 p { width:329px; }
+    img.poiscom404 { width:82px; /* 329/4 */ }
+}
+@media screen and (min-width:720px){
+    div.map-hover{  width:494px;
+                    /*720 - 226
+                    = 18,45% de 720 (marge pour les boutons de navigation)
+                    + 10% de 720 (marge interne gauche de recompence404)
+                    + 3% de 720 (marge interne droite de recompence404)*/
+                    height:389px;
+                    /*494 (longueur image) * 607 (hauteur réelle de l'image)
+                    /770 (longueur réelle de l'image)*/ }
+    div.recompence404 p { width:494px; }
+    img.poiscom404 { width:123px; /* 494/4 */ }
+}
+@media screen and (min-width:768px){
+    div.map-hover{  width:526px;
+                    /*768 - 242
+                    = 18,45% de 768 (marge pour les boutons de navigation)
+                    + 10% de 768 (marge interne gauche de recompence404)
+                    + 3% de 768 (marge interne droite de recompence404)*/
+                    height:415px;
+                    /*526 (longueur image) * 607 (hauteur réelle de l'image)
+                    /770 (longueur réelle de l'image)*/ }
+    div.recompence404 p { width:526px; }
+    img.poiscom404 { width:131px; /* 526/4 */ }
+}
+@media screen and (min-width:900px){
+    div.map-hover{  width:617px;
+                    /*900 - 283
+                    = 18,45% de 900 (marge pour les boutons de navigation)
+                    + 10% de 900 (marge interne gauche de recompence404)
+                    + 3% de 900 (marge interne droite de recompence404)*/
+                    height:486px;
+                    /*617 (longueur image) * 607 (hauteur réelle de l'image)
+                    /770 (longueur réelle de l'image)*/ }
+    div.recompence404 p { width:617px; }
+    img.poiscom404 { width:154px; /* 617/4 */ }
+}
+@media screen and (min-width:1024px){
+    div.map-hover{  width:359px;
+                    /*1024 - 665
+                    = 30% de 1024(message404-standard) 
+                    + 2*10% de 1024(marge de la page) 
+                    + 2% de 1024 (marge gauche de display404)
+                    + 10% de 1024 (marge interne gauche de recompence404)
+                    + 3% de 1024 (marge interne droite de recompence404)*/
+                    height:283px;
+                    /*359 (longueur image) * 607 (hauteur réelle de l'image)
+                    /770 (longueur réelle de l'image)*/ }
+    div.recompence404 p { width:359px; }
+    img.poiscom404 { width:90px; /* 359/4 */ }
+}
+@media screen and (min-width:1200px){
+    div.map-hover{  width:420px;
+                    /*1200 - 780
+                    = 30% de 1200(message404-standard) 
+                    + 2*10% de 1200(marge de la page) 
+                    + 2% de 1200 (marge gauche de display404)
+                    + 10% de 1200 (marge interne gauche de recompence404)
+                    + 3% de 1200 (marge interne droite de recompence404)*/
+                    height:331px;
+                    /*420 (longueur image) * 607 (hauteur réelle de l'image)
+                    /770 (longueur réelle de l'image)*/ }
+    div.recompence404 p { width:420px; }
+    img.poiscom404 { width:105px; /* 420/4 */ }
+}
+@media screen and (min-width:1400px){
+    div.map-hover{  width:490px;
+                    /*1400 - 910
+                    = 30% de 1400(message404-standard) 
+                    + 2*10% de 1400(marge de la page) 
+                    + 2% de 1400 (marge gauche de display404)
+                    + 10% de 1400 (marge interne gauche de recompence404)
+                    + 3% de 1400 (marge interne droite de recompence404)*/
+                    height:386px;
+                    /*490 (longueur image) * 607 (hauteur réelle de l'image)
+                    /770 (longueur réelle de l'image)*/ }
+    div.recompence404 p { width:490px; }
+    img.poiscom404 { width:122px; /* 490/4 */ }
+}
+@media screen and (min-width:1600px){
+    div.map-hover{  width:560px;
+                    /*1600 - 1040
+                    = 30% de 1600(message404-standard) 
+                    + 2*10% de 1600(marge de la page) 
+                    + 2% de 1600 (marge gauche de display404)
+                    + 10% de 1600 (marge interne gauche de recompence404)
+                    + 3% de 1600 (marge interne droite de recompence404)*/
+                    height:441px;
+                    /*560 (longueur image) * 607 (hauteur réelle de l'image)
+                    /770 (longueur réelle de l'image)*/ }
+    div.recompence404 p { width:560px; }
+    img.poiscom404 { width:140px; /* 560/4 */ }
+}
+
 div.map-hover img.ilecarte404 { opacity:0; box-sizing:border-box; }
 div.map-hover img.ilecarte404:hover, div.map-hover img.ilecarte404:active { opacity:0.5; }
-div.map-hover img.NW { position:absolute; top:66%; left:12.4%; width:24%; }
-div.map-hover img.W { position:absolute; top:241%; left:19.5%; width:5.8%; }
-div.map-hover img.SW { position:absolute; top:350%; left:19.5%; width:16.9%; }
-div.map-hover img.N { position:absolute; top:126%; left:62.7%; width:5.2%; }
-div.map-hover img.C-NW { position:absolute; top:199%; left:41.5%; width:3.5%; }
-div.map-hover img.C-SE { position:absolute; top:289%; left:53.4%; width:2.2%; }
-div.map-hover img.S { position:absolute; top:374.5%; left:49.6%; width:6.6%; }
-div.map-hover img.NE { position:absolute; top:141.5%; left:87%; width:6.5%; }
-div.map-hover img.E { position:absolute; top:239.8%; left:73%; width:2%; }
-div.map-hover img.SE { position:absolute; top:320%; left:70%; width:5%; }
-
+div.map-hover img.NW { position:absolute; top:2.5%; left:4.8%; width:27%; }
+div.map-hover img.W { position:absolute; top:47.5%; left:13.7%; width:6%; }
+div.map-hover img.SW { position:absolute; top:75.2%; left:13.3%; width:19%; }
+div.map-hover img.N { position:absolute; top:17.6%; left:62%; width:6%; }
+div.map-hover img.C-NW { position:absolute; top:36.3%; left:37.7%; width:3.9%; }
+div.map-hover img.C-SE { position:absolute; top:58.9%; left:50.9%; width:2.8%; }
+div.map-hover img.S { position:absolute; top:80.9%; left:46.6%; width:7.4%; }
+div.map-hover img.NE { position:absolute; top:22%; left:89%; width:7%; }
+div.map-hover img.E { position:absolute; top:46.4%; left:73%; width:2.5%; }
+div.map-hover img.SE { position:absolute; top:67%; left:69.7%; width:5.8%; }
+    
 div.btn-close-recompence404 { z-index:4; position:absolute; top:-3%; right:0; width:3em; }
-img.poiscom404 { cursor:pointer; z-index:4; position:absolute; top:2%; left:2%; width:19%; 
-transform:rotate(0deg); transform-origin:50% 50%; transition:all 2s; }
-img.poiscom404:hover { transform:rotate(360deg); }
-img.carte404 { opacity:0.8; }
-div.recompence404 figure { margin:0; }
-div.recompence404 figcaption { text-align:center; font-weight:bold; }
 
-div.message404-standard { padding:5%; background:rgba(0,184,203,0.8); border:1px solid rgba(0,70,79,1); border-radius:0.8em; }
-div.message404-standard ul { padding-left:1em; }
-div.message404-standard ul li { margin:0.5em 0; }
-
-
-
-@media screen and (min-width:768px){
-    div#align-form-coordonnee div.saisie-coordonnees {  }
-}
 
 
 

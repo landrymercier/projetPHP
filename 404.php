@@ -17,7 +17,7 @@
             <ul>
                 <li>Retournez à <a href="index.php">l'accueil</a>, sélectionnez une plage et choissisez votre groupe 
                     dans la liste.</li>
-                <li>Sinon, créez un nouveau groupe <a href="index.php#creation-groupe">ici</a>.</li>
+                <li>Sinon, créez un nouveau groupe <a href="index.php#form-creation-groupe">ici</a>.</li>
             </ul>
             <hr/>
             <p>Vous êtes chercheur et vous voulez consulter les données collectées ?</p>
@@ -27,7 +27,7 @@
             <hr/>
             <p>Vous ne savez pas trop ?</p>
             <ul>
-                <li>Demandez de l'aide à votre <a href="mailto:unchercheur@danslanature.bzh">chercheur</a> !</li>
+                <li>Demandez de l'aide à votre <a href="mailto:unchercheur@danslanature.wld">chercheur</a> !</li>
             </ul>
         </div>
         <div class="display404">
@@ -64,21 +64,18 @@
                 </div>
                 <img src="images/404/404_poiscom.png" alt="" class="poiscom404"/>
                 <div class="map-hover">
-                    <a href="interchercheur.php" title="Vers interface chercheur"><img src="images/404/404_ile-nw.png" alt="" class="ilecarte404 NW"/></a>
-                    <a href="#"><img src="images/404/404_ile-w.png" alt="" class="ilecarte404 W"/></a>
+                    <a href="login.php" title="Vers interface chercheur"><img src="images/404/404_ile-nw.png" alt="" class="ilecarte404 NW"/></a>
+                    <a href="index.php#form-creation-groupe" title="Vers la création de groupe"><img src="images/404/404_ile-w.png" alt="" class="ilecarte404 W"/></a>
                     <a href="index.php" title="Vers l'accueil"><img src="images/404/404_ile-sw.png" alt="" class="ilecarte404 SW"/></a>
-                    <a href="#"><img src="images/404/404_ile-n.png" alt="" class="ilecarte404 N"/></a>
-                    <a href="#"><img src="images/404/404_ile-c-nw.png" alt="" class="ilecarte404 C-NW"/></a>
-                    <a href="#"><img src="images/404/404_ile-c-se.png" alt="" class="ilecarte404 C-SE"/></a>
+                    <a href="index.php#form-creation-groupe" title="Vers la création de groupe"><img src="images/404/404_ile-n.png" alt="" class="ilecarte404 N"/></a>
+                    <a href="index.php" title="Vers l'accueil"><img src="images/404/404_ile-c-nw.png" alt="" class="ilecarte404 C-NW"/></a>
+                    <a href="login.php" title="Vers interface chercheur"><img src="images/404/404_ile-c-se.png" alt="" class="ilecarte404 C-SE"/></a>
                     <a href="index.php#form-creation-groupe" title="Vers la création de groupe"><img src="images/404/404_ile-s.png" alt="" class="ilecarte404 S"/></a>
-                    <a href="#"><img src="images/404/404_ile-ne.png" alt="" class="ilecarte404 NE"/></a>
-                    <a href="#"><img src="images/404/404_ile-e.png" alt="" class="ilecarte404 E"/></a>
-                    <a href="#"><img src="images/404/404_ile-se.png" alt="" class="ilecarte404 SE"/></a>
+                    <a href="index.php" title="Vers l'accueil"><img src="images/404/404_ile-ne.png" alt="" class="ilecarte404 NE"/></a>
+                    <a href="login.php" title="Vers interface chercheur"><img src="images/404/404_ile-e.png" alt="" class="ilecarte404 E"/></a>
+                    <a href="index.php" title="Vers l'accueil"><img src="images/404/404_ile-se.png" alt="" class="ilecarte404 SE"/></a>
                 </div>
-                <figure>
-                    <img src="images/404/404_carte.jpg" alt="" class="carte404"/>
-                    <figcaption>Cliquez sur un lieu pour explorer.</figcaption>
-                <figure>
+                <p>Cliquez sur un lieu pour explorer.</p>
             </div>
         </div>
         
