@@ -115,7 +115,7 @@ if (isset($_GET['voir'])) {
             </form>';
 } ?>
                 <?php if (!isset($_POST['cree'])) {
-                    echo"<a href='clore.php?cloreproj=1&groupeid=" . $_SESSION['idplage'] . "' class='bouton'>Supprimer la plage</a>";
+                    echo"<a href='clore.php?cloreproj=1&groupeid=" . $_SESSION['idplage'] . "' class='bouton error_content'>Supprimer la plage</a>";
                 } ?>
 
             <div id="infos-projet">

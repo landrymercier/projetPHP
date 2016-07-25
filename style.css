@@ -209,11 +209,11 @@ a:hover.valide_content, a:active.valide_content
 .error_content, .error_content h1 { color:rgba(70,0,0,1); }
 .error_content h1 { border-bottom: 1px solid rgba(70,0,0,1); }
 .error_content, #interchercheur_ifrocean .error_content, a.error_content 
-{ border:1px solid rgba(70,0,0,1); background-color:rgba(170,78,48,1); }
+{ border:1px solid rgba(70,0,0#interchercheur_ifrocean .error_content, a.error_content,1); background-color:rgba(170,78,48,1); }
 .error_content a { color:rgba(70,0,0,1); font-style:normal; }
 .error_content a:hover, .error_content a:active { text-decoration:underline; }
 
-#interchercheur_ifrocean input.error_content:hover, #interchercheur_ifrocean input.error_content:active,
+#interchercheur_ifrocean .error_content:hover, #interchercheur_ifrocean .error_content:active,
 a:hover.error_content, a:active.error_content
 { background-color:rgba(90,0,0,1); text-decoration:none; }
 

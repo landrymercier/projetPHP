@@ -21,7 +21,7 @@ include_once 'Config.php'
         $reponse = $bdd->query("SELECT mdp FROM login");
         $donnees = $reponse->fetch();
 
-        echo"mdp :" . $donnees['mdp'];
+        //echo"mdp :" . $donnees['mdp'];
         if ($donnees['mdp'] == $_POST['pass']) {
             $_SESSION['logged'] = true;
             echo'<div class="valide_content">
@@ -30,7 +30,7 @@ include_once 'Config.php'
                     <meta http-equiv="Refresh" content="3; url=tablechercheur.php">
         </div>';
         } else {
-            echo'<div class="valide_content">
+            echo'<div class="error_content">
             <h1>Mot de passe invalide ! Veuillez recommencer</h1>
             <p>Si vous n\'êtes pas redirigé dans quelques secondes, cliquez sur ce <a href="tablechercheur.php">lien</a>.</p>
                     <meta http-equiv="Refresh" content="3; url=login.php">
