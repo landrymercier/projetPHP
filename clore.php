@@ -48,8 +48,8 @@
             $req = $bdd->query("UPDATE plage SET Clore = 1 WHERE ID = " . $_GET['id']);
             $sup = $req->fetch();
             $req->closeCursor();
-            echo"<h1>Le projet à bien été clos, vous allez être redirigé vers la page principale <br>Si vous n'êtes pas redirigé dans quelques secondes, cliquez sur ce <a href='index.php'>lien</a>.</h1>";
-            echo'<meta http-equiv="Refresh" content="3; url=index.php">';
+            echo"<h1>Le projet à bien été verrouillé, vous allez être redirigé vers la liste des projets <br>Si vous n'êtes pas redirigé dans quelques secondes, cliquez sur ce <a href='index.php'>lien</a>.</h1>";
+            echo'<meta http-equiv="Refresh" content="3; url=tablechercheur.php">';
         } if (isset($_GET['verrouilleproj'])){
             echo'<form action="chercheur" method="post">';
             echo'<div class="valide_content">';
@@ -74,8 +74,8 @@
             $req = $bdd->prepare("UPDATE plage SET Clore = 2 WHERE ID = " . $_GET['id']);
             $req->execute();
             $req->closeCursor();
-            echo"<h1>Le projet à bien été clos, vous allez être redirigé vers la page principale <br>Si vous n'êtes pas redirigé dans quelques secondes, cliquez sur ce <a href='index.php'>lien</a>.</h1>";
-            echo'<meta http-equiv="Refresh" content="3; url=index.php">';
+            echo"<h1>La plage à bien été clos, vous allez être redirigé vers la liste des plages <br>Si vous n'êtes pas redirigé dans quelques secondes, cliquez sur ce <a href='index.php'>lien</a>.</h1>";
+            echo'<meta http-equiv="Refresh" content="3; url=tablechercheur.php">';
         } if (isset($_GET['cloreproj'])){
             echo'<form action="chercheur" method="post">';
             echo'<div class="valide_content">';

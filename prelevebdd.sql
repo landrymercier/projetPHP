@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 05 Juillet 2016 à 14:45
+-- Généré le :  Lun 25 Juillet 2016 à 10:56
 -- Version du serveur :  5.7.9
 -- Version de PHP :  5.6.16
 
@@ -35,37 +35,46 @@ CREATE TABLE IF NOT EXISTS `espece` (
   `IDzone` int(4) NOT NULL,
   PRIMARY KEY (`IDespeces`,`IDzone`),
   KEY `IDzone` (`IDzone`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=latin1;
 
---
--- Vider la table avant d'insérer `espece`
---
-
-TRUNCATE TABLE `espece`;
 --
 -- Contenu de la table `espece`
 --
 
 INSERT INTO `espece` (`IDespeces`, `Nom`, `IDzone`) VALUES
-(1, 'Magicarpe', 1),
-(2, 'Carapuce', 1),
-(3, 'Stari', 1),
-(4, 'Magicarpe', 2),
-(5, 'Leviathor (shiny !)', 2),
-(6, 'starros', 2),
-(7, 'Tortipousse', 5),
-(8, 'Carapure', 5),
-(9, 'Starros', 5),
-(10, 'ptitart', 5),
-(11, 'poutrator', 5),
-(12, 'poutrator', 5),
-(13, 'poutrator', 5),
-(14, 'poutrator', 5),
-(15, 'poutrator', 5),
-(16, 'poutrator', 5),
-(17, 'Magicarpe', 5),
-(18, 'Poissireine', 5),
-(19, 'ytyyyty', 8);
+(41, 'Magicarpe', 24),
+(42, 'Carapuce', 24),
+(43, 'Stari', 24),
+(44, 'Espece 1', 25),
+(45, 'Espece 2', 25),
+(46, 'Espece 3', 25),
+(47, 'Espece 1', 26),
+(48, 'Espece 2', 26),
+(49, 'Espece 3', 26),
+(50, 'Espece 1', 27),
+(51, 'magicarpe', 28),
+(52, 'espece 2', 28),
+(53, 'Espèce 1', 31),
+(54, 'Espece 2', 31),
+(55, 'Espece 3', 31);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `login`
+--
+
+DROP TABLE IF EXISTS `login`;
+CREATE TABLE IF NOT EXISTS `login` (
+  `mdp` tinytext NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `login`
+--
+
+INSERT INTO `login` (`mdp`) VALUES
+('pppppp');
 
 -- --------------------------------------------------------
 
@@ -82,22 +91,19 @@ CREATE TABLE IF NOT EXISTS `plage` (
   `Datepreleve` date NOT NULL COMMENT 'date de preleve',
   `Clore` tinyint(1) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
 
---
--- Vider la table avant d'insérer `plage`
---
-
-TRUNCATE TABLE `plage`;
 --
 -- Contenu de la table `plage`
 --
 
 INSERT INTO `plage` (`ID`, `Nom`, `Ville`, `Superficie`, `Datepreleve`, `Clore`) VALUES
-(1, 'Karmouk les roches', 'Karmouk', 90, '2016-06-20', 0),
-(2, 'Crevette-sur-salade', 'les morues', 125, '2016-06-22', 0),
-(3, 'Pornic', 'Pornic', 47, '2016-06-21', 1),
-(4, 'Pornic la vieille', 'Pornic', 41, '2016-06-21', 0);
+(22, 'Je suis vide', 'Pornic', 0, '2016-07-22', 0),
+(23, 'Je suis en cours', 'Nantes', 0, '2016-07-25', 0),
+(24, 'Je suis plein', 'Lorient', 0, '2017-01-01', 0),
+(25, 'Guidel-plage', 'Guidel', 0, '2016-05-20', 2),
+(26, 'Guidel-plage 2018', 'Guidel', 0, '2018-01-01', 0),
+(27, 'Une plage perdue', 'quelque part', 0, '2016-07-25', 0);
 
 -- --------------------------------------------------------
 
@@ -115,25 +121,25 @@ CREATE TABLE IF NOT EXISTS `prelevement` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Vider la table avant d'insérer `prelevement`
---
-
-TRUNCATE TABLE `prelevement`;
---
 -- Contenu de la table `prelevement`
 --
 
 INSERT INTO `prelevement` (`IDzone`, `IDespece`, `quantite`) VALUES
-(1, 1, 4),
-(1, 2, 8),
-(1, 3, 12),
-(2, 4, 48),
-(2, 5, 1),
-(5, 7, 5),
-(5, 16, 4),
-(5, 17, 22),
-(5, 18, 4),
-(8, 19, 7);
+(24, 41, 12),
+(24, 42, 1),
+(24, 43, 17),
+(25, 44, 14),
+(25, 45, 87),
+(25, 46, 99),
+(26, 47, 12),
+(26, 48, 14),
+(26, 49, 95),
+(27, 50, 99),
+(28, 51, 1),
+(28, 52, 2),
+(31, 53, 14),
+(31, 54, 4),
+(31, 55, 78);
 
 -- --------------------------------------------------------
 
@@ -166,27 +172,22 @@ CREATE TABLE IF NOT EXISTS `zones` (
   `deciYD` float NOT NULL DEFAULT '0',
   PRIMARY KEY (`ID`,`IDplage`),
   KEY `IDplage` (`IDplage`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
 
---
--- Vider la table avant d'insérer `zones`
---
-
-TRUNCATE TABLE `zones`;
 --
 -- Contenu de la table `zones`
 --
 
 INSERT INTO `zones` (`ID`, `IDplage`, `latA`, `longA`, `latB`, `longB`, `latC`, `longC`, `latD`, `longD`, `Nom`, `Superficie`, `Clore`, `deciXA`, `deciYA`, `deciXB`, `deciYB`, `deciXC`, `deciYC`, `deciXD`, `deciYD`) VALUES
-(1, 1, '4°45''9554"', '4°45''9471"', '4°45''9798"', '4°45''9451"', '4°45''9489"', '4°45''9795"', '4°45''9112"', '4°45''9487"', 'AC/DC', 45, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(2, 1, '2°45''9577"', '2°45''9477"', '2°45''9797"', '2°45''9471"', '2°45''9479"', '2°45''9775"', '2°45''9712"', '2°45''9787"', 'Metallica', 45, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(3, 2, '4°45''9577"', '4°45''9477"', '4°45''9797"', '4°45''9471"', '4°45''9479"', '4°45''9775"', '4°45''9712"', '4°45''9787"', 'LED Zepplin', 45, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(4, 2, '4°45''97877"', '4°45''94977"', '4°45''99819"', '4°45''94497"', '4°45''95419"', '4°45''99988"', '4°45''95449"', '4°45''97897"', 'Rammstein', 984, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(5, 4, '1°10''1111"', '1°11''1122"', '1°14''4444"', '1°15''5555"', '1°12''2222"', '1°13''3333"', '1°16''1547"', '1°17''1325"', 'jygflg', 744855, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(6, 4, '1°10''1111"', '1°11''1122"', '1°14''4444"', '1°15''5555"', '1°12''2222"', '1°13''3333"', '1°16''1547"', '1°17''1325"', 'libereeeeeee délivréééééé', 744855, 1, 0, 0, 0, 0, 0, 0, 0, 0),
-(7, 4, '1°10''1111"', '1°11''1122"', '1°14''4444"', '1°15''5555"', '1°12''2222"', '1°13''3333"', '1°16''1547"', '1°17''1325"', 'ON NE FINIRA JAMAIIIIS', 744855, 1, 0, 0, 0, 0, 0, 0, 0, 0),
-(8, 4, '5°24''600"', '2°41''1411"', '4°1''11"', '1°11''11"', '4°44''44"', '4°44''44"', '55°55''55"', '55°55''55"', 'hfrty', 726935000000, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(9, 1, '47°13''7.09"', '-1°33''33.74"', '48°00''19.96"', '0°11''59.33"', '47°18''5.71"', '5°03''23.25"', '45°49''33.34"', '1°16''15.53"', 'les testeurs de GPS !', 101225000000, 0, 47.2186, -0.440628, 48.0055, 0.199814, 47.3016, 5.05646, 45.8259, 1.27098);
+(24, 23, '1°1''1"', '1°1''1"', '1°1''1"', '1°1''1"', '1°1''1"', '1°1''1"', '1°1''1"', '1°1''1"', 'Groupe 1', 0, 0, 1.01694, 1.01694, 1.01694, 1.01694, 1.01694, 1.01694, 1.01694, 1.01694),
+(25, 23, '2°2''2"', '2°2''2"', '2°2''2"', '2°2''2"', '2°2''2"', '2°2''2"', '2°2''2"', '2°2''2"', 'Groupe 2', 0, 0, 2.03389, 2.03389, 2.03389, 2.03389, 2.03389, 2.03389, 2.03389, 2.03389),
+(26, 23, '3°3''3"', '3°3''3"', '3°3''3"', '3°3''3"', '3°3''3"', '3°3''3"', '3°3''3"', '3°3''3"', 'Groupe 3', 0, 0, 3.05083, 3.05083, 3.05083, 3.05083, 3.05083, 3.05083, 3.05083, 3.05083),
+(27, 24, '5°5''5"', '5°5''5"', '5°5''5"', '5°5''5"', '5°5''5"', '5°5''5"', '5°5''5"', '5°5''5"', 'Equipe 1', 0, 1, 5.08472, 5.08472, 5.08472, 5.08472, 5.08472, 5.08472, 5.08472, 5.08472),
+(28, 27, '46°40''6.5"', '-1°55''11.5"', '46°40''6.6"', '-1°55''9.8"', '46°40''5.9"', '-1°55''11.1"', '46°40''6.1"', '-1°55''9.2"', 'Un groupe avec de vrais coordonnées', 1596.81, 0, 46.6685, -0.0801389, 46.6685, -0.0806111, 46.6683, -0.08025, 46.6684, -0.0807778),
+(29, 27, '46°40''6.5"', '-1°55''11.5"', '46°40''6.6"', '-1°55''9.8"', '46°40''5.9"', '-1°55''11.1"', '46°40''6.1"', '-1°55''9.2"', 'un autre groupe', 1596.81, 0, 46.6685, -0.0801389, 46.6685, -0.0806111, 46.6683, -0.08025, 46.6684, -0.0807778),
+(30, 27, '46°40''6.5"', '1°55''11.5"', '46°40''6.6"', '1°55''9.8"', '46°40''5.9"', '1°55''11.1"', '46°40''6.1"', '1°55''9.2"', 'Le vrai groupe', 1595.92, 0, 46.6685, 1.91986, 46.6685, 1.91939, 46.6683, 1.91975, 46.6684, 1.91922),
+(31, 22, '1°1''1"', '1°1''1.1"', '1°1''1.2"', '1°1''1.3"', '1°1''1.4"', '1°1''1.5"', '1°1''1.6"', '1°1''1.7"', 'Equipe 2', 0.00000436008, 0, 1.01694, 1.01697, 1.017, 1.01703, 1.01706, 1.01708, 1.01711, 1.01714),
+(32, 24, '1°1''1"', '1°1''1"', '1°1''1"', '1°1''1"', '1°1''1"', '1°1''1"', '1°1''1"', '1°1''1"', 'Equipe Alpha', 0, 1, 1.01694, 1.01694, 1.01694, 1.01694, 1.01694, 1.01694, 1.01694, 1.01694);
 
 --
 -- Contraintes pour les tables exportées
