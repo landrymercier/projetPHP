@@ -7,14 +7,22 @@ class PointGPS {
 
     public function __construct($abscisse_degre, $abscisse_minute, $abscisse_seconde, 
             $ordonnee_degre, $ordonnee_minute, $ordonnee_seconde) {
-        $abscisse_minute = $abscisse_minute/60;
-        $abscisse_seconde = $abscisse_seconde/3600;
         
-        $ordonnee_minute = $ordonnee_minute/60;
-        $ordonnee_seconde = $ordonnee_seconde/3600;
+        $signe_abscisse = 1;
+        $signe_ordonnee = 1;
         
-        $this->x = $abscisse_degre.$abscisse_minute.$abscisse_seconde;
-        $this->y = $ordonnee_degre.$ordonnee_minute.$ordonnee_seconde;
+        if(substr($abscisse_degre, 0, 1) = '-'){
+            $signe_abscisse = -1;
+        }
+        if(substr($ordonnee_degre, 0, 1) = '-'){
+            $signe_ordonnee = -1;
+        }
+        
+        abs($abscisse_degre);
+        abs($ordonnee_degre);
+        
+        $this->x = $signe_abscisse*($abscisse_degre+($abscisse_minute/60)+($abscisse_seconde/3600));
+        $this->y = $signe_ordonnee*($ordonnee_degre+($ordonnee_minute/60)+($ordonnee_seconde/3600));
     }
     
     public function getX(){ return $this->x; }
