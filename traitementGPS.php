@@ -47,7 +47,7 @@ $pt2 = new PointGPS($x_degres_2, $x_minutes_2, $x_secondes_2, $y_degres_2, $y_mi
 $pt3 = new PointGPS($x_degres_3, $x_minutes_3, $x_secondes_3, $y_degres_3, $y_minutes_3, $y_secondes_3);
 $pt4 = new PointGPS($x_degres_4, $x_minutes_4, $x_secondes_4, $y_degres_4, $y_minutes_4, $y_secondes_4);
 
-/*Récupération des Points en format décimal*/
+//enregister les variables ci dessous en base pour l'export kml
 $pt1_x = $pt1->getX();
 $pt1_y = $pt1->getY();
 $pt2_x = $pt2->getX();
@@ -56,6 +56,8 @@ $pt3_x = $pt3->getX();
 $pt3_y = $pt3->getY();
 $pt4_x = $pt4->getX();
 $pt4_y = $pt4->getY();
+//echo $pt1_x . "/" . $pt1_y . "<br/>" . $pt2_x . "/" . $pt2_y . "<br/>" . $pt3_x . "/" . $pt3_y . "<br/>" . $pt4_x . "/" . $pt4_y . "<br/>";
+//enregister les variables ci dessus en base pour l'export kml
 
 $pt1->calculerDistance($pt2);
 $pt2->calculerDistance($pt3);
@@ -78,7 +80,17 @@ if (isset($_POST['cree'])) {
     } catch (Exception $e) {
         die('Erreur : ' . $e->getMessage());
     }
-    
+    //echo"<br><br>";
+    //echo $_POST['idprojet'] . " , " . $x_degres_1 . "°" . $x_minutes_1 . "'" . $x_secondes_1 . "\"" . " , " .
+    //$y_degres_1 . "°" . $y_minutes_1 . "'" . $y_secondes_1 . "\"" . " , " .
+    //$x_degres_2 . "°" . $x_minutes_2 . "'" . $x_secondes_2 . "\"" . " , " .
+    //$y_degres_2 . "°" . $y_minutes_2 . "'" . $y_secondes_2 . "\"" . " , " .
+    //$x_degres_3 . "°" . $x_minutes_3 . "'" . $x_secondes_3 . "\"" . " , " .
+    //$y_degres_3 . "°" . $y_minutes_3 . "'" . $y_secondes_3 . "\"" . " , " .
+    //$x_degres_4 . "°" . $x_minutes_4 . "'" . $x_secondes_4 . "\"" . " , " .
+    //$y_degres_4 . "°" . $y_minutes_4 . "'" . $y_secondes_4 . "\"" . " , " .
+    //$_POST['nom-groupe'] . " , " . $zone_totale . " , 0," .
+    //$pt1_x . "," . $pt1_y . "," . $pt2_x . "," . $pt2_y . "," . $pt3_x . "," . $pt3_y . "," . $pt4_x . "," . $pt4_y;
 //CREATION DU GROUPE
     $req = $bdd->prepare('INSERT INTO zones (IDplage,latA,longA,latB,longB,latC,longC,latD,longD,Nom,Superficie,Clore,deciXA,deciYA,deciXB,deciYB,deciXC,deciYC,deciXD,deciYD) '
             . 'VALUES(:idplage,:latA,:lonA,:latB,:lonB,:latC,:lonC,:latD,:lonD,:nom,:super,:clos,:XA,:YA,:XB,:YB,:XC,:YC,:XD,:YD)');
