@@ -11,10 +11,10 @@ class PointGPS {
         $signe_abscisse = 1;
         $signe_ordonnee = 1;
         
-        if(substr($abscisse_degre, 0, 1) = '-'){
+        if(substr($abscisse_degre, 0, 1) == '-'){
             $signe_abscisse = -1;
         }
-        if(substr($ordonnee_degre, 0, 1) = '-'){
+        if(substr($ordonnee_degre, 0, 1) == '-'){
             $signe_ordonnee = -1;
         }
         
