@@ -18,8 +18,8 @@ class PointGPS {
             $signe_ordonnee = -1;
         }
         
-        abs($abscisse_degre);
-        abs($ordonnee_degre);
+        $abscisse_degre = abs($abscisse_degre);
+        $ordonnee_degre = abs($ordonnee_degre);
         
         $this->x = $signe_abscisse*($abscisse_degre+($abscisse_minute/60)+($abscisse_seconde/3600));
         $this->y = $signe_ordonnee*($ordonnee_degre+($ordonnee_minute/60)+($ordonnee_seconde/3600));
