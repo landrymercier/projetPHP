@@ -23,13 +23,13 @@ include_once 'Config.php';
         <h1>Interface d'étude de prélèvement</h1>
 
         <div class="btn-session">
-        <?php
-        if (isset($_SESSION['logged']) == true) {//GESTION DE LA SESSION, LE CHERCHEUR EST LOGGUE, PAS LE PRELEVEUR
-            echo'<a href="tablechercheur.php" class="bouton" title="Page Chercheur"><img src="images/icone_session.png" alt="Page chercheur"/></a>';
-        } else {
-            echo'<a href="login.php" class="bouton" title="Se connecter"><img src="images/icone_login.png" alt="Se connecter"/></a>';
-        }
-        ?>
+            <?php
+            if (isset($_SESSION['logged']) == true) {//GESTION DE LA SESSION, LE CHERCHEUR EST LOGGUE, PAS LE PRELEVEUR
+                echo'<a href="tablechercheur.php" class="bouton" title="Page Chercheur"><img src="images/icone_session.png" alt="Page chercheur"/></a>';
+            } else {
+                echo'<a href="login.php" class="bouton" title="Se connecter"><img src="images/icone_login.png" alt="Se connecter"/></a>';
+            }
+            ?>
         </div>
         <div class="btn-aide">
             <a href="404.php" class="bouton" title="Aide"><img src="images/icone_aide.png" alt="Aide"/></a>
@@ -42,7 +42,11 @@ include_once 'Config.php';
                 //LISTE DES PROJETS EN COURS, ON RECUPERE L'ID POUR L'ENVOYER DANS LA REQUETE SUIVANTE
                 $reponse = $bdd->query("SELECT ID,Nom FROM plage WHERE Clore = 0");
                 while ($donnees = $reponse->fetch()) {
-                    echo "<option value='" . $donnees['ID'] . "'>" . $donnees['Nom'] . "</option>";
+                    if ($donnees['ID'] == $_POST['idprojet']) {
+                        echo "<option value='" . $donnees['ID'] . "' selected='selected'>" . $donnees['Nom'] . "</option>";
+                    } else {
+                        echo "<option value='" . $donnees['ID'] . "'>" . $donnees['Nom'] . "</option>";
+                    }
                 }
                 $reponse->closeCursor();
                 ?>
@@ -67,28 +71,28 @@ include_once 'Config.php';
                     <th>Action</th>
                 </tr>
             </tfoot>
-            
-                <?php
-                if (isset($_POST['envoiprojet']) == "Envoyer") {
-                    //AFFICHE LES GROUPES DEJA CREES SUIVANT LE PROJET SELECTIONNE
-                    $reponse = $bdd->query("SELECT ID,Nom,Clore FROM zones WHERE IDplage = (SELECT ID FROM plage WHERE id=" . $_POST['idprojet'] . ")");
-                    while ($donnees = $reponse->fetch()) {
-                        echo"<tr>";
-                        echo"<td>" . $donnees['Nom'] . "</td>";
-                         
-                        if($donnees['Clore'] == 1){ //SI LA ZONE EST CLOSE
-                            echo'<td>Clos</td>';
-                        } else { //LE PRELEVEUR PEUT COMPLETER SON PRELEVEMENT
-                            echo'<form action="interprel.php" method="get">';
-                            echo'<td><input type="hidden" name="groupeid" value="'. $donnees['ID'] .'"/>';
-                            echo'<input type="submit" class="bouton" value="Completer"/></td>';
-                            echo'</form>';
-                        }
-                        echo"</tr>";
-                    }$reponse->closeCursor();
-                }
-                ?>
-            
+
+            <?php
+            if (isset($_POST['envoiprojet']) == "Envoyer") {
+                //AFFICHE LES GROUPES DEJA CREES SUIVANT LE PROJET SELECTIONNE
+                $reponse = $bdd->query("SELECT ID,Nom,Clore FROM zones WHERE IDplage = (SELECT ID FROM plage WHERE id=" . $_POST['idprojet'] . ")");
+                while ($donnees = $reponse->fetch()) {
+                    echo"<tr>";
+                    echo"<td>" . $donnees['Nom'] . "</td>";
+
+                    if ($donnees['Clore'] == 1) { //SI LA ZONE EST CLOSE
+                        echo'<td>Clos</td>';
+                    } else { //LE PRELEVEUR PEUT COMPLETER SON PRELEVEMENT
+                        echo'<form action="interprel.php" method="get">';
+                        echo'<td><input type="hidden" name="groupeid" value="' . $donnees['ID'] . '"/>';
+                        echo'<input type="submit" class="bouton" value="Completer"/></td>';
+                        echo'</form>';
+                    }
+                    echo"</tr>";
+                }$reponse->closeCursor();
+            }
+            ?>
+
         </table>
 
         <?php
@@ -100,11 +104,11 @@ include_once 'Config.php';
             
             <label for="nom">Sélectionnez une plage :</label>
             <select name="idprojet" id="nom">';
-                $reponse = $bdd->query("SELECT ID,Nom FROM plage WHERE Clore = 0");
-                while ($donnees = $reponse->fetch()) {
-                    echo "<option value='" . $donnees['ID'] . "'>" . $donnees['Nom'] . "</option>";
-                }
-                $reponse->closeCursor();
+            $reponse = $bdd->query("SELECT ID,Nom FROM plage WHERE Clore = 0");
+            while ($donnees = $reponse->fetch()) {
+                echo "<option value='" . $donnees['ID'] . "'>" . $donnees['Nom'] . "</option>";
+            }
+            $reponse->closeCursor();
 
             echo'</select>
             
@@ -230,7 +234,7 @@ include_once 'Config.php';
         <footer>
             <a href="#index_ifrocean" class="bouton" title="Haut de page"><img src="images/icone_fleche-retour.png" alt="Haut de page"/></a>
         </footer>
-        
+
         <!--import javascript-->
         <!--import de la bibliotheque jQuery pour les animations-->
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>

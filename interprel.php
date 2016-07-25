@@ -168,7 +168,7 @@ $donnees = $reponse->fetch();
             </table>
             <div class="align-btn-droite">
                 <a href="index.php" class="bouton">Retour</a>
-                <?php echo"<a href='clore.php?clore=groupe&groupeid=" . $_GET['groupeid'] . "' class='bouton'>Clore</a>"; ?>
+                <?php echo"<a href='clore.php?cloregroup=1&groupeid=" . $_GET['groupeid'] . "' class='bouton'>Clore</a>"; ?>
             </div>
 
             <footer>

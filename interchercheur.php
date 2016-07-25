@@ -2,10 +2,10 @@
 session_start();
 include_once 'Config.php';
 include_once 'cherchclass.php';
-if(isset($_GET['voir'])){
-$_SESSION['idplage'] = $_GET['idplage'];
-$_SESSION['nomplage'] = $_GET['nomplage'];
-$_SESSION['nbgroupe'] = $_GET['nbgroupe'];
+if (isset($_GET['voir'])) {
+    $_SESSION['idplage'] = $_GET['idplage'];
+    $_SESSION['nomplage'] = $_GET['nomplage'];
+    $_SESSION['nbgroupe'] = $_GET['nbgroupe'];
 }
 ?>
 <!DOCTYPE html>
@@ -16,8 +16,6 @@ $_SESSION['nbgroupe'] = $_GET['nbgroupe'];
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
         <link href="style.css" rel="stylesheet" type="text/css"/>
         <?php
-        echo"idplage:".$_SESSION['idplage'];
-        echo"nomplage:".$_SESSION['nomplage'];
         if (isset($_SESSION['logged']) == false) {
             echo'<meta http-equiv="Refresh" content="1; url=index.php">';
         }
@@ -25,36 +23,36 @@ $_SESSION['nbgroupe'] = $_GET['nbgroupe'];
     </head>
 
     <body id="interchercheur_ifrocean">
- <?php
+        <?php
         if (isset($_POST['cree'])) {
             echo "<h1>Interface Préleveur - " . $_POST['nom-projet'] . "</h1>";
         } else {
             echo "<h1>Interface Préleveur - " . $_SESSION['nomplage'] . "</h1>";
         }
 
-    $bdd = CONNECTBDD();
-       
-        
+        $bdd = CONNECTBDD();
+
+
 //SI CREATION D'UN NOUVEAU PROJET
         if (isset($_POST['cree'])) {
-            CreaProjet($_POST['nom-projet'],$_POST['ville'],$_POST['annee'],$_POST['mois'],$_POST['jour']);
+            CreaProjet($_POST['nom-projet'], $_POST['ville'], $_POST['annee'], $_POST['mois'], $_POST['jour']);
         }
-        
+
 //SI RECALCUL DE LA SUPERFICIE
-        if(isset($_POST['Recalc'])){
+        if (isset($_POST['Recalc'])) {
             RecalcSuper($_SESSION['idplage']);
         }
-        
+
         //FERMETURE DES GROUPES
-        if(isset($_POST['CloreAll'])){
-            
+        if (isset($_POST['CloreAll'])) {
+
             $req = $bdd->query("UPDATE zones SET Clore = 1 WHERE IDplage = " . $_SESSION['idplage']);
             $sup = $req->fetch();
-            echo"UPDATE zones SET Clore = 1 WHERE IDplage = " . $_SESSION['idplage'];
+            $req = $bdd->query("UPDATE zones SET Clore = 1 WHERE IDplage = " . $_SESSION['idplage']);
+            $sup = $req->fetch();
         }
-        
+
 //FERMETURE DE TOUS LES GROUPES LIES AU PROJET
-        
         ?>
         <div class="btn-session">
             <a href="unlogged.php" class="bouton" title="Se déconnecter"><img src="images/icone_deconnexion.png" alt="Se déconnecter"/></a>
@@ -73,10 +71,11 @@ $_SESSION['nbgroupe'] = $_GET['nbgroupe'];
                     } else {
                         $reponse = $bdd->query("SELECT ID,Nom,Clore FROM zones WHERE IDplage = (SELECT ID FROM plage WHERE id=" . $_SESSION['idplage'] . ")");
                         while ($donnees = $reponse->fetch()) {
-                            if($_GET['Vue']==$donnees['Nom']){
-                            echo"<option selected='selected'>" . $donnees['Nom'] . "</option>";}
-                            else{
-                            echo"<option>" . $donnees['Nom'] . "</option>";}
+                            if ($_GET['Vue'] == $donnees['Nom']) {
+                                echo"<option selected='selected'>" . $donnees['Nom'] . "</option>";
+                            } else {
+                                echo"<option>" . $donnees['Nom'] . "</option>";
+                            }
                         }
                     }
                     ?>
@@ -100,19 +99,25 @@ $_SESSION['nbgroupe'] = $_GET['nbgroupe'];
             <form method="post">
                 <!--<input type="submit" id="Modif-projet" class="bouton" name="Modif-projet" value="Modifier les informations"/>-->
                 <input type="submit" id="Recalc" class="bouton" name="Recalc" value="Recalculer la superficie"/>
-                <input type="submit" id="CloreAll" class="bouton" name="CloreAll" value="Clore tous les groupes"/>
+                <?php if (!isset($_POST['cree'])) {
+                    echo"<a href='clore.php?verrouilleproj=1&groupeid=" . $_SESSION['idplage'] . "' class='bouton'>Verrouiller la plage</a>";
+                } ?>
             </form>
             <form method="get" action="gestiongroupe.php">
-                <?php if (!isset($_POST['cree'])) {echo'<input type="hidden" name="nbgroupe" value="' . $_SESSION['nbgroupe'] . '"/>';}?>
-            <input type="submit" id="" class="bouton" name="" value="Gestion des groupe"/>
+            <?php if (!isset($_POST['cree'])) {
+                echo'<input type="hidden" name="nbgroupe" value="' . $_SESSION['nbgroupe'] . '"/>';
+            } ?>
+                <input type="submit" id="" class="bouton" name="" value="Gestion des groupe"/>
             </form>
-            <?php if (!isset($_POST['cree'])){echo'<form method="get" action="exportKML.php">
+<?php if (!isset($_POST['cree'])) {
+    echo'<form method="get" action="exportKML.php">
                 <input type="submit" id="KML" class="bouton" name="KML" value="Exporter KML"/>
-            </form>';} ?>
-            <form method="get" action="tablechercheur.php">
-            <input type="submit" id="" class="bouton error_content" name="supprimer" value="Supprimer le projet"/>
-            </form>
-            
+            </form>';
+} ?>
+                <?php if (!isset($_POST['cree'])) {
+                    echo"<a href='clore.php?cloreproj=1&groupeid=" . $_SESSION['idplage'] . "' class='bouton'>Supprimer la plage</a>";
+                } ?>
+
             <div id="infos-projet">
                 <?php
                 //REQUETE POUR RECUPERER LES INFORMATIONS DU PROJET (ville, nom projet, date...)
@@ -120,7 +125,7 @@ $_SESSION['nbgroupe'] = $_GET['nbgroupe'];
                     echo "<h2>Informations relatives à la plage étudiée</h2>";
                     echo "<p>Nom : " . $_POST['nom-projet'] . "</p>";
                     echo "<p>Ville : " . $_POST['ville'] . "</p>";
-                    echo "<p>Date : " . $_POST['jour'] ."-". $_POST['mois'] ."-". $_POST['annee'] . "</p>";
+                    echo "<p>Date : " . $_POST['jour'] . "-" . $_POST['mois'] . "-" . $_POST['annee'] . "</p>";
                     echo "<p>Superficie totale : 0 m²</p>";
                 } else {
                     $reponse = $bdd->query("SELECT Nom,Ville,Datepreleve,Superficie FROM plage WHERE ID=" . $_SESSION['idplage']);
@@ -162,7 +167,7 @@ $_SESSION['nbgroupe'] = $_GET['nbgroupe'];
                         if ($_GET['Vue'] == 'Vue globale') {
                             $reponse = $bdd->query("SELECT DISTINCT espece.Nom, SUM(prelevement.quantite) AS quantite FROM zones 
                         INNER JOIN (espece INNER JOIN prelevement ON espece.IDespeces=prelevement.IDespece)
-                        ON zones.ID=espece.IDzone WHERE zones.IDplage=" . $_SESSION['idplage'] ." GROUP BY espece.Nom");
+                        ON zones.ID=espece.IDzone WHERE zones.IDplage=" . $_SESSION['idplage'] . " GROUP BY espece.Nom");
                         } else {
                             $reponse = $bdd->query("SELECT DISTINCT espece.Nom, prelevement.quantite FROM zones 
                         INNER JOIN (espece INNER JOIN prelevement ON espece.IDespeces=prelevement.IDespece)
@@ -184,7 +189,7 @@ $_SESSION['nbgroupe'] = $_GET['nbgroupe'];
         <footer>
             <a href="#interchercheur_ifrocean" class="bouton" title="Haut de page"><img src="images/icone_fleche-retour.png" alt="Haut de page"/></a>
         </footer>
-        
+
         <!--import javascript-->
         <!--import de la bibliotheque jQuery pour les animations-->
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
