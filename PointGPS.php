@@ -7,8 +7,8 @@ class PointGPS {
 
     public function __construct($abscisse_degre, $abscisse_minute, $abscisse_seconde, 
             $ordonnee_degre, $ordonnee_minute, $ordonnee_seconde) {
-        $this->x = $abscisse_degre+($abscisse_minute/60)+($abscisse_seconde/3600);
-        $this->y = $ordonnee_degre+($ordonnee_minute/60)+($ordonnee_seconde/3600);
+        $this->x = $abscisse_degre.($abscisse_minute/60).($abscisse_seconde/3600);
+        $this->y = $ordonnee_degre.($ordonnee_minute/60).($ordonnee_seconde/3600);
     }
     
     public function getX(){ return $this->x; }
