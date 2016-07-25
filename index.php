@@ -123,7 +123,7 @@ include_once 'Config.php';
                         <h4>Coordonnées du premier point</h4>
                         <p>
                             <span>Latitude</span>
-                            <input type="number" min="0" max="90" step="1" name="latitude_degres_1" id="latitude_degres_1" placeholder="47" required/>
+                            <input type="number" min="-180" max="180" step="1" name="latitude_degres_1" id="latitude_degres_1" placeholder="47" required/>
                             <label for="latitude_degres_1">°</label>
 
                             <input type="number" min="0" max="59" step="1" name="latitude_minutes_1" id="latitude_minutes_1" placeholder="13" required/>
@@ -148,7 +148,7 @@ include_once 'Config.php';
                         <h4>Coordonnées du deuxième point</h4>
                         <p>
                             <span>Latitude</span>
-                            <input type="number" min="0" max="90" step="1" name="latitude_degres_2" id="latitude_degres_2" placeholder="48" required/>
+                            <input type="number" min="-180" max="180" step="1" name="latitude_degres_2" id="latitude_degres_2" placeholder="48" required/>
                             <label for="latitude_degres_2">°</label>
 
                             <input type="number" min="0" max="59" step="1" name="latitude_minutes_2" id="latitude_minutes_2" placeholder="00" required/>
@@ -175,7 +175,7 @@ include_once 'Config.php';
                         <h4>Coordonnées du troisième point</h4>
                         <p>
                             <span>Latitude</span>
-                            <input type="number" min="0" max="90" step="1" name="latitude_degres_3" id="latitude_degres_3" placeholder="47" required/>
+                            <input type="number" min="-180" max="180" step="1" name="latitude_degres_3" id="latitude_degres_3" placeholder="47" required/>
                             <label for="latitude_degres_3">°</label>
 
                             <input type="number" min="0" max="59" step="1" name="latitude_minutes_3" id="latitude_minutes_3" placeholder="18" required/>
@@ -200,7 +200,7 @@ include_once 'Config.php';
                         <h4>Coordonnees du quatrième point</h4>
                         <p>
                             <span>Latitude</span>
-                            <input type="number" min="0" max="90" step="1" name="latitude_degres_4" id="latitude_degres_4" placeholder="45" required/>
+                            <input type="number" min="-180" max="180" step="1" name="latitude_degres_4" id="latitude_degres_4" placeholder="45" required/>
                             <label for="latitude_degres_4">°</label>
 
                             <input type="number" min="0" max="59" step="1" name="latitude_minutes_4" id="latitude_minutes_4" placeholder="49" required/>
